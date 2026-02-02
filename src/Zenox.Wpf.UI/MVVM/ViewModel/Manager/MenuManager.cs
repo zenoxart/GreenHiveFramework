@@ -37,16 +37,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				keywords: new[] { "dashboard", "übersicht", "home" }
 			);
 
-			// Strategy Demo Command
-			paletteManager.RegisterCommand(
-				"Strategy Demo öffnen",
-				"Navigation",
-				() => this.AppKontext.TabView.LoadView<StrategyDemoView>(),
-				"Öffnet die Strategy Provider Demo",
-				keywords: new[] { "strategy", "strategie", "demo", "pattern", "provider" }
-			);
-
-
 			// Command History Overlay (NEU - Hauptfeature)
 			paletteManager.RegisterCommand(
 				"Command-Historie anzeigen",
@@ -526,20 +516,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							this.AppKontext.TabView.LoadView<DashboardView>();
 						}, _ => true)
 					});
-
-					// Strategy Demo
-					_pageMenu.Add(new RelayObject
-					{
-						PngPath = "/Assets/arrow-right-02-stroke-rounded.png",
-						Name = "Strategy Demo",
-						Foreground = Brushes.White,
-						Command = new RelayCommand(
-						_ =>
-						{
-						 this.AppKontext.TabView.LoadView<StrategyDemoView>();
-						}, _ => true)
-					});
-
 				}
 				return _pageMenu;
 			}
