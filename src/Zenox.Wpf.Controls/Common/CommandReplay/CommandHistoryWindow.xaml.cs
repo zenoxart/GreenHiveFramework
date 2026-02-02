@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using Zenox.Wpf.Controls.Common.Dialogs;
 using Zenox.Wpf.Core.Common.CommandReplay;
 using Zenox.Wpf.Core.Common.Notifications;
 
@@ -87,7 +88,7 @@ namespace Zenox.Wpf.Controls.Common.CommandReplay
 				return;
 			}
 
-			var inputDialog = new Snapshots.InputDialog("Sequenz speichern", "Bitte geben Sie einen Namen für die Sequenz ein:");
+			var inputDialog = new InputDialog("Sequenz speichern", "Bitte geben Sie einen Namen für die Sequenz ein:");
 			if (inputDialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(inputDialog.InputText))
 			{
 				CommandReplayManager.Instance.SaveSequence(selected, inputDialog.InputText);

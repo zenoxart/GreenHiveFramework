@@ -46,15 +46,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				keywords: new[] { "strategy", "strategie", "demo", "pattern", "provider" }
 			);
 
-			// Snapshot Demo Command
-			paletteManager.RegisterCommand(
-				"Snapshot Demo öffnen",
-				"Navigation",
-				() => this.AppKontext.TabView.LoadView<SnapshotDemoView>(),
-				"Öffnet die Snapshot Manager Demo",
-				keywords: new[] { "snapshot", "demo", "state", "zustand", "sicherung", "backup" }
-			);
-
 
 			// Command History Overlay (NEU - Hauptfeature)
 			paletteManager.RegisterCommand(
@@ -71,8 +62,8 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				"Einstellungen öffnen",
 				"Einstellungen",
 				() => this.AppKontext.TabView.LoadView<EinstellungenView>(),
-				"Öffnet die Anwendungseinstellungen",
-				keywords: new[] { "einstellungen", "settings", "konfiguration" }
+				"Öffnet die Anwendungseinstellungen inkl. Snapshot-Konfiguration",
+				keywords: new[] { "einstellungen", "settings", "konfiguration", "snapshot" }
 			);
 
 			paletteManager.RegisterCommand(
@@ -244,17 +235,13 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				keywords: new[] { "state", "löschen", "clear", "recovery" }
 			);
 
-			// Snapshot System Commands (NEW)
+			// Snapshot System Commands - jetzt über Einstellungen
 			paletteManager.RegisterCommand(
-				"Snapshot-Verwaltung öffnen",
+				"Snapshot-Einstellungen öffnen",
 				"Power-User",
-				() =>
-				{
-					var window = new Controls.Common.Snapshots.SnapshotManagerWindow();
-					window.ShowDialog();
-				},
-				"Öffnet die Snapshot-Verwaltung für Zustandssicherungen",
-				keywords: new[] { "snapshot", "state", "backup", "restore", "wiederherstellen", "sicherung" }
+				() => this.AppKontext.TabView.LoadView<EinstellungenView>(),
+				"Öffnet die Einstellungen für das Snapshot-System",
+				keywords: new[] { "snapshot", "state", "backup", "restore", "wiederherstellen", "sicherung", "einstellungen" }
 			);
 
 			paletteManager.RegisterCommand(
@@ -262,11 +249,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				"Power-User",
 				() =>
 				{
-					var state = new { CurrentView = "Dashboard", Timestamp = System.DateTime.Now };
-					Core.Common.Snapshots.SnapshotManager.Instance.CreateSnapshot(
-						state,
-						$"Manual_{System.DateTime.Now:HHmmss}",
-						Core.Common.Snapshots.SnapshotType.Manual);
+					Core.Common.Snapshots.SnapshotManager.Instance.CreateAllCategorySnapshots("Manuell");
 					Core.Common.Notifications.NotificationService.Instance.ShowSuccess(
 						"Snapshot erstellt",
 						"Neuer Snapshot wurde erfolgreich erstellt");
@@ -399,6 +382,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 								Command = new RelayCommand(
 								_ =>
 								{
+									this.AppKontext.TabView.LoadView<EinstellungenView>();
 								}, _ => true)
 							},
 
@@ -552,20 +536,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 						Command = new RelayCommand(
 						_ =>
 						{
-							this.AppKontext.TabView.LoadView<StrategyDemoView>();
-						}, _ => true)
-					});
-
-					// Snapshot Demo
-					_pageMenu.Add(new RelayObject
-					{
-						PngPath = "/Assets/arrow-right-02-stroke-rounded.png",
-						Name = "Snapshot Demo",
-						Foreground = Brushes.White,
-						Command = new RelayCommand(
-						_ =>
-						{
-							this.AppKontext.TabView.LoadView<SnapshotDemoView>();
+						 this.AppKontext.TabView.LoadView<StrategyDemoView>();
 						}, _ => true)
 					});
 

@@ -1,13 +1,317 @@
 ﻿<UserControl x:Class="Zenox.Wpf.Views.EinstellungenView"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:local="clr-namespace:Zenox.Wpf.Views"
-			 mc:Ignorable="d"
-			 d:DesignHeight="450"
-			 d:DesignWidth="800">
-	<Grid>
-		<TextBlock>Einstellungen</TextBlock>
-	</Grid>
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Zenox.Wpf.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="700"
+             d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance Type=local:EinstellungenViewModel, IsDesignTimeCreatable=True}">
+
+    <UserControl.Resources>
+        <local:EinstellungenViewModel x:Key="EinstellungenVM"/>
+
+        <Style x:Key="SettingsSectionStyle" TargetType="GroupBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="Padding" Value="10"/>
+        </Style>
+
+        <Style x:Key="SettingsToggleStyle" TargetType="ToggleButton">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="26"/>
+            <Setter Property="Background" Value="#3A3A3A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="13"
+                                Padding="3">
+                            <Ellipse x:Name="Thumb" 
+                                     Width="20" 
+                                     Height="20" 
+                                     Fill="White"
+                                     HorizontalAlignment="Left"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#4CAF50"/>
+                                <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SettingsLabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="SettingsDescriptionStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#808080"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="{DynamicResource FluentWindowBackground}"
+          DataContext="{StaticResource EinstellungenVM}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="20,20,20,10">
+            <TextBlock Text="Einstellungen"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="White"/>
+            <TextBlock Text="Konfigurieren Sie die Anwendungseinstellungen und das Snapshot-System."
+                       Foreground="#B0B0B0"
+                       TextWrapping="Wrap"
+                       Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <!-- Settings Content -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="20,10,20,0">
+            <StackPanel>
+
+                <!-- Snapshot Settings Section -->
+                <GroupBox Header="Snapshot-Einstellungen" Style="{StaticResource SettingsSectionStyle}">
+                    <StackPanel>
+                        <!-- Auto-Snapshots Toggle -->
+                        <Grid Margin="0,5,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Automatische Snapshots" Style="{StaticResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Erstellt automatisch Snapshots des Anwendungszustands in regelmäßigen Abständen." 
+                                           Style="{StaticResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding AutoSnapshotsEnabled}" 
+                                          Style="{StaticResource SettingsToggleStyle}"
+                                          VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Interval Setting -->
+                        <Grid Margin="0,0,0,15" IsEnabled="{Binding AutoSnapshotsEnabled}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Intervall (Minuten)" Style="{StaticResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Zeit zwischen automatischen Snapshots." 
+                                           Style="{StaticResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <TextBox Grid.Column="1" 
+                                     Text="{Binding AutoSnapshotIntervalMinutes, UpdateSourceTrigger=PropertyChanged}"
+                                     VerticalAlignment="Center"
+                                     Padding="8,6"
+                                     FontSize="13"/>
+                        </Grid>
+
+                        <!-- Max Snapshots -->
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Maximale Anzahl" Style="{StaticResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Maximale Anzahl an Snapshots die aufbewahrt werden." 
+                                           Style="{StaticResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <TextBox Grid.Column="1" 
+                                     Text="{Binding MaxSnapshotCount, UpdateSourceTrigger=PropertyChanged}"
+                                     VerticalAlignment="Center"
+                                     Padding="8,6"
+                                     FontSize="13"/>
+                        </Grid>
+
+                        <!-- Snapshot on Startup -->
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Snapshot bei Start" Style="{StaticResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Erstellt einen Snapshot beim Starten der Anwendung." 
+                                           Style="{StaticResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding SnapshotOnStartup}" 
+                                          Style="{StaticResource SettingsToggleStyle}"
+                                          VerticalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Snapshot on Shutdown -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Snapshot bei Beenden" Style="{StaticResource SettingsLabelStyle}"/>
+                                <TextBlock Text="Erstellt einen Snapshot beim Beenden der Anwendung." 
+                                           Style="{StaticResource SettingsDescriptionStyle}"/>
+                            </StackPanel>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding SnapshotOnShutdown}" 
+                                          Style="{StaticResource SettingsToggleStyle}"
+                                          VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Snapshot Categories Section -->
+                <GroupBox Header="Snapshot-Kategorien" Style="{StaticResource SettingsSectionStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Wählen Sie welche Daten in Snapshots gespeichert werden sollen."
+                                   Foreground="#808080"
+                                   FontSize="12"
+                                   Margin="0,0,0,15"/>
+
+                        <!-- Window Layout -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Fenster-Layout" Style="{StaticResource SettingsLabelStyle}"/>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding SnapshotWindowLayout}" 
+                                          Style="{StaticResource SettingsToggleStyle}"/>
+                        </Grid>
+
+                        <!-- User Settings -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Benutzereinstellungen" Style="{StaticResource SettingsLabelStyle}"/>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding SnapshotUserSettings}" 
+                                          Style="{StaticResource SettingsToggleStyle}"/>
+                        </Grid>
+
+                        <!-- App Configuration -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Anwendungskonfiguration" Style="{StaticResource SettingsLabelStyle}"/>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding SnapshotAppConfiguration}" 
+                                          Style="{StaticResource SettingsToggleStyle}"/>
+                        </Grid>
+
+                        <!-- Session Data -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Session-Daten" Style="{StaticResource SettingsLabelStyle}"/>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding SnapshotSessionData}" 
+                                          Style="{StaticResource SettingsToggleStyle}"/>
+                        </Grid>
+
+                        <!-- Custom Data -->
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Benutzerdefinierte Daten" Style="{StaticResource SettingsLabelStyle}"/>
+                            <ToggleButton Grid.Column="1" 
+                                          IsChecked="{Binding SnapshotCustomData}" 
+                                          Style="{StaticResource SettingsToggleStyle}"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- Snapshot Info Section -->
+                <GroupBox Header="Snapshot-Verwaltung" Style="{StaticResource SettingsSectionStyle}">
+                    <StackPanel>
+                        <!-- Info -->
+                        <Border Background="#252525" CornerRadius="4" Padding="15" Margin="0,5,0,15">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="Gespeicherte Snapshots" Foreground="#808080" FontSize="11"/>
+                                    <TextBlock Text="{Binding SnapshotCount}" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,5,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Gesamtgröße" Foreground="#808080" FontSize="11"/>
+                                    <TextBlock Text="{Binding TotalSnapshotSize}" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,5,0,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <!-- Actions -->
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Snapshot erstellen"
+                                    Command="{Binding CreateManualSnapshotCommand}"
+                                    Style="{DynamicResource FluentTabButtonStyle}"
+                                    Padding="15,8"
+                                    Margin="0,0,10,0"/>
+                            <Button Content="Alle Snapshots löschen"
+                                    Command="{Binding ClearAllSnapshotsCommand}"
+                                    Style="{DynamicResource FluentTabButtonStyle}"
+                                    Padding="15,8"
+                                    Foreground="#FF6B6B"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" 
+                Background="#252525" 
+                Padding="20,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="{Binding StatusMessage}"
+                           Foreground="#4CAF50"
+                           VerticalAlignment="Center"/>
+
+                <Button Grid.Column="1"
+                        Content="Einstellungen speichern"
+                        Command="{Binding SaveSettingsCommand}"
+                        Style="{DynamicResource FluentTabButtonStyle}"
+                        Padding="20,8"/>
+            </Grid>
+        </Border>
+    </Grid>
 </UserControl>
