@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using Zenox.Wpf.Controls.Common.CommandPalette;
 using Zenox.Wpf.Core.Common.BackgroundTasks;
+using Zenox.Wpf.Core.Common.Heatmap;
 using Zenox.Wpf.Core.Common.Input;
 using Zenox.Wpf.Core.Common.MVVM.Composite;
 using Zenox.Wpf.Core.Common.Notifications;
@@ -24,6 +25,17 @@ public partial class App : Application
 
 		// Telemetrie-Service initialisieren
 		TelemetryService.Instance.Initialize();
+
+		// Interaction Heatmap Controller initialisieren und starten
+		InteractionHeatmapController.Instance.Initialize(new HeatmapConfiguration
+		{
+			TrackClicks = true,
+			TrackHover = true,
+			TrackScroll = false,
+			MinHoverDurationMs = 500,
+			MaxInteractions = 10000
+		});
+		InteractionHeatmapController.Instance.StartTracking();
 
 		// Crash Recovery Manager initialisieren
 		CrashRecoveryManager.Instance.Initialize();
@@ -91,6 +103,9 @@ public partial class App : Application
 	{
 		Settings.Default.LocalisationISO = this.ModuleHandler.AppKontext.Sprachen.AktuelleSprache.Code;
 		Settings.Default.Save();
+
+		// Stop Heatmap Tracking
+		InteractionHeatmapController.Instance.StopTracking();
 
 		// Save final state
 		CrashRecoveryManager.Instance.SaveSnapshot(false);

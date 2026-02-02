@@ -5,6 +5,7 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:Zenox.Wpf.Controls.Common.ExecutionLog"
 		xmlns:perfMon="clr-namespace:Zenox.Wpf.Controls.Common.PerformanceMonitor"
+		xmlns:heatmap="clr-namespace:Zenox.Wpf.Controls.Common.Heatmap"
 		mc:Ignorable="d"
 		Title="Performance und Telemetrie Panel"
 		Height="600"
@@ -241,6 +242,11 @@
 						</ListView.View>
 					</ListView>
 				</Border>
+			</TabItem>
+
+			<!-- Interaction Heatmap Tab (NEU) -->
+			<TabItem Header="Interaction Heatmap">
+				<heatmap:InteractionHeatmapView/>
 			</TabItem>
 
 			<!-- Background Tasks Tab -->
