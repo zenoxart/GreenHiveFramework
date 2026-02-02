@@ -45,6 +45,15 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				keywords: new[] { "strategy", "strategie", "demo", "pattern", "provider" }
 			);
 
+			// Snapshot Demo Command
+			paletteManager.RegisterCommand(
+				"Snapshot Demo öffnen",
+				"Navigation",
+				() => this.AppKontext.TabView.LoadView<SnapshotDemoView>(),
+				"Öffnet die Snapshot Manager Demo",
+				keywords: new[] { "snapshot", "demo", "state", "zustand", "sicherung", "backup" }
+			);
+
 			// Einstellungen Commands
 			paletteManager.RegisterCommand(
 				"Einstellungen öffnen",
@@ -532,6 +541,19 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 						_ =>
 						{
 							this.AppKontext.TabView.LoadView<StrategyDemoView>();
+						}, _ => true)
+					});
+
+					// Snapshot Demo
+					_pageMenu.Add(new RelayObject
+					{
+						PngPath = "/Assets/arrow-right-02-stroke-rounded.png",
+						Name = "Snapshot Demo",
+						Foreground = Brushes.White,
+						Command = new RelayCommand(
+						_ =>
+						{
+							this.AppKontext.TabView.LoadView<SnapshotDemoView>();
 						}, _ => true)
 					});
 				}

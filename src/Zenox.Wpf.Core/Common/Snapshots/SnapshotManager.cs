@@ -25,7 +25,7 @@ namespace Zenox.Wpf.Core.Common.Snapshots
 		private SnapshotManager()
 		{
 			var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			_snapshotsDirectory = Path.Combine(appData, "VoestalpineWpf", "Snapshots");
+			_snapshotsDirectory = Path.Combine(appData, "Wpf", "Snapshots");
 			Directory.CreateDirectory(_snapshotsDirectory);
 			LoadSnapshots();
 		}
