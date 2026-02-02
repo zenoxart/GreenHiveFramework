@@ -395,6 +395,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 								Command = new RelayCommand(
 								_ =>
 								{
+									this.AppKontext.TabView.LoadView<ProfilView>();
 								}, _ => true)
 							},
 							new() {

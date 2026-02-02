@@ -1,6 +1,7 @@
 using System.IO;
 using System.Text.Json;
 using System.Windows;
+using Zenox.Wpf.Core.Common.Snapshots;
 
 namespace Zenox.Wpf.Core.Common.Recovery
 {
@@ -33,10 +34,16 @@ namespace Zenox.Wpf.Core.Common.Recovery
 		/// Benutzerdefinierte State-Daten (als JSON)
 		/// </summary>
 		public string? CustomStateJson { get; set; }
+
+		/// <summary>
+		/// Referenz auf den zugehörigen StateSnapshot (falls vorhanden)
+		/// </summary>
+		public string? SnapshotId { get; set; }
 	}
 
 	/// <summary>
-	/// Manager für Crash Recovery und App-State Management
+	/// Manager für Crash Recovery und App-State Management.
+	/// Verwendet den SnapshotManager für die Zustandssicherung.
 	/// </summary>
 	public sealed class CrashRecoveryManager
 	{
@@ -66,14 +73,19 @@ namespace Zenox.Wpf.Core.Common.Recovery
 		/// </summary>
 		public event EventHandler<AppStateSnapshot>? CrashDetected;
 
+		/// <summary>
+		/// Gibt an ob die Integration mit dem SnapshotManager aktiviert ist
+		/// </summary>
+		public bool UseSnapshotManager { get; set; } = true;
+
 		private CrashRecoveryManager()
 		{
 			var appDataPath = Path.Combine(
 				Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-				"VoestalpineWpf");
+				"Wpf");
 
 			Directory.CreateDirectory(appDataPath);
-			_stateFilePath = Path.Combine(appDataPath, "app_state.json");
+			_stateFilePath = Path.Combine(appDataPath, "crash_state.json");
 		}
 
 		/// <summary>
@@ -121,6 +133,24 @@ namespace Zenox.Wpf.Core.Common.Recovery
 					}
 				}
 
+				// SnapshotManager verwenden wenn aktiviert
+				if (UseSnapshotManager)
+				{
+					var snapshotType = isCrashRecovery ? SnapshotType.Crash : SnapshotType.Auto;
+					var snapshotName = isCrashRecovery 
+						? $"Crash Recovery - {DateTime.Now:yyyy-MM-dd HH:mm:ss}" 
+						: $"Auto Recovery - {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+
+					var stateSnapshot = SnapshotManager.Instance.CreateSnapshot(
+						snapshot,
+						snapshotName,
+						snapshotType,
+						SnapshotCategory.SessionData);
+
+					snapshot.SnapshotId = stateSnapshot.Id;
+				}
+
+				// Crash-State separat speichern für schnellen Zugriff beim Neustart
 				var json = JsonSerializer.Serialize(snapshot, new JsonSerializerOptions
 				{
 					WriteIndented = true
@@ -151,6 +181,17 @@ namespace Zenox.Wpf.Core.Common.Recovery
 				if (snapshot?.IsCrashRecovery == true)
 				{
 					_lastSnapshot = snapshot;
+
+					// Versuche zusätzliche Daten vom SnapshotManager zu laden
+					if (UseSnapshotManager && !string.IsNullOrEmpty(snapshot.SnapshotId))
+					{
+						var stateSnapshot = SnapshotManager.Instance.GetSnapshot(snapshot.SnapshotId);
+						if (stateSnapshot != null)
+						{
+							System.Diagnostics.Debug.WriteLine($"Crash snapshot found: {stateSnapshot.Name}");
+						}
+					}
+
 					CrashDetected?.Invoke(this, snapshot);
 
 					// Reset Crash-Flag
@@ -168,10 +209,83 @@ namespace Zenox.Wpf.Core.Common.Recovery
 		/// </summary>
 		public void RestoreLastState()
 		{
-			if (_lastSnapshot?.CustomStateJson != null && RestoreCustomState != null)
+			if (_lastSnapshot == null) return;
+
+			// Versuche zuerst vom SnapshotManager wiederherzustellen
+			if (UseSnapshotManager && !string.IsNullOrEmpty(_lastSnapshot.SnapshotId))
+			{
+				try
+				{
+					var restoredSnapshot = SnapshotManager.Instance.RestoreSnapshot<AppStateSnapshot>(_lastSnapshot.SnapshotId);
+					if (restoredSnapshot?.CustomStateJson != null && RestoreCustomState != null)
+					{
+						RestoreCustomState(restoredSnapshot.CustomStateJson);
+						return;
+					}
+				}
+				catch (Exception ex)
+				{
+					System.Diagnostics.Debug.WriteLine($"Failed to restore from SnapshotManager: {ex.Message}");
+				}
+			}
+
+			// Fallback auf lokalen State
+			if (_lastSnapshot.CustomStateJson != null && RestoreCustomState != null)
 			{
 				RestoreCustomState(_lastSnapshot.CustomStateJson);
 			}
+		}
+
+		/// <summary>
+		/// Stellt den State aus einem bestimmten Snapshot wieder her
+		/// </summary>
+		/// <param name="snapshotId">ID des wiederherzustellenden Snapshots</param>
+		/// <returns>True wenn erfolgreich</returns>
+		public bool RestoreFromSnapshot(string snapshotId)
+		{
+			if (!UseSnapshotManager || string.IsNullOrEmpty(snapshotId))
+				return false;
+
+			try
+			{
+				var snapshot = SnapshotManager.Instance.GetSnapshot(snapshotId);
+				if (snapshot == null) return false;
+
+				var restoredState = snapshot.Restore<AppStateSnapshot>();
+				if (restoredState?.CustomStateJson != null && RestoreCustomState != null)
+				{
+					RestoreCustomState(restoredState.CustomStateJson);
+					return true;
+				}
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine($"Failed to restore from snapshot {snapshotId}: {ex.Message}");
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Gibt alle verfügbaren Recovery-Snapshots zurück
+		/// </summary>
+		public IReadOnlyList<StateSnapshot> GetAvailableRecoverySnapshots()
+		{
+			if (!UseSnapshotManager)
+				return [];
+
+			return SnapshotManager.Instance.GetSnapshotsByCategory(SnapshotCategory.SessionData);
+		}
+
+		/// <summary>
+		/// Gibt den neuesten Recovery-Snapshot zurück
+		/// </summary>
+		public StateSnapshot? GetLatestRecoverySnapshot()
+		{
+			if (!UseSnapshotManager)
+				return null;
+
+			return SnapshotManager.Instance.GetLatestSnapshot(SnapshotCategory.SessionData);
 		}
 
 		/// <summary>
@@ -186,6 +300,12 @@ namespace Zenox.Wpf.Core.Common.Recovery
 					File.Delete(_stateFilePath);
 				}
 				_lastSnapshot = null;
+
+				// Optional: Auch SessionData-Snapshots löschen
+				if (UseSnapshotManager)
+				{
+					SnapshotManager.Instance.ClearCategory(SnapshotCategory.SessionData);
+				}
 			}
 			catch (Exception ex)
 			{
@@ -219,7 +339,7 @@ namespace Zenox.Wpf.Core.Common.Recovery
 			if (Telemetry.TelemetryService.Instance != null)
 			{
 				Telemetry.TelemetryService.Instance.LogEvent("ApplicationCrash", "Critical",
-					new System.Collections.Generic.Dictionary<string, object>
+					new Dictionary<string, object>
 					{
 						["Exception"] = exception.GetType().Name,
 						["Message"] = exception.Message,

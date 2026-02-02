@@ -21,15 +21,11 @@ xmlns:menu="clr-namespace:Zenox.Wpf.Controls.Common.Menu;assembly=Zenox.Wpf.Cont
             </Border>
 
             <!-- Status Bar -->
-            <StatusBar DockPanel.Dock="Bottom"
+			<StatusBar DockPanel.Dock="Bottom"
                        tutorial:TutorialHelper.TutorialKey="StatusArea"
 					   Background="MediumPurple"
 					   Foreground="White"
 					   Height="40" Padding="0">
-				<StatusBarItem Height="35">
-					<Button Content="Alarming"
-							Height="30"/>
-                </StatusBarItem>
 				<StatusBarItem Height="35">
                     <TextBlock Text="{Binding MainWindow.Status}" Foreground="White" />
                 </StatusBarItem>

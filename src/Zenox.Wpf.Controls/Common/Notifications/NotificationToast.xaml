@@ -5,20 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="400"
+             x:Name="Root"
              Cursor="Hand">
     
     <UserControl.Resources>
         <!-- Fade In Animation -->
         <Storyboard x:Key="FadeInStoryboard">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+            <DoubleAnimation Storyboard.TargetName="Root"
+                           Storyboard.TargetProperty="Opacity"
                            From="0" To="1" Duration="0:0:0.3"
                            BeginTime="0:0:0">
                 <DoubleAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <ThicknessAnimation Storyboard.TargetProperty="Margin"
-                              From="0,20,0,0" To="0,0,0,0" Duration="0:0:0.3">
+            <ThicknessAnimation Storyboard.TargetName="MainBorder"
+                              Storyboard.TargetProperty="Margin"
+                              From="0,20,0,8" To="0,0,0,8" Duration="0:0:0.3">
                 <ThicknessAnimation.EasingFunction>
                     <QuadraticEase EasingMode="EaseOut"/>
                 </ThicknessAnimation.EasingFunction>
@@ -27,12 +30,14 @@
         
         <!-- Fade Out Animation -->
         <Storyboard x:Key="FadeOutStoryboard" Completed="FadeOut_Completed">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+            <DoubleAnimation Storyboard.TargetName="Root"
+                           Storyboard.TargetProperty="Opacity"
                            From="1" To="0" Duration="0:0:0.2"/>
         </Storyboard>
     </UserControl.Resources>
 
-    <Border Background="#2D2D2D" 
+    <Border x:Name="MainBorder"
+            Background="#2D2D2D" 
             BorderBrush="#404040" 
             BorderThickness="1"
             CornerRadius="8"

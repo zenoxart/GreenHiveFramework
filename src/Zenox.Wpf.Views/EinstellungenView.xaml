@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Zenox.Wpf.Views"
              mc:Ignorable="d"
-             d:DesignHeight="700"
+             d:DesignHeight="900"
              d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=local:EinstellungenViewModel, IsDesignTimeCreatable=True}">
 
@@ -60,6 +60,34 @@
             <Setter Property="FontSize" Value="11"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="Margin" Value="0,2,0,0"/>
+        </Style>
+
+        <Style x:Key="SnapshotListItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="4" 
+                                Padding="{TemplateBinding Padding}"
+                                BorderBrush="#3A3A3A"
+                                BorderThickness="1">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3A3A3A"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#4A4A6A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </UserControl.Resources>
 
@@ -251,7 +279,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <!-- Snapshot Info Section -->
+                <!-- Snapshot Management Section -->
                 <GroupBox Header="Snapshot-Verwaltung" Style="{StaticResource SettingsSectionStyle}">
                     <StackPanel>
                         <!-- Info -->
@@ -273,7 +301,7 @@
                         </Border>
 
                         <!-- Actions -->
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
                             <Button Content="Snapshot erstellen"
                                     Command="{Binding CreateManualSnapshotCommand}"
                                     Style="{DynamicResource FluentTabButtonStyle}"
@@ -286,6 +314,115 @@
                                     Foreground="#FF6B6B"/>
                         </StackPanel>
                     </StackPanel>
+                </GroupBox>
+
+                <!-- Snapshot Browser Section -->
+                <GroupBox Header="Snapshot laden" Style="{StaticResource SettingsSectionStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="200"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Header mit Refresh -->
+                        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+                            <TextBlock Text="Verfügbare Snapshots" 
+                                       Style="{StaticResource SettingsLabelStyle}"
+                                       VerticalAlignment="Center"/>
+                            <Button Content="⟳" 
+                                    Command="{Binding RefreshSnapshotsCommand}"
+                                    Background="Transparent"
+                                    Foreground="#808080"
+                                    BorderThickness="0"
+                                    FontSize="16"
+                                    Padding="8,4"
+                                    Margin="10,0,0,0"
+                                    Cursor="Hand"
+                                    ToolTip="Liste aktualisieren"/>
+                        </StackPanel>
+
+                        <!-- Snapshot List -->
+                        <ListBox Grid.Column="0" Grid.Row="1"
+                                 ItemsSource="{Binding AvailableSnapshots}"
+                                 SelectedItem="{Binding SelectedSnapshot}"
+                                 Background="#1E1E1E"
+                                 BorderBrush="#3A3A3A"
+                                 BorderThickness="1"
+                                 ItemContainerStyle="{StaticResource SnapshotListItemStyle}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0">
+                                            <TextBlock Text="{Binding Name}" 
+                                                       FontWeight="SemiBold" 
+                                                       Foreground="White"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                <TextBlock Text="{Binding Type}" 
+                                                           FontSize="11" 
+                                                           Foreground="MediumPurple"
+                                                           Margin="0,0,10,0"/>
+                                                <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:dd.MM.yy HH:mm}'}" 
+                                                           FontSize="11" 
+                                                           Foreground="#808080"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="{Binding Category}" 
+                                                   FontSize="10" 
+                                                   Foreground="#606060"
+                                                   VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <!-- Snapshot Details -->
+                        <TextBlock Grid.Column="2" Grid.Row="0" 
+                                   Text="Details" 
+                                   Style="{StaticResource SettingsLabelStyle}"
+                                   Margin="0,0,0,10"/>
+                        
+                        <Border Grid.Column="2" Grid.Row="1"
+                                Background="#1E1E1E"
+                                BorderBrush="#3A3A3A"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Padding="12">
+                            <TextBlock Text="{Binding SelectedSnapshotDetails}"
+                                       Foreground="#B0B0B0"
+                                       FontSize="12"
+                                       FontFamily="Consolas"
+                                       TextWrapping="Wrap"/>
+                        </Border>
+
+                        <!-- Actions -->
+                        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" 
+                                    Orientation="Horizontal" 
+                                    Margin="0,15,0,0">
+                            <Button Content="Snapshot laden"
+                                    Command="{Binding LoadSnapshotCommand}"
+                                    Style="{DynamicResource FluentTabButtonStyle}"
+                                    Padding="15,8"
+                                    Margin="0,0,10,0"/>
+                            <Button Content="Snapshot löschen"
+                                    Command="{Binding DeleteSnapshotCommand}"
+                                    Style="{DynamicResource FluentTabButtonStyle}"
+                                    Padding="15,8"
+                                    Foreground="#FF6B6B"/>
+                        </StackPanel>
+                    </Grid>
                 </GroupBox>
 
             </StackPanel>
