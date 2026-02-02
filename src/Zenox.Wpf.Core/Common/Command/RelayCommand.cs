@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Input;
+using Zenox.Wpf.Core.Common.CommandReplay;
 using Zenox.Wpf.Core.Common.Permission;
 
 namespace Zenox.Wpf.Core.Common.Command
@@ -28,6 +29,17 @@ namespace Zenox.Wpf.Core.Common.Command
         public string Name { get; set; }
 
         /// <summary>
+        /// Die Kategorie des Befehls für das Command-Tracking.
+        /// </summary>
+        public string Category { get; set; }
+
+        /// <summary>
+        /// Gibt an, ob dieses Command vom CommandReplayManager getrackt werden soll.
+        /// Standard: true
+        /// </summary>
+        public bool TrackExecution { get; set; } = true;
+
+        /// <summary>
         /// Prüft, ob der Befehl ausgeführt werden kann.
         /// </summary>
         /// <param name="parameter">Optionaler Parameter.</param>
@@ -50,14 +62,46 @@ namespace Zenox.Wpf.Core.Common.Command
             }
 
             Stopwatch stopwatch = Stopwatch.StartNew();
+            bool success = true;
+            string errorMessage = null;
+            
             try
             {
                 _execute(parameter);
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                errorMessage = ex.Message;
+                throw;
             }
             finally
             {
                 stopwatch.Stop();
                 RelayCommandPool.LogExecution(Name, stopwatch.Elapsed);
+                
+                // Automatisches Tracking über CommandReplayManager
+                if (TrackExecution && !string.IsNullOrEmpty(Name))
+                {
+                    try
+                    {
+                        var recorded = CommandReplayManager.Instance.RecordCommand(
+                            Name,
+                            parameter,
+                            Category ?? "Command");
+                        
+                        if (recorded != null)
+                        {
+                            recorded.DurationMs = stopwatch.ElapsedMilliseconds;
+                            recorded.Success = success;
+                            recorded.ErrorMessage = errorMessage;
+                        }
+                    }
+                    catch
+                    {
+                        // Tracking-Fehler sollten die Command-Ausführung nicht beeinflussen
+                    }
+                }
             }
         }
 

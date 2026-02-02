@@ -29,7 +29,7 @@ namespace Zenox.Wpf.Core.Common.CommandReplay
 		private CommandReplayManager()
 		{
 			var appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-			_historyDirectory = Path.Combine(appData, "VoestalpineWpf", "CommandHistory");
+			_historyDirectory = Path.Combine(appData, "Wpf", "CommandHistory");
 			Directory.CreateDirectory(_historyDirectory);
 			_isRecording = true;
 		}

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using Zenox.Wpf.Controls.Common.CommandHistory;
 using Zenox.Wpf.Controls.Common.CommandPalette;
 using Zenox.Wpf.Core.Common.Command;
 using Zenox.Wpf.Views;
@@ -52,6 +53,17 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				() => this.AppKontext.TabView.LoadView<SnapshotDemoView>(),
 				"Öffnet die Snapshot Manager Demo",
 				keywords: new[] { "snapshot", "demo", "state", "zustand", "sicherung", "backup" }
+			);
+
+
+			// Command History Overlay (NEU - Hauptfeature)
+			paletteManager.RegisterCommand(
+				"Command-Historie anzeigen",
+				"System",
+				() => CommandHistoryManager.Instance.ShowHistory(),
+				"Zeigt die Historie aller ausgeführten Commands (Live-Tracking)",
+				"Ctrl+Shift+H",
+				keywords: new[] { "command", "history", "historie", "verlauf", "tracking", "log", "aufzeichnung" }
 			);
 
 			// Einstellungen Commands
@@ -556,6 +568,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							this.AppKontext.TabView.LoadView<SnapshotDemoView>();
 						}, _ => true)
 					});
+
 				}
 				return _pageMenu;
 			}

@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using Zenox.Wpf.Controls.Common.CommandHistory;
+using Zenox.Wpf.Controls.Common.CommandPalette;
 
 namespace Zenox.Wpf.UI
 {
@@ -13,6 +16,31 @@ namespace Zenox.Wpf.UI
         public MainAppShell()
         {
             InitializeComponent();
+            
+            // Globale Keyboard-Shortcuts registrieren
+            this.PreviewKeyDown += OnPreviewKeyDown;
+        }
+
+        private void OnPreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            // Ctrl+K - Command Palette
+            if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                CommandPaletteManager.Instance.ShowPalette();
+                e.Handled = true;
+                return;
+            }
+
+            // Ctrl+Shift+H - Command History
+            if (e.Key == Key.H && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
+            {
+                CommandHistoryManager.Instance.ShowHistory();
+                e.Handled = true;
+                return;
+            }
+
+            // Ctrl+Shift+R - Command Replay Demo (optional - nur wenn View geladen werden soll)
+            // Dies wird bereits über die Command Palette gehandhabt
         }
     }
 }
