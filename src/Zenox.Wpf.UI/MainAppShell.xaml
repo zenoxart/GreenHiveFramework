@@ -6,7 +6,7 @@
 		xmlns:local="clr-namespace:Zenox.Wpf.UI"
 		xmlns:notifications="clr-namespace:Zenox.Wpf.Controls.Common.Notifications;assembly=Zenox.Wpf.Controls"
 		mc:Ignorable="d"
-		Title="BEVO Prototyp"
+		Title="WPF Prototyp"
 		MinHeight="300"
 		MinWidth="800"
 		>
