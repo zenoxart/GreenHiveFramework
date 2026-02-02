@@ -3,6 +3,7 @@ using Zenox.Wpf.Controls.Common.CommandPalette;
 using Zenox.Wpf.Core.Common.BackgroundTasks;
 using Zenox.Wpf.Core.Common.Heatmap;
 using Zenox.Wpf.Core.Common.Input;
+using Zenox.Wpf.Core.Common.ML.ContextAwareValidation;
 using Zenox.Wpf.Core.Common.MVVM.Composite;
 using Zenox.Wpf.Core.Common.Notifications;
 using Zenox.Wpf.Core.Common.Recovery;
@@ -56,6 +57,17 @@ public partial class App : Application
 
 		// Global Keyboard Handler initialisieren
 		GlobalKeyboardHandler.Initialize(() => CommandPaletteManager.Instance.ShowPalette());
+
+		// Global Validation Manager initialisieren
+		// Ermöglicht AI-basierte Validierung per Shift+Rechtsklick auf beliebigen UI-Elementen
+		GlobalValidationManager.Instance.IsEnabled = true;
+		GlobalValidationManager.Instance.Initialize();
+		GlobalValidationManager.Instance.ElementValidated += (s, args) =>
+		{
+			// Optional: Logging von Validierungen
+			TelemetryService.Instance.LogEvent("ElementValidated",
+				$"{args.Context.FieldName}={args.Context.ValueAsString} -> {args.Result.State}");
+		};
 
 		// Auto-Update Service initialisieren (optional - URL konfigurieren!)
 		// AutoUpdateService.Instance.Initialize("https://your-server.com/updates/manifest.json");

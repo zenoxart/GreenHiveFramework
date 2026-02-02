@@ -21,6 +21,12 @@ namespace Zenox.Wpf.Views.Hilfe
         public AboutView()
         {
             InitializeComponent();
+            
+            // Set DataContext to ViewModel if not already set
+            if (DataContext == null)
+            {
+                DataContext = new AboutViewModel();
+            }
         }
     }
 }

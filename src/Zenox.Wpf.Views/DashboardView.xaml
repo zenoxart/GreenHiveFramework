@@ -5,9 +5,519 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Zenox.Wpf.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-			 Name="Startpage">
-    <Grid>
-		<TextBlock Foreground="White">Dashboard Ansicht</TextBlock>
+             d:DesignHeight="800" d:DesignWidth="1200"
+             d:DataContext="{d:DesignInstance Type=local:DashboardViewModel, IsDesignTimeCreatable=True}"
+             Name="Startpage">
+
+    <UserControl.Resources>
+        <local:DashboardViewModel x:Key="DashboardVM"/>
+
+        <!-- Stat Card Style -->
+        <Style x:Key="StatCardStyle" TargetType="Border">
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="0,0,15,15"/>
+        </Style>
+
+        <!-- Section Header Style -->
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+        </Style>
+
+        <!-- Quick Action Button Style -->
+        <Style x:Key="QuickActionButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#3A3A3A"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,12"/>
+            <Setter Property="Margin" Value="0,0,10,10"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="6"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#4A4A4A"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#5A5A5A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Activity Item Style -->
+        <Style x:Key="ActivityItemStyle" TargetType="Border">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#3A3A3A"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="Padding" Value="10,12"/>
+        </Style>
+
+        <!-- Notification Item Style -->
+        <Style x:Key="NotificationItemStyle" TargetType="Border">
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="{DynamicResource FluentWindowBackground}"
+          DataContext="{StaticResource DashboardVM}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <Grid Grid.Row="0" Margin="25,25,25,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="{Binding WelcomeMessage}"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"/>
+                <TextBlock Text="{Binding CurrentDateTime, StringFormat='{}Heute ist {0:dddd, dd. MMMM yyyy}'}"
+                           Foreground="#B0B0B0"
+                           FontSize="13"
+                           Margin="0,5,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Content="🔄 Aktualisieren"
+                        Command="{Binding RefreshCommand}"
+                        Style="{StaticResource QuickActionButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="25,0,25,25">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Statistics Cards Row -->
+                <UniformGrid Grid.Row="0" Rows="1" Columns="4" Margin="0,0,0,10">
+                    
+                    <!-- Total Users Card -->
+                    <Border Style="{StaticResource StatCardStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                       Text="Aktive Benutzer" 
+                                       Foreground="#808080" 
+                                       FontSize="12"/>
+                            <TextBlock Grid.Row="1" 
+                                       Text="{Binding ActiveUsersCount}" 
+                                       Foreground="White" 
+                                       FontSize="32" 
+                                       FontWeight="Bold"
+                                       Margin="0,5,0,5"/>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Text="▲ " Foreground="#4CAF50" FontSize="12"/>
+                                <TextBlock Text="{Binding ActiveUsersChange, StringFormat='{}{0}% diese Woche'}" 
+                                           Foreground="#4CAF50" 
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- Tasks Completed Card -->
+                    <Border Style="{StaticResource StatCardStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                       Text="Erledigte Aufgaben" 
+                                       Foreground="#808080" 
+                                       FontSize="12"/>
+                            <TextBlock Grid.Row="1" 
+                                       Text="{Binding CompletedTasksCount}" 
+                                       Foreground="White" 
+                                       FontSize="32" 
+                                       FontWeight="Bold"
+                                       Margin="0,5,0,5"/>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Text="▲ " Foreground="#4CAF50" FontSize="12"/>
+                                <TextBlock Text="{Binding CompletedTasksChange, StringFormat='{}{0}% diese Woche'}" 
+                                           Foreground="#4CAF50" 
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- Pending Tasks Card -->
+                    <Border Style="{StaticResource StatCardStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                       Text="Offene Aufgaben" 
+                                       Foreground="#808080" 
+                                       FontSize="12"/>
+                            <TextBlock Grid.Row="1" 
+                                       Text="{Binding PendingTasksCount}" 
+                                       Foreground="White" 
+                                       FontSize="32" 
+                                       FontWeight="Bold"
+                                       Margin="0,5,0,5"/>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Text="○ " Foreground="#FFA726" FontSize="12"/>
+                                <TextBlock Text="{Binding PendingTasksInfo}" 
+                                           Foreground="#FFA726" 
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- System Health Card -->
+                    <Border Style="{StaticResource StatCardStyle}" Margin="0,0,0,15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" 
+                                       Text="Systemstatus" 
+                                       Foreground="#808080" 
+                                       FontSize="12"/>
+                            <TextBlock Grid.Row="1" 
+                                       Text="{Binding SystemHealthPercent, StringFormat='{}{0}%'}" 
+                                       Foreground="White" 
+                                       FontSize="32" 
+                                       FontWeight="Bold"
+                                       Margin="0,5,0,5"/>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Text="● " Foreground="#4CAF50" FontSize="12"/>
+                                <TextBlock Text="{Binding SystemHealthStatus}" 
+                                           Foreground="#4CAF50" 
+                                           FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </UniformGrid>
+
+                <!-- Middle Section: Quick Actions & Activity -->
+                <Grid Grid.Row="1" Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="350"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Left Side: Quick Actions & Recent Activity -->
+                    <StackPanel Grid.Column="0">
+                        
+                        <!-- Quick Actions Section -->
+                        <Border Background="#2A2A2A" CornerRadius="8" Padding="20" Margin="0,0,0,15">
+                            <StackPanel>
+                                <TextBlock Text="Schnellzugriff" Style="{StaticResource SectionHeaderStyle}"/>
+                                <WrapPanel>
+                                    <Button Content="📝 Neue Aufgabe"
+                                            Command="{Binding NewTaskCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"/>
+                                    <Button Content="📊 Berichte"
+                                            Command="{Binding OpenReportsCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"/>
+                                    <Button Content="👥 Team"
+                                            Command="{Binding OpenTeamCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"/>
+                                    <Button Content="📁 Dokumente"
+                                            Command="{Binding OpenDocumentsCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"/>
+                                    <Button Content="⚙️ Einstellungen"
+                                            Command="{Binding OpenSettingsCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"/>
+                                    <Button Content="❓ Hilfe"
+                                            Command="{Binding OpenHelpCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"/>
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Recent Activity Section -->
+                        <Border Background="#2A2A2A" CornerRadius="8" Padding="20">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" 
+                                               Text="Letzte Aktivitaeten" 
+                                               Style="{StaticResource SectionHeaderStyle}"
+                                               Margin="0"/>
+                                    <Button Grid.Column="1" 
+                                            Content="Alle anzeigen"
+                                            Command="{Binding ViewAllActivitiesCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"
+                                            Padding="10,6"
+                                            Margin="0"
+                                            FontSize="11"/>
+                                </Grid>
+                                
+                                <ItemsControl ItemsSource="{Binding RecentActivities}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource ActivityItemStyle}">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <!-- Activity Icon -->
+                                                    <Border Grid.Column="0" 
+                                                            Width="36" Height="36" 
+                                                            CornerRadius="18"
+                                                            Background="{Binding IconBackground}"
+                                                            Margin="0,0,12,0">
+                                                        <TextBlock Text="{Binding Icon}"
+                                                                   FontSize="16"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"/>
+                                                    </Border>
+                                    
+                                                    <!-- Activity Details -->
+                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Title}"
+                                                                   Foreground="White"
+                                                                   FontSize="13"/>
+                                                        <TextBlock Text="{Binding Description}"
+                                                                   Foreground="#808080"
+                                                                   FontSize="11"
+                                                                   Margin="0,2,0,0"/>
+                                                    </StackPanel>
+                                                    
+                                                    <!-- Timestamp -->
+                                                    <TextBlock Grid.Column="2" 
+                                                               Text="{Binding TimeAgo}"
+                                                               Foreground="#606060"
+                                                               FontSize="11"
+                                                               VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Right Side: Notifications & Upcoming -->
+                    <StackPanel Grid.Column="2">
+                        
+                        <!-- Notifications Section -->
+                        <Border Background="#2A2A2A" CornerRadius="8" Padding="20" Margin="0,0,0,15">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="Benachrichtigungen" 
+                                                   Style="{StaticResource SectionHeaderStyle}"
+                                                   Margin="0"/>
+                                        <Border Background="#E53935" 
+                                                CornerRadius="10" 
+                                                Padding="8,2" 
+                                                Margin="10,0,0,0"
+                                                VerticalAlignment="Center"
+                                                Visibility="{Binding HasUnreadNotifications}">
+                                            <TextBlock Text="{Binding UnreadNotificationsCount}"
+                                                       Foreground="White"
+                                                       FontSize="11"
+                                                       FontWeight="Bold"/>
+                                        </Border>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" 
+                                            Content="Alle lesen"
+                                            Command="{Binding MarkAllReadCommand}"
+                                            Style="{StaticResource QuickActionButtonStyle}"
+                                            Padding="10,6"
+                                            Margin="0"
+                                            FontSize="11"/>
+                                </Grid>
+                                
+                                <ItemsControl ItemsSource="{Binding Notifications}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource NotificationItemStyle}">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <!-- Notification Type Indicator -->
+                                                    <Border Grid.Column="0" 
+                                                            Width="4" 
+                                                            CornerRadius="2"
+                                                            Background="{Binding TypeColor}"
+                                                            Margin="0,0,12,0"/>
+                                                    
+                                                    <!-- Notification Content -->
+                                                    <StackPanel Grid.Column="1">
+                                                        <TextBlock Text="{Binding Title}"
+                                                                   Foreground="White"
+                                                                   FontSize="12"
+                                                                   FontWeight="SemiBold"/>
+                                                        <TextBlock Text="{Binding Message}"
+                                                                   Foreground="#909090"
+                                                                   FontSize="11"
+                                                                   TextWrapping="Wrap"
+                                                                   Margin="0,4,0,4"/>
+                                                        <TextBlock Text="{Binding TimeAgo}"
+                                                                   Foreground="#606060"
+                                                                   FontSize="10"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Upcoming Events Section -->
+                        <Border Background="#2A2A2A" CornerRadius="8" Padding="20">
+                            <StackPanel>
+                                <TextBlock Text="Anstehende Termine" Style="{StaticResource SectionHeaderStyle}"/>
+                                
+                                <ItemsControl ItemsSource="{Binding UpcomingEvents}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#1E1E1E" 
+                                                    CornerRadius="6" 
+                                                    Padding="12" 
+                                                    Margin="0,0,0,8">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                
+                                                    <!-- Date Box -->
+                                                    <Border Grid.Column="0" 
+                                                            Background="{Binding DateBackground}"
+                                                            CornerRadius="6"
+                                                            Padding="10,8"
+                                                            Margin="0,0,12,0">
+                                                        <StackPanel HorizontalAlignment="Center">
+                                                            <TextBlock Text="{Binding DayOfMonth}"
+                                                                       Foreground="White"
+                                                                       FontSize="18"
+                                                                       FontWeight="Bold"
+                                                                       HorizontalAlignment="Center"/>
+                                                            <TextBlock Text="{Binding MonthShort}"
+                                                                       Foreground="#D0D0D0"
+                                                                       FontSize="10"
+                                                                       HorizontalAlignment="Center"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                    
+                                                    <!-- Event Details -->
+                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding Title}"
+                                                                   Foreground="White"
+                                                                   FontSize="12"
+                                                                   FontWeight="SemiBold"/>
+                                                        <TextBlock Text="{Binding Time}"
+                                                                   Foreground="#808080"
+                                                                   FontSize="11"
+                                                                   Margin="0,2,0,0"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Bottom Section: Progress Overview -->
+                <Border Grid.Row="2" Background="#2A2A2A" CornerRadius="8" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Projektfortschritt" Style="{StaticResource SectionHeaderStyle}"/>
+                        
+                        <ItemsControl ItemsSource="{Binding ProjectProgress}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,0,0,15">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Grid Grid.Row="0" Margin="0,0,0,6">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" 
+                                                       Text="{Binding Name}"
+                                                       Foreground="White"
+                                                       FontSize="13"/>
+                                            <TextBlock Grid.Column="1" 
+                                                       Text="{Binding Percent, StringFormat='{}{0}%'}"
+                                                       Foreground="#808080"
+                                                       FontSize="12"/>
+                                        </Grid>
+                                        
+                                        <!-- Progress Bar -->
+                                        <Grid Grid.Row="1" Height="8">
+                                            <Border Background="#1E1E1E" CornerRadius="4"/>
+                                            <Border Background="{Binding ProgressColor}" 
+                                                    CornerRadius="4"
+                                                    HorizontalAlignment="Left"
+                                                    Width="{Binding ProgressWidth}"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -64,7 +64,7 @@ xmlns:menu="clr-namespace:Zenox.Wpf.Controls.Common.Menu;assembly=Zenox.Wpf.Cont
                     <TabControl.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Name}" 
-                                       Foreground="{StaticResource FluentTextBrush}" />
+                                       Foreground="White" />
                         </DataTemplate>
                     </TabControl.ItemTemplate>
                     <TabControl.ContentTemplate>
