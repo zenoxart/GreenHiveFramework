@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tutorials>
+  <Tutorial Key="MainWindow">
+    <Step Key="TopMenuArea" Title="Willkommen in WPF" Position="Bottom" CanSkip="true" StepType="Highlight">
+      <InstructionText>Dies ist die Haupt-Navigationsleiste. Hier finden Sie alle wichtigen Funktionen der Anwendung wie Tutorial, Performance-Panel, Admin-Bereich und Hilfe.</InstructionText>
+    </Step>
+    <Step Key="LeftMenuArea" Title="Navigation-Menü" Position="Right" CanSkip="true" StepType="Highlight">
+      <InstructionText>Das linke Menü bietet schnellen Zugriff auf die verschiedenen Bereiche der Anwendung. Jeder Button öffnet einen neuen Arbeitsbereich.</InstructionText>
+    </Step>
+    <Step Key="TabArea" Title="Tab-Verwaltung" Position="Bottom" CanSkip="true" StepType="Highlight" DelayMs="300">
+      <InstructionText>In diesem Bereich werden alle geöffneten Ansichten als Tabs angezeigt. Sie können zwischen verschiedenen Arbeitsbereichen wechseln und mehrere Views gleichzeitig offen halten.</InstructionText>
+    </Step>
+    <Step Key="StatusArea" Title="Status-Information" Position="Top" CanSkip="true" StepType="Highlight">
+      <InstructionText>Die Statusleiste zeigt wichtige Informationen über den aktuellen Zustand der Anwendung an, einschließlich Tutorial-Fortschritt und System-Status.</InstructionText>
+    </Step>
+  </Tutorial>
+
+  <Tutorial Key="MenuNavigation">
+    <Step Key="TopMenuItems" Title="Haupt-Navigation" Position="Bottom" CanSkip="true" StepType="Highlight">
+      <InstructionText>Diese Leiste enthält die wichtigsten Funktionen. Jeder Bereich hat spezifische Aufgaben und Werkzeuge.</InstructionText>
+    </Step>
+    <Step Key="LeftMenuItems" Title="Seiten-Navigation" Position="Right" CanSkip="true" StepType="Highlight">
+      <InstructionText>Verwenden Sie diese Buttons, um zwischen verschiedenen Arbeitsbereichen zu wechseln. Jeder Button öffnet eine neue Ansicht im Tab-Bereich.</InstructionText>
+    </Step>
+  </Tutorial>
+</Tutorials>

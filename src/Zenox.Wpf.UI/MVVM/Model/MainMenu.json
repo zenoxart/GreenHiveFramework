@@ -1,0 +1,32 @@
+[
+  {
+    "Key": "Datei",
+    "DisplayName": "Datei",
+    "Icon": "FolderOpen20Regular",
+    "Enabled": true
+  },
+  {
+    "Key": "Bearbeiten",
+    "DisplayName": "Bearbeiten",
+    "Icon": "Save20Regular",
+    "Enabled": true
+  },
+  {
+    "Key": "Ansicht",
+    "DisplayName": "Ansicht",
+    "Icon": "Dismiss20Regular",
+    "Enabled": true
+  },
+  {
+    "Key": "Admin",
+    "DisplayName": "Admin-Panel",
+    "Icon": "Dismiss20Regular",
+    "Enabled": true
+  },
+  {
+    "Key": "Sprache",
+    "DisplayName": "Sprache",
+    "Icon": "Dismiss20Regular",
+    "Enabled": true
+  }
+]

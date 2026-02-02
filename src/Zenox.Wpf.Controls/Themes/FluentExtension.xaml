@@ -1,0 +1,217 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"  
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+<FontFamily x:Key="FluentLepoIconsFont">
+/Zenox.Wpf.Core;component/Assets/Fonts/FluentSystemIcons-Regular.ttf#FluentSystemIcons-Regular
+</FontFamily>
+
+	<!-- Enhanced System Theme-Aware Fluent UI Colors for Natural/Transparent Look -->
+	<!-- These colors use natural transparency and system-aware colors that blend properly -->
+	
+	<!-- Primary Background Colors - Natural and transparent -->
+	<SolidColorBrush x:Key="FluentTabControlBackground" Color="Transparent"/>
+
+	<SolidColorBrush x:Key="FluentTabBackground" Color="Transparent"/>
+	
+	<!-- Subtle hover effect with natural transparency -->
+	<SolidColorBrush x:Key="FluentTabHoverBackground" Color="#10000000"/>
+
+	<!-- Selected tab with subtle tint, not bright white -->
+	<SolidColorBrush x:Key="FluentTabSelectedBackground" Color="#20000000"/>
+	
+	<!-- Border and Text Colors - Use system brush directly -->
+	<SolidColorBrush x:Key="FluentBorderBrush" Color="#FF808080"/>
+	
+	<!-- All text brushes changed to white -->
+	<SolidColorBrush x:Key="FluentTextBrush" Color="Black"/>
+	
+	<!-- Accent and Interactive Colors - Use MediumPurple as the main accent color -->
+	<SolidColorBrush x:Key="FluentAccentBrush" Color="MediumPurple"/>
+	
+	<!-- Natural button hover with subtle transparency -->
+	<SolidColorBrush x:Key="FluentButtonHoverBrush" Color="#15000000"/>
+
+	<!-- Natural window background that respects system theme - kept transparent -->
+	<SolidColorBrush x:Key="FluentWindowBackground" Color="Transparent"/>
+	
+	<SolidColorBrush x:Key="FluentWindowTextBrush" Color="White"/>
+
+	<!-- Natural Secondary Colors - all text brushes changed to white -->
+	<SolidColorBrush x:Key="FluentSelectedTextBrush" Color="White"/>
+
+	<SolidColorBrush x:Key="FluentDisabledTextBrush" Color="#80FFFFFF"/>
+
+	<!-- Natural inactive selection with subtle transparency -->
+	<SolidColorBrush x:Key="FluentInactiveSelectionBrush" Color="#10808080"/>
+
+	<!-- Natural control colors that blend with system theme -->
+	<SolidColorBrush x:Key="FluentControlBackground" Color="{x:Static SystemColors.ControlColor}"/>
+
+	<SolidColorBrush x:Key="FluentControlTextBrush" Color="White"/>
+
+	<SolidColorBrush x:Key="FluentMenuBackground" Color="{x:Static SystemColors.MenuColor}"/>
+
+	<SolidColorBrush x:Key="FluentMenuTextBrush" Color="White"/>
+
+	<!-- Enhanced Fluent UI Tab Control Style with Natural Transparency -->
+	<Style x:Key="FluentTabControlStyle" TargetType="TabControl">
+		<Setter Property="Background" Value="{StaticResource FluentTabControlBackground}"/>
+		<Setter Property="Foreground" Value="{StaticResource FluentTextBrush}"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TabControl">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						
+						<!-- Tab Headers with natural transparency -->
+						<Border Grid.Row="0" 
+								Background="{StaticResource FluentTabControlBackground}"
+								BorderBrush="{StaticResource FluentBorderBrush}"
+								BorderThickness="0,0,0,1"
+								Padding="8,4,8,0">
+							<TabPanel x:Name="HeaderPanel" IsItemsHost="True" Panel.ZIndex="1"/>
+						</Border>
+						
+						<!-- Content Area with natural background -->
+						<Border Grid.Row="1"
+								Background="Transparent"
+								BorderBrush="{StaticResource FluentBorderBrush}"
+								BorderThickness="0"
+								CornerRadius="0">
+							<ContentPresenter x:Name="PART_SelectedContentHost"
+											  ContentSource="SelectedContent"
+											  Margin="16"/>
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Enhanced Fluent UI Tab Item Style with Natural Transparency -->
+	<Style x:Key="FluentTabItemStyle" TargetType="TabItem">
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FluentTextBrush}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Margin" Value="0,0,2,0"/>
+		<Setter Property="Padding" Value="12,8"/>
+		<Setter Property="MinHeight" Value="36"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="TabItem">
+					<Border x:Name="Border"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="6,6,0,0"
+							Margin="{TemplateBinding Margin}">
+						<ContentPresenter x:Name="ContentSite"
+										  ContentSource="Header"
+										  HorizontalAlignment="Center"
+										  VerticalAlignment="Center"
+										  Margin="{TemplateBinding Padding}"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<!-- Selected state with natural subtle background -->
+						<Trigger Property="IsSelected" Value="True">
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource FluentTabSelectedBackground}"/>
+							<Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource FluentAccentBrush}"/>
+							<Setter TargetName="Border" Property="BorderThickness" Value="0,0,0,2"/>
+							<Setter Property="Panel.ZIndex" Value="2"/>
+							<Setter Property="Margin" Value="0,0,2,0"/>
+							<Setter Property="Foreground" Value="{StaticResource FluentTextBrush}"/>
+						</Trigger>
+						<!-- Hover state with natural subtle background -->
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource FluentTabHoverBackground}"/>
+							<Setter TargetName="Border" Property="BorderBrush" Value="Transparent"/>
+							<Setter Property="Foreground" Value="{StaticResource FluentTextBrush}"/>
+						</MultiTrigger>
+						<!-- Disabled state with proper contrast -->
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="{StaticResource FluentDisabledTextBrush}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Natural Button Style for Tab Controls -->
+	<Style x:Key="FluentTabButtonStyle" TargetType="Button">
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Foreground" Value="{StaticResource FluentTextBrush}"/>
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+		<Setter Property="Cursor" Value="Hand"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="ButtonBorder"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="4"
+							Padding="{TemplateBinding Padding}">
+						<ContentPresenter HorizontalAlignment="Center" 
+										  VerticalAlignment="Center"/>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter TargetName="ButtonBorder" Property="Background" Value="{StaticResource FluentButtonHoverBrush}"/>
+						</Trigger>
+						<Trigger Property="IsPressed" Value="True">
+							<Setter TargetName="ButtonBorder" Property="Background" Value="{StaticResource FluentInactiveSelectionBrush}"/>
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="{StaticResource FluentDisabledTextBrush}"/>
+							<Setter Property="Opacity" Value="0.5"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- Natural MenuItem Style -->
+	<Style x:Key="FluentMenuItemStyle" TargetType="MenuItem">
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+		<Setter Property="FontSize" Value="14"/>
+		<Setter Property="Foreground" Value="{StaticResource FluentMenuTextBrush}"/>
+		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Padding" Value="12,8"/>
+		<Setter Property="MinHeight" Value="32"/>
+		<Style.Triggers>
+			<Trigger Property="IsHighlighted" Value="True">
+				<Setter Property="Background" Value="{StaticResource FluentAccentBrush}"/>
+				<Setter Property="Foreground" Value="{StaticResource FluentSelectedTextBrush}"/>
+			</Trigger>
+			<Trigger Property="IsEnabled" Value="False">
+				<Setter Property="Foreground" Value="{StaticResource FluentDisabledTextBrush}"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<!-- Global TextBlock style to ensure white text everywhere -->
+	<Style TargetType="TextBlock">
+		<Setter Property="Foreground" Value="White"/>
+	</Style>
+
+	<!-- Apply styles globally -->
+	<Style TargetType="TabControl" BasedOn="{StaticResource FluentTabControlStyle}"/>
+
+</ResourceDictionary>

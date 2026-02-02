@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<neuigkeiten:NeuigkeitenKonfiguration 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:neuigkeiten="clr-namespace:Zenox.Wpf.Core.Common.Neuigkeiten;assembly=Zenox.Wpf.Core"
+    Titel="What's New">
+
+    <!-- Version 1.0 -->
+    <neuigkeiten:VersionNeuigkeiten Version="1.0">
+        
+        <!-- What's new -->
+        <neuigkeiten:NeuigkeitenKategorie Titel="What's new in v1.0">
+            <neuigkeiten:NeuigkeitEintrag Text="Implemented Config" Beschreibung="Konfigurationssystem fuer flexible Anpassungen"/>
+            <neuigkeiten:NeuigkeitEintrag Text="Command Palette" Beschreibung="Schnellzugriff auf alle Befehle mit Ctrl+K"/>
+            <neuigkeiten:NeuigkeitEintrag Text="Notification System" Beschreibung="Toast-Benachrichtigungen fuer Benutzer-Feedback"/>
+        </neuigkeiten:NeuigkeitenKategorie>
+
+        <!-- Shiny new things -->
+        <neuigkeiten:NeuigkeitenKategorie Titel="Shiny new things">
+            <neuigkeiten:NeuigkeitEintrag Text="Tutorial-Engine" Beschreibung="Interaktive Tutorials fuer neue Benutzer"/>
+            <neuigkeiten:NeuigkeitEintrag Text="Performance Overlay" Beschreibung="Echtzeit-Performance-Monitoring"/>
+            <neuigkeiten:NeuigkeitEintrag Text="Crash Recovery" Beschreibung="Automatische Wiederherstellung nach Abstuerzen"/>
+        </neuigkeiten:NeuigkeitenKategorie>
+
+        <!-- Breaking Changes -->
+        <neuigkeiten:NeuigkeitenKategorie Titel="Breaking Changes">
+            <neuigkeiten:NeuigkeitEintrag Text="General Styling" Beschreibung="Neues Fluent UI Design-System"/>
+            <neuigkeiten:NeuigkeitEintrag Text=".NET 10 erforderlich" Beschreibung="Mindestanforderung auf .NET 10 angehoben"/>
+        </neuigkeiten:NeuigkeitenKategorie>
+
+        <!-- Improvements -->
+        <neuigkeiten:NeuigkeitenKategorie Titel="Improvements">
+            <neuigkeiten:NeuigkeitEintrag Text="General Styling" Beschreibung="Verbesserte visuelle Konsistenz"/>
+            <neuigkeiten:NeuigkeitEintrag Text="Background Task Scheduler" Beschreibung="Optimierte Hintergrundverarbeitung"/>
+            <neuigkeiten:NeuigkeitEintrag Text="Telemetrie-System" Beschreibung="Verbessertes Performance-Monitoring"/>
+        </neuigkeiten:NeuigkeitenKategorie>
+
+        <!-- No longer Broken -->
+        <neuigkeiten:NeuigkeitenKategorie Titel="No longer Broken">
+            <neuigkeiten:NeuigkeitEintrag Text="General Styling" Beschreibung="Diverse UI-Korrekturen"/>
+            <neuigkeiten:NeuigkeitEintrag Text="Memory Leaks behoben" Beschreibung="Verbesserte Speicherverwaltung"/>
+        </neuigkeiten:NeuigkeitenKategorie>
+
+    </neuigkeiten:VersionNeuigkeiten>
+    
+</neuigkeiten:NeuigkeitenKonfiguration>

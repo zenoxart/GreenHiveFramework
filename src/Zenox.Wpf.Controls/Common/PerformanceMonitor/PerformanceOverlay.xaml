@@ -1,0 +1,110 @@
+<UserControl x:Class="Zenox.Wpf.Controls.Common.PerformanceMonitor.PerformanceOverlay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="200" d:DesignWidth="300">
+
+    <Border Background="#404040"
+            CornerRadius="8"
+            Padding="12">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" 
+                            Direction="270" 
+                            ShadowDepth="2" 
+                            BlurRadius="10" 
+                            Opacity="0.5"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Title -->
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2"
+                      Text="Performance Monitor"
+                      FontSize="14"
+                      FontWeight="Bold"
+                      Foreground="White"
+                      Margin="0,0,0,8"/>
+
+            <!-- CPU -->
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                      Text="CPU:"
+                      Foreground="White"
+                      Margin="0,2"/>
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                      Text="{Binding CpuUsage, StringFormat='{}{0:F1}%'}"
+                      Foreground="#00FF00"
+                      FontFamily="Consolas"
+                      Margin="8,2,0,2"/>
+
+            <!-- Memory -->
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                      Text="Memory:"
+                      Foreground="White"
+                      Margin="0,2"/>
+            <TextBlock Grid.Row="2" Grid.Column="1"
+                      Text="{Binding MemoryUsage, StringFormat='{}{0:F0} MB'}"
+                      Foreground="#00FF00"
+                      FontFamily="Consolas"
+                      Margin="8,2,0,2"/>
+
+            <!-- GC Memory -->
+            <TextBlock Grid.Row="3" Grid.Column="0"
+                      Text="GC Memory:"
+                      Foreground="White"
+                      Margin="0,2"/>
+            <TextBlock Grid.Row="3" Grid.Column="1"
+                      Text="{Binding GcMemory, StringFormat='{}{0:F0} MB'}"
+                      Foreground="#00FF00"
+                      FontFamily="Consolas"
+                      Margin="8,2,0,2"/>
+
+            <!-- Threads -->
+            <TextBlock Grid.Row="4" Grid.Column="0"
+                      Text="Threads:"
+                      Foreground="White"
+                      Margin="0,2"/>
+            <TextBlock Grid.Row="4" Grid.Column="1"
+                      Text="{Binding ThreadCount}"
+                      Foreground="#00FF00"
+                      FontFamily="Consolas"
+                      Margin="8,2,0,2"/>
+
+            <!-- Active Tasks -->
+            <TextBlock Grid.Row="5" Grid.Column="0"
+                      Text="Active Tasks:"
+                      Foreground="White"
+                      Margin="0,2"/>
+            <TextBlock Grid.Row="5" Grid.Column="1"
+                      Text="{Binding ActiveTasks}"
+                      Foreground="#00FF00"
+                      FontFamily="Consolas"
+                      Margin="8,2,0,2"/>
+
+            <!-- Uptime -->
+            <TextBlock Grid.Row="6" Grid.Column="0"
+                      Text="Uptime:"
+                      Foreground="White"
+                      Margin="0,2,0,0"/>
+            <TextBlock Grid.Row="6" Grid.Column="1"
+                      Text="{Binding Uptime}"
+                      Foreground="#00FF00"
+                      FontFamily="Consolas"
+                      Margin="8,2,0,0"/>
+        </Grid>
+    </Border>
+</UserControl>

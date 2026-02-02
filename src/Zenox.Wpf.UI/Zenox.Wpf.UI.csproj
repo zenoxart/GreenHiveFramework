@@ -1,0 +1,64 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<LangVersion>latest</LangVersion>
+		<DebugType>full</DebugType>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Title>Zenox WPF UI Example App</Title>
+		<Product>WPF UI Example-Framework</Product>
+		<Description>Integrates the Zenox.Wpf.Core Lib in a WPF-UI Application</Description>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Zenox.Wpf.Controls\Zenox.Wpf.Controls.csproj" />
+	  <ProjectReference Include="..\Zenox.Wpf.Core\Zenox.Wpf.Core.csproj" />
+	  <ProjectReference Include="..\Zenox.Wpf.Views\Zenox.Wpf.Views.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Configuration\TutorialConfiguration.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Configuration\NeuigkeitenKonfiguration.xaml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+</Project>

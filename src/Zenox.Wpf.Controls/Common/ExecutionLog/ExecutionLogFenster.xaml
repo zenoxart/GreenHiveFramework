@@ -1,0 +1,357 @@
+﻿<Window x:Class="Zenox.Wpf.Controls.Common.ExecutionLog.ExecutionLogFenster"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Zenox.Wpf.Controls.Common.ExecutionLog"
+		xmlns:perfMon="clr-namespace:Zenox.Wpf.Controls.Common.PerformanceMonitor"
+		mc:Ignorable="d"
+		Title="Performance und Telemetrie Panel"
+		Height="600"
+		Width="1000"
+		Background="#1E1E1E">
+
+	<Window.Resources>
+		<!-- Tab Control Styles -->
+		<Style TargetType="TabControl">
+			<Setter Property="Background" Value="#1E1E1E"/>
+			<Setter Property="BorderThickness" Value="0"/>
+		</Style>
+		
+		<Style TargetType="TabItem">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Background" Value="#2D2D2D"/>
+			<Setter Property="Padding" Value="16,10"/>
+			<Setter Property="FontSize" Value="13"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="TabItem">
+						<Border x:Name="Border"
+								Background="{TemplateBinding Background}"
+								BorderBrush="#404040"
+								BorderThickness="0,0,1,0"
+								Padding="{TemplateBinding Padding}"
+								CornerRadius="8,8,0,0"
+								Margin="0,0,4,0">
+							<ContentPresenter ContentSource="Header"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsSelected" Value="True">
+								<Setter TargetName="Border" Property="Background" Value="#0078D4"/>
+								<Setter Property="Panel.ZIndex" Value="1"/>
+							</Trigger>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+									<Condition Property="IsSelected" Value="False"/>
+								</MultiTrigger.Conditions>
+								<Setter TargetName="Border" Property="Background" Value="#3A3A3A"/>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<!-- ListView Styles with Dark Theme -->
+		<Style TargetType="ListView">
+			<Setter Property="Background" Value="#252525"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="BorderBrush" Value="#404040"/>
+		</Style>
+
+		<Style TargetType="ListViewItem">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="Padding" Value="8,6"/>
+			<Setter Property="BorderThickness" Value="0,0,0,1"/>
+			<Setter Property="BorderBrush" Value="#2D2D2D"/>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="#3A3A3A"/>
+				</Trigger>
+				<Trigger Property="IsSelected" Value="True">
+					<Setter Property="Background" Value="MediumPurple"/>
+					<Setter Property="Foreground" Value="White"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+
+		<!-- GridView Column Header Style -->
+		<Style TargetType="GridViewColumnHeader">
+			<Setter Property="Background" Value="#2D2D2D"/>
+			<Setter Property="Foreground" Value="#B0B0B0"/>
+			<Setter Property="BorderBrush" Value="#404040"/>
+			<Setter Property="BorderThickness" Value="0,0,1,1"/>
+			<Setter Property="Padding" Value="8,6"/>
+			<Setter Property="FontWeight" Value="SemiBold"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="GridViewColumnHeader">
+						<Border x:Name="HeaderBorder"
+								Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								Padding="{TemplateBinding Padding}">
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											VerticalAlignment="Center"/>
+						</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter TargetName="HeaderBorder" Property="Background" Value="#3A3A3A"/>
+							</Trigger>
+							<Trigger Property="IsPressed" Value="True">
+								<Setter TargetName="HeaderBorder" Property="Background" Value="#0078D4"/>
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<!-- ScrollBar Styles for Dark Theme -->
+		<Style TargetType="ScrollBar">
+			<Setter Property="Background" Value="#2D2D2D"/>
+			<Setter Property="Foreground" Value="#808080"/>
+		</Style>
+
+		<Style TargetType="ScrollViewer">
+			<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+		</Style>
+	</Window.Resources>
+
+	<Grid Margin="0">
+		<TabControl>
+			<!-- Performance Metrics Tab -->
+			<TabItem Header="Live Metriken">
+				<Grid Margin="16">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+
+					<!-- Performance Cards -->
+					<Grid Grid.Row="0" Margin="0,0,0,16">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+
+						<!-- CPU Card -->
+						<Border Grid.Column="0" Background="#2D2D2D" CornerRadius="8" Padding="16" Margin="0,0,8,0"
+								BorderBrush="#404040" BorderThickness="1">
+							<StackPanel>
+								<TextBlock Text="CPU Usage" Foreground="#808080" FontSize="12" FontWeight="SemiBold"/>
+								<TextBlock Text="{Binding CpuUsage, StringFormat='{}{0:F1}%'}" 
+										 Foreground="MediumPurple" FontSize="28" FontWeight="Bold" Margin="0,8,0,0"
+										 FontFamily="Segoe UI"/>
+							</StackPanel>
+						</Border>
+
+						<!-- Memory Card -->
+						<Border Grid.Column="1" Background="#2D2D2D" CornerRadius="8" Padding="16" Margin="0,0,8,0"
+								BorderBrush="#404040" BorderThickness="1">
+							<StackPanel>
+								<TextBlock Text="Memory" Foreground="#808080" FontSize="12" FontWeight="SemiBold"/>
+								<TextBlock Text="{Binding MemoryUsage, StringFormat='{}{0:F0} MB'}" 
+										 Foreground="MediumPurple" FontSize="28" FontWeight="Bold" Margin="0,8,0,0"
+										 FontFamily="Segoe UI"/>
+							</StackPanel>
+						</Border>
+
+						<!-- Threads Card -->
+						<Border Grid.Column="2" Background="#2D2D2D" CornerRadius="8" Padding="16" Margin="0,0,8,0"
+								BorderBrush="#404040" BorderThickness="1">
+							<StackPanel>
+								<TextBlock Text="Threads" Foreground="#808080" FontSize="12" FontWeight="SemiBold"/>
+								<TextBlock Text="{Binding ThreadCount}" 
+										 Foreground="MediumPurple" FontSize="28" FontWeight="Bold" Margin="0,8,0,0"
+										 FontFamily="Segoe UI"/>
+							</StackPanel>
+						</Border>
+
+						<!-- Active Tasks Card -->
+						<Border Grid.Column="3" Background="#2D2D2D" CornerRadius="8" Padding="16"
+								BorderBrush="#404040" BorderThickness="1">
+							<StackPanel>
+								<TextBlock Text="Active Tasks" Foreground="#808080" FontSize="12" FontWeight="SemiBold"/>
+								<TextBlock Text="{Binding ActiveTasks}" 
+										 Foreground="MediumPurple" FontSize="28" FontWeight="Bold" Margin="0,8,0,0"
+										 FontFamily="Segoe UI"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<!-- Performance Overlay -->
+					<Border Grid.Row="1" Background="#252525" CornerRadius="8" Padding="16"
+							BorderBrush="#404040" BorderThickness="1">
+						<perfMon:PerformanceOverlay HorizontalAlignment="Stretch"
+												  VerticalAlignment="Stretch"/>
+					</Border>
+				</Grid>
+			</TabItem>
+
+			<!-- Execution Log Tab -->
+			<TabItem Header="Execution Log">
+				<Border Background="#252525" Margin="8" CornerRadius="8" BorderBrush="#404040" BorderThickness="1">
+					<ListView ItemsSource="{
+						Binding ExecutionLogList, 
+						RelativeSource={RelativeSource FindAncestor, 
+						AncestorType={x:Type local:ExecutionLogFenster}}}"
+						Margin="0">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Name" Width="350">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Name}" 
+													 Foreground="White"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Dauer (ms)" Width="150">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Ausführungszeit, StringFormat='{}{0} ms'}" 
+													 Foreground="#00FF00" 
+													 FontFamily="Consolas"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Timestamp" Width="220">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm:ss.fff}'}" 
+													 Foreground="#808080" 
+													 FontFamily="Consolas"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</Border>
+			</TabItem>
+
+			<!-- Background Tasks Tab -->
+			<TabItem Header="Background Tasks">
+				<Border Background="#252525" Margin="8" CornerRadius="8" BorderBrush="#404040" BorderThickness="1">
+					<ListView ItemsSource="{Binding BackgroundTasks}"
+						Margin="0">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Name" Width="280">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Name}" 
+													 Foreground="White"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Status" Width="120">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<Border Background="#2D2D2D" CornerRadius="4" Padding="6,2" Margin="4">
+												<TextBlock Text="{Binding Status}" 
+														 Foreground="#00FF00"
+														 HorizontalAlignment="Center"
+														 FontSize="11"
+														 FontWeight="SemiBold"/>
+											</Border>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Priority" Width="100">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Priority}" 
+													 Foreground="#0078D4"
+													 Padding="4"
+													 FontWeight="SemiBold"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Duration (ms)" Width="130">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding ExecutionTimeMs}" 
+													 Foreground="#00D9FF" 
+													 FontFamily="Consolas"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Started At" Width="150">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding StartedAt, StringFormat='{}{0:HH:mm:ss}'}" 
+													 Foreground="#808080" 
+													 FontFamily="Consolas"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</Border>
+			</TabItem>
+
+			<!-- Telemetry Events Tab -->
+			<TabItem Header="Telemetrie Events">
+				<Border Background="#252525" Margin="8" CornerRadius="8" BorderBrush="#404040" BorderThickness="1">
+					<ListView ItemsSource="{Binding TelemetryEvents}"
+						Margin="0">
+						<ListView.View>
+							<GridView>
+								<GridViewColumn Header="Event Name" Width="300">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding EventName}" 
+													 Foreground="White"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Category" Width="180">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<Border Background="#2D2D2D" CornerRadius="4" Padding="8,2" Margin="4">
+												<TextBlock Text="{Binding Category}" 
+														 Foreground="#0078D4"
+														 HorizontalAlignment="Center"
+														 FontSize="11"
+														 FontWeight="SemiBold"/>
+											</Border>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+								<GridViewColumn Header="Timestamp" Width="220">
+									<GridViewColumn.CellTemplate>
+										<DataTemplate>
+											<TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm:ss.fff}'}" 
+													 Foreground="#808080" 
+													 FontFamily="Consolas"
+													 Padding="4"/>
+										</DataTemplate>
+									</GridViewColumn.CellTemplate>
+								</GridViewColumn>
+							</GridView>
+						</ListView.View>
+					</ListView>
+				</Border>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>

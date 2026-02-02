@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Voestalpine.Wpf.UI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="HauptUITyp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Voestalpine.Wpf.UI.MainWindow</Value>
+    </Setting>
+    <Setting Name="LocalisationISO" Type="System.String" Scope="User">
+      <Value Profile="(Default)">de</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
