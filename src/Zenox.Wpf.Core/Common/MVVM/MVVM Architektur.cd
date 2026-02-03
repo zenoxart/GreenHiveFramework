@@ -68,11 +68,33 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="Zenox.Wpf.Core.Common.MVVM.ViewModelSupport.NotificationObject">
+    <Position X="1.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAIAAAAIAEgAEAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Common\MVVM\ViewModelSupport\NotificationObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Zenox.Wpf.Core.Common.MVVM.ViewModelSupport.ViewModelLocator">
+    <Position X="1.5" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAABAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\MVVM\ViewModelSupport\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="Zenox.Wpf.Core.Common.MVVM.FactoryInjection.IAppObject">
     <Position X="10.5" Y="8" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAhAAAAIAAAAAAAAAAAEEAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Common\MVVM\FactoryInjection\IAppObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Zenox.Wpf.Core.Common.MVVM.ModelSupport.IModelBase">
+    <Position X="11.25" Y="6" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\MVVM\ModelSupport\ModelBase.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="Zenox.Wpf.Core.Common.MVVM.FactoryInjection.LogStufe">
