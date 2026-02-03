@@ -26,6 +26,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Http" Version="10.0.2" />
+		<PackageReference Include="System.Net.Http.Json" Version="10.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Include="Configuration\TutorialConfiguration.xml">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
@@ -59,6 +64,10 @@
 	    <Generator>SettingsSingleFileGenerator</Generator>
 	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
 	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Debug\" />
 	</ItemGroup>
 
 </Project>

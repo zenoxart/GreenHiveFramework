@@ -59,15 +59,9 @@ public partial class App : Application
 		GlobalKeyboardHandler.Initialize(() => CommandPaletteManager.Instance.ShowPalette());
 
 		// Global Validation Manager initialisieren
-		// Ermöglicht AI-basierte Validierung per Shift+Rechtsklick auf beliebigen UI-Elementen
+		// Ermöglicht AI-basierte Validierung per Rechtsklick auf beliebigen UI-Elementen
 		GlobalValidationManager.Instance.IsEnabled = true;
 		GlobalValidationManager.Instance.Initialize();
-		GlobalValidationManager.Instance.ElementValidated += (s, args) =>
-		{
-			// Optional: Logging von Validierungen
-			TelemetryService.Instance.LogEvent("ElementValidated",
-				$"{args.Context.FieldName}={args.Context.ValueAsString} -> {args.Result.State}");
-		};
 
 		// Auto-Update Service initialisieren (optional - URL konfigurieren!)
 		// AutoUpdateService.Instance.Initialize("https://your-server.com/updates/manifest.json");
@@ -95,7 +89,26 @@ public partial class App : Application
 		Shell.DataContext = ModuleHandler.AppKontext;
 		Shell.Show();
 
-		ModuleHandler.LoadView<MainWindow, AppViewModel>("MainView", Shell.MainModule);
+		// Prüfe ob Benutzer angemeldet ist
+		var savedToken = Settings.Default.AuthToken;
+		
+		// DEBUG: Token temporär zurücksetzen für Tests (kann später entfernt werden)
+		// Settings.Default.AuthToken = string.Empty;
+		// Settings.Default.Save();
+		
+		if (string.IsNullOrEmpty(savedToken))
+		{
+			// Zeige Login-View
+			ShowLoginView(Shell, uiAppKontext);
+		}
+		else
+		{
+			// TODO: Token-Validierung gegen API durchführen
+			// Falls Token ungültig, zur Login-View wechseln
+			
+			// Lade Hauptanwendung
+			ModuleHandler.LoadView<MainWindow, AppViewModel>("MainView", Shell.MainModule);
+		}
 
 		TelemetryService.Instance.LogEvent("ApplicationStarted", "System");
 
@@ -109,6 +122,37 @@ public partial class App : Application
 			},
 			System.TimeSpan.FromMinutes(5),
 			TaskPriority.Low);
+	}
+
+	private void ShowLoginView(MainAppShell shell, UIAppKontext appKontext)
+	{
+		var authView = new Views.AuthView();
+		var authViewModel = authView.DataContext as MVVM.ViewModel.AuthViewModel;
+		
+		if (authViewModel != null)
+		{
+			authViewModel.AuthenticationSuccessful += (s, args) =>
+			{
+				// Token speichern
+				if (args.Token != null)
+				{
+					Settings.Default.AuthToken = args.Token;
+					Settings.Default.Save();
+				}
+
+				// Hauptanwendung laden
+				Dispatcher.Invoke(() =>
+				{
+					ModuleHandler.LoadView<MainWindow, AppViewModel>("MainView", shell.MainModule);
+					
+					NotificationService.Instance.ShowSuccess(
+						"Anmeldung erfolgreich",
+						$"Willkommen zurück, {args.User?.Username}!");
+				});
+			};
+		}
+
+		shell.MainModule.Content = authView;
 	}
 
 	protected override void OnExit(ExitEventArgs e)

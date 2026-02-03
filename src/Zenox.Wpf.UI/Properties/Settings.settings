@@ -8,5 +8,8 @@
     <Setting Name="LocalisationISO" Type="System.String" Scope="User">
       <Value Profile="(Default)">de</Value>
     </Setting>
+    <Setting Name="AuthToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

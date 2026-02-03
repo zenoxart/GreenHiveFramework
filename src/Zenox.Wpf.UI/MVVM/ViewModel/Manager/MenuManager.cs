@@ -21,302 +21,15 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 		}
 
 		/// <summary>
-		/// Initialisiert die Command Palette mit allen verfügbaren Befehlen
+		/// Initialisiert die Command Palette automatisch aus den Menü-Strukturen
 		/// </summary>
 		private void InitializeCommandPalette()
 		{
-			#region Command-Palette
 			var paletteManager = CommandPaletteManager.Instance;
 
-			// Navigation Commands
-			paletteManager.RegisterCommand(
-				"Dashboard öffnen",
-				"Navigation",
-				() => this.AppKontext.TabView.LoadView<DashboardView>(),
-				"Öffnet die Dashboard-Verwaltung",
-				keywords: new[] { "dashboard", "übersicht", "home" }
-			);
+			RegisterMenuCommands(TopMenu, "Navigation");
+			RegisterMenuCommands(BottomMenu, "System");
 
-			// Command History Overlay (NEU - Hauptfeature)
-			paletteManager.RegisterCommand(
-				"Command-Historie anzeigen",
-				"System",
-				() => CommandHistoryManager.Instance.ShowHistory(),
-				"Zeigt die Historie aller ausgeführten Commands (Live-Tracking)",
-				"Ctrl+Shift+H",
-				keywords: new[] { "command", "history", "historie", "verlauf", "tracking", "log", "aufzeichnung" }
-			);
-
-			// Einstellungen Commands
-			paletteManager.RegisterCommand(
-				"Einstellungen öffnen",
-				"Einstellungen",
-				() => this.AppKontext.TabView.LoadView<EinstellungenView>(),
-				"Öffnet die Anwendungseinstellungen inkl. Snapshot-Konfiguration",
-				keywords: new[] { "einstellungen", "settings", "konfiguration", "snapshot" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Performancepanel öffnen",
-				"Einstellungen",
-				() =>
-				{
-					Controls.Common.ExecutionLog.ExecutionLogFenster exelogWindow = new();
-					exelogWindow.ExecutionLogList = CommandPool.ExecutionLog;
-					exelogWindow.Show();
-				},
-				"Zeigt das Performance-Monitoring-Panel mit Telemetrie",
-				"F11",
-				keywords: new[] { "performance", "monitoring", "log", "geschwindigkeit", "telemetrie", "metriken" }
-			);
-
-			// Hilfe Commands
-			paletteManager.RegisterCommand(
-				"Hilfe anzeigen",
-				"Hilfe",
-				() => MainWindowManager.StartTutorialCommand.Execute("MainWindow"),
-				"Startet das interaktive Tutorial",
-				"Ctrl+F1",
-				keywords: new[] { "hilfe", "tutorial", "help", "anleitung" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Neuigkeiten anzeigen",
-				"Hilfe",
-				() => this.AppKontext.TabView.LoadView<NeuigkeitenView>(),
-				"Zeigt die neuesten Updates und Features",
-				keywords: new[] { "neuigkeiten", "news", "updates", "changelog" }
-			);
-
-			paletteManager.RegisterCommand(
-				"About anzeigen",
-				"Hilfe",
-				() => this.AppKontext.TabView.LoadView<AboutView>(),
-				"Zeigt Informationen über die Anwendung",
-				keywords: new[] { "about", "über", "info", "version" }
-			);
-
-			// System Commands
-			paletteManager.RegisterCommand(
-				"Anwendungs-Logs",
-				"System",
-				() => MessageBox.Show("Anwendungs-Logs!"),
-				"Zeigt die Anwendungs-Logs",
-				keywords: new[] { "logs", "protokoll", "events" }
-			);
-
-			// Background Tasks Commands
-			paletteManager.RegisterCommand(
-				"Background Tasks anzeigen",
-				"System",
-				() =>
-				{
-					var window = new Controls.Common.ExecutionLog.ExecutionLogFenster();
-					window.ExecutionLogList = CommandPool.ExecutionLog;
-					window.Show();
-				},
-				"Zeigt alle laufenden Hintergrundaufgaben",
-				keywords: new[] { "tasks", "background", "jobs", "scheduler" }
-			);
-
-			// Notification System Commands
-			paletteManager.RegisterCommand(
-				"Test-Benachrichtigung (Info)",
-				"System",
-				() => Core.Common.Notifications.NotificationService.Instance.ShowInfo(
-					"Test Info",
-					"Dies ist eine Test-Benachrichtigung vom Typ Info"),
-				"Zeigt eine Test-Info-Benachrichtigung an",
-				keywords: new[] { "notification", "benachrichtigung", "toast", "info", "test" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Test-Benachrichtigung (Erfolg)",
-				"System",
-				() => Core.Common.Notifications.NotificationService.Instance.ShowSuccess(
-					"Erfolg!",
-					"Operation wurde erfolgreich abgeschlossen"),
-				"Zeigt eine Test-Erfolgs-Benachrichtigung an",
-				keywords: new[] { "notification", "benachrichtigung", "toast", "success", "erfolg", "test" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Test-Benachrichtigung (Warnung)",
-				"System",
-				() => Core.Common.Notifications.NotificationService.Instance.ShowWarning(
-					"Warnung",
-					"Dies ist eine Warnung, die Ihre Aufmerksamkeit erfordert"),
-				"Zeigt eine Test-Warnungs-Benachrichtigung an",
-				keywords: new[] { "notification", "benachrichtigung", "toast", "warning", "warnung", "test" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Test-Benachrichtigung (Fehler)",
-				"System",
-				() => Core.Common.Notifications.NotificationService.Instance.ShowError(
-					"Fehler!",
-					"Ein Fehler ist aufgetreten"),
-				"Zeigt eine Test-Fehler-Benachrichtigung an",
-				keywords: new[] { "notification", "benachrichtigung", "toast", "error", "fehler", "test" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Alle Benachrichtigungen löschen",
-				"System",
-				() => Core.Common.Notifications.NotificationService.Instance.Clear(),
-				"Löscht alle aktiven Benachrichtigungen",
-				keywords: new[] { "notification", "benachrichtigung", "clear", "löschen", "entfernen" }
-			);
-
-			// Update System Commands
-			paletteManager.RegisterCommand(
-				"Nach Updates suchen",
-				"System",
-				async () =>
-				{
-					Core.Common.Notifications.NotificationService.Instance.ShowInfo(
-						"Update-Prüfung",
-						"Suche nach verfügbaren Updates...");
-
-					var updateInfo = await Core.Common.Updates.AutoUpdateService.Instance.CheckForUpdatesAsync();
-
-					if (updateInfo != null)
-					{
-						var dialog = new Controls.Common.Updates.UpdateNotificationDialog(updateInfo);
-						dialog.ShowDialog();
-					}
-					else
-					{
-						Core.Common.Notifications.NotificationService.Instance.ShowSuccess(
-							"Keine Updates",
-							"Sie verwenden bereits die neueste Version");
-					}
-				},
-				"Prüft auf verfügbare Software-Updates",
-				keywords: new[] { "update", "aktualisierung", "version", "upgrade" }
-			);
-
-			// Recovery Commands
-			paletteManager.RegisterCommand(
-				"App-State speichern",
-				"System",
-				() =>
-				{
-					Core.Common.Recovery.CrashRecoveryManager.Instance.SaveSnapshot(false);
-					Core.Common.Notifications.NotificationService.Instance.ShowSuccess(
-						"State gespeichert",
-						"Aktueller Anwendungs-State wurde gesichert");
-				},
-				"Speichert den aktuellen Anwendungs-State",
-				keywords: new[] { "state", "speichern", "snapshot", "backup", "recovery" }
-			);
-
-			paletteManager.RegisterCommand(
-				"App-State löschen",
-				"System",
-				() =>
-				{
-					Core.Common.Recovery.CrashRecoveryManager.Instance.ClearState();
-					Core.Common.Notifications.NotificationService.Instance.ShowInfo(
-						"State gelöscht",
-						"Gespeicherter Anwendungs-State wurde entfernt");
-				},
-				"Löscht den gespeicherten Anwendungs-State",
-				keywords: new[] { "state", "löschen", "clear", "recovery" }
-			);
-
-			// Snapshot System Commands - jetzt über Einstellungen
-			paletteManager.RegisterCommand(
-				"Snapshot-Einstellungen öffnen",
-				"Power-User",
-				() => this.AppKontext.TabView.LoadView<EinstellungenView>(),
-				"Öffnet die Einstellungen für das Snapshot-System",
-				keywords: new[] { "snapshot", "state", "backup", "restore", "wiederherstellen", "sicherung", "einstellungen" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Neuen Snapshot erstellen",
-				"Power-User",
-				() =>
-				{
-					Core.Common.Snapshots.SnapshotManager.Instance.CreateAllCategorySnapshots("Manuell");
-					Core.Common.Notifications.NotificationService.Instance.ShowSuccess(
-						"Snapshot erstellt",
-						"Neuer Snapshot wurde erfolgreich erstellt");
-				},
-				"Erstellt einen neuen Snapshot des aktuellen Zustands",
-				keywords: new[] { "snapshot", "create", "erstellen", "backup", "save" }
-			);
-
-			// Power-User Mode Commands (NEW)
-			paletteManager.RegisterCommand(
-				"Power-User Modus umschalten",
-				"Power-User",
-				() =>
-				{
-					Core.Common.PowerUser.PowerUserMode.Instance.Toggle();
-					var isEnabled = Core.Common.PowerUser.PowerUserMode.Instance.IsEnabled;
-					Core.Common.Notifications.NotificationService.Instance.ShowInfo(
-						"Power-User Modus",
-						isEnabled ? "Power-User Modus aktiviert" : "Power-User Modus deaktiviert");
-				},
-				"Schaltet den Power-User Modus ein/aus",
-				"Ctrl+Shift+P",
-				keywords: new[] { "power", "user", "advanced", "expert", "modus", "mode" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Performance-Overlay anzeigen",
-				"Power-User",
-				() =>
-				{
-					if (!Core.Common.PowerUser.PowerUserMode.Instance.IsFeatureEnabled(
-						Core.Common.PowerUser.PowerUserFeature.PerformanceOverlay))
-					{
-						Core.Common.Notifications.NotificationService.Instance.ShowWarning(
-							"Feature nicht verfügbar",
-							"Aktivieren Sie zuerst den Power-User Modus");
-						return;
-					}
-					// PerformanceOverlay ist ein UserControl, nicht ein Window - verwende ExecutionLog stattdessen
-					var window = new Controls.Common.ExecutionLog.ExecutionLogFenster();
-					window.ExecutionLogList = CommandPool.ExecutionLog;
-					window.Show();
-				},
-				"Zeigt das Performance-Overlay an",
-				keywords: new[] { "performance", "overlay", "monitoring", "fps", "memory" }
-			);
-
-			// Command Replay Commands (NEW)
-			paletteManager.RegisterCommand(
-				"Befehlsverlauf öffnen",
-				"Power-User",
-				() =>
-				{
-					var window = new Controls.Common.CommandReplay.CommandHistoryWindow();
-					window.Show();
-				},
-				"Öffnet den Befehlsverlauf für Wiedergabe und Automatisierung",
-				keywords: new[] { "command", "befehl", "history", "verlauf", "replay", "wiedergabe" }
-			);
-
-			paletteManager.RegisterCommand(
-				"Befehlsaufzeichnung umschalten",
-				"Power-User",
-				() =>
-				{
-					Core.Common.CommandReplay.CommandReplayManager.Instance.IsRecording =
-						!Core.Common.CommandReplay.CommandReplayManager.Instance.IsRecording;
-					var isRecording = Core.Common.CommandReplay.CommandReplayManager.Instance.IsRecording;
-					Core.Common.Notifications.NotificationService.Instance.ShowInfo(
-						"Befehlsaufzeichnung",
-						isRecording ? "Aufzeichnung aktiviert" : "Aufzeichnung deaktiviert");
-				},
-				"Startet/Stoppt die Aufzeichnung von Befehlen",
-				keywords: new[] { "recording", "aufzeichnung", "command", "befehl", "capture" }
-			);
-
-			// Command Palette selbst
 			paletteManager.RegisterCommand(
 				"Befehlspalette öffnen",
 				"System",
@@ -325,8 +38,74 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				"Ctrl+K",
 				keywords: new[] { "befehl", "command", "palette", "suche", "search" }
 			);
+		}
 
-			#endregion
+		/// <summary>
+		/// Registriert alle Commands aus einem Menü rekursiv in der Command Palette
+		/// </summary>
+		/// <param name="menu">Das Menü, dessen Commands registriert werden sollen</param>
+		/// <param name="defaultCategory">Die Standard-Kategorie für Commands ohne übergeordnetes Menü</param>
+		private void RegisterMenuCommands(RelayMenu menu, string defaultCategory)
+		{
+			if (menu == null) return;
+
+			var paletteManager = CommandPaletteManager.Instance;
+
+			foreach (var item in menu)
+			{
+				RegisterRelayObject(item, defaultCategory, paletteManager);
+			}
+		}
+
+		/// <summary>
+		/// Registriert ein einzelnes RelayObject und seine Kinder rekursiv
+		/// </summary>
+		private void RegisterRelayObject(RelayObject item, string category, CommandPaletteManager paletteManager)
+		{
+			if (item == null || string.IsNullOrWhiteSpace(item.Name)) return;
+
+			if (item.Command != null && item.Command is RelayCommand relayCommand)
+			{
+				var keywords = GenerateKeywords(item.Name);
+				
+				paletteManager.RegisterCommand(
+					item.Name,
+					category,
+					() => relayCommand.Execute(null),
+					$"Führt '{item.Name}' aus",
+					keywords: keywords
+				);
+			}
+
+			if (item.Children != null && item.Children.Count > 0)
+			{
+				var childCategory = item.Name;
+				foreach (var child in item.Children)
+				{
+					RegisterRelayObject(child, childCategory, paletteManager);
+				}
+			}
+		}
+
+		/// <summary>
+		/// Generiert Keywords für die Suche basierend auf dem Namen
+		/// </summary>
+		private string[] GenerateKeywords(string name)
+		{
+			if (string.IsNullOrWhiteSpace(name)) return System.Array.Empty<string>();
+
+			var keywords = new System.Collections.Generic.List<string>();
+			
+			var lowerName = name.ToLower();
+			keywords.Add(lowerName);
+			
+			var words = name.Split(new[] { ' ', '-', '_' }, System.StringSplitOptions.RemoveEmptyEntries);
+			foreach (var word in words)
+			{
+				keywords.Add(word.ToLower());
+			}
+
+			return keywords.ToArray();
 		}
 
 		public RelayMenu TopMenu
@@ -400,11 +179,19 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 
-								Name = "An/Abmelden",
+								Name = "Abmelden",
 								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
+									// Token löschen
+									Properties.Settings.Default.AuthToken = string.Empty;
+									Properties.Settings.Default.Save();
+									
+									// Anwendung neu starten
+									System.Diagnostics.Process.Start(
+										System.Diagnostics.Process.GetCurrentProcess().MainModule!.FileName!);
+									System.Windows.Application.Current.Shutdown();
 								}, _ => true)
 							},
 
@@ -517,6 +304,12 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							this.AppKontext.TabView.LoadView<DashboardView>();
 						}, _ => true)
 					});
+
+					
+
+					
+
+					
 				}
 				return _pageMenu;
 			}
