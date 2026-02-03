@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Zenox.Wpf.Core.Common.Tutorial.TutorialHelper">
+    <Position X="5.5" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAEAAAAAAAAAAA=</HashCode>
+      <FileName>Common\Tutorial\TutorialHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zenox.Wpf.Core.Common.Tutorial.TutorialManager">
+    <Position X="5.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>wIAhhADAAiAAFAIAmAQwEAAABAACEAQAAAAAAACAAEQ=</HashCode>
+      <FileName>Common\Tutorial\TutorialManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zenox.Wpf.Core.Common.Tutorial.TutorialStepEventArgs">
+    <Position X="8" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAQAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Common\Tutorial\TutorialManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zenox.Wpf.Core.Common.Tutorial.TutorialPopup">
+    <Position X="3" Y="4.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AABAAAAABECAQKAEAAACAAACABAAAAAQAAAgAAAAAAA=</HashCode>
+      <FileName>Common\Tutorial\TutorialPopup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zenox.Wpf.Core.Common.Tutorial.TutorialService">
+    <Position X="3" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAgAAAkAAAQAAYwAAAAAAQQAAAYAAAAgg=</HashCode>
+      <FileName>Common\Tutorial\TutorialService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zenox.Wpf.Core.Common.Tutorial.TutorialStep">
+    <Position X="0.5" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAEQgAAAAAAAAQQAAAAAAAAEAAAAAAQA=</HashCode>
+      <FileName>Common\Tutorial\TutorialStep.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Zenox.Wpf.Core.Common.Tutorial.TutorialXmlLoader">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAACAAAgAAAAABAQAAAAAAAAAACAAAAAAAg=</HashCode>
+      <FileName>Common\Tutorial\TutorialXmlLoader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Zenox.Wpf.Core.Common.Tutorial.TutorialStepType">
+    <Position X="3" Y="7.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEIAgAAAIAAAAAA=</HashCode>
+      <FileName>Common\Tutorial\TutorialStep.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Zenox.Wpf.Core.Common.Tutorial.TutorialPosition">
+    <Position X="0.5" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAIAAAACACAACAIAAA=</HashCode>
+      <FileName>Common\Tutorial\TutorialStep.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
