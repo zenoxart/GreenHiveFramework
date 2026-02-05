@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Zenox.Wpf.Core.Common.ML.ContextAwareValidation
+namespace Zenox.NET.Core.Common.ML.ContextAwareValidation
 {
     /// <summary>
     /// Kontext für die Validierung eines Wertes

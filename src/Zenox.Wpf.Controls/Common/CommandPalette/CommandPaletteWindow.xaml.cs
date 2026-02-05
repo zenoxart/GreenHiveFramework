@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.CommandPalette;
+using Zenox.NET.Core.Common.CommandPalette;
 
 namespace Zenox.Wpf.Controls.Common.CommandPalette
 {

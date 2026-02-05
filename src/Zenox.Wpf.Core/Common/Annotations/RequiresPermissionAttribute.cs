@@ -1,6 +1,6 @@
-using Zenox.Wpf.Core.Common.Permission;
+using Zenox.NET.Core.Common.Permission;
 
-namespace Zenox.Wpf.Core.Common.Annotations
+namespace Zenox.NET.Core.Common.Annotations
 {
 
     /// <summary>

@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using Zenox.Wpf.Core.Common.Notifications;
+using Zenox.NET.Core.Common.Notifications;
 
 namespace Zenox.Wpf.Controls.Common.Notifications
 {

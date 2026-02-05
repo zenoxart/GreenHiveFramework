@@ -1,6 +1,6 @@
 ﻿using System.Windows.Markup;
 
-namespace Zenox.Wpf.Core.Common.Extensions.FontMapping
+namespace Zenox.NET.Core.Common.Extensions.FontMapping
 {
     [MarkupExtensionReturnType(typeof(string))]
     public class FontIconExtension : MarkupExtension

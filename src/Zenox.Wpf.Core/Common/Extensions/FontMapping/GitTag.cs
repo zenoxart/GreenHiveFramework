@@ -3,6 +3,6 @@
 // Copyright (C) Leszek Pomianowski and WPF UI Contributors.
 // All Rights Reserved.
 
-namespace Zenox.Wpf.Core.Common.Extensions.FontMapping;
+namespace Zenox.NET.Core.Common.Extensions.FontMapping;
 
 record GitTag(string Ref, string Node_Id, string Url);

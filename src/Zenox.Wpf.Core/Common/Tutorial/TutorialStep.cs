@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.Tutorial
+namespace Zenox.NET.Core.Common.Tutorial
 {
     /// <summary>
     /// Definiert alle Eigenschaften eines Tutorial-Schrittes

@@ -1,6 +1,6 @@
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.CommandPalette;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.CommandPalette;
 
 namespace Zenox.Wpf.Controls.Common.CommandPalette
 {

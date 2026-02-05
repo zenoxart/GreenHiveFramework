@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Text.Json;
-using Zenox.Wpf.Core.Common;
+using Zenox.NET.Core.Common;
 
-namespace Zenox.Wpf.Core.Common.Services
+namespace Zenox.NET.Core.Common.Services
 {
     /// <summary>
     /// Dienst zum Laden und Speichern von Anwendungseinstellungen als JSON-Datei.

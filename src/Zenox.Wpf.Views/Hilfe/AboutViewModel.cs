@@ -2,8 +2,8 @@ using System;
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
 
 namespace Zenox.Wpf.Views.Hilfe
 {

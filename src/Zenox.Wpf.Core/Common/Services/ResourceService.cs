@@ -1,7 +1,7 @@
 using System.Windows;
-using Zenox.Wpf.Core.Common;
+using Zenox.NET.Core.Common;
 
-namespace Zenox.Wpf.Core.Common.Services
+namespace Zenox.NET.Core.Common.Services
 {
     /// <summary>
     /// Stellt Methoden zum Abrufen von Ressourcen aus der aktuellen WPF-Anwendung bereit.

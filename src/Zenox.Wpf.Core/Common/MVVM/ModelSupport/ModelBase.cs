@@ -1,4 +1,4 @@
-﻿namespace Zenox.Wpf.Core.Common.MVVM.ModelSupport
+﻿namespace Zenox.NET.Core.Common.MVVM.ModelSupport
 {
     /// <summary>
     /// Definiert die Schnittstelle für alle Modellklassen.

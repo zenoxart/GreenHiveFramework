@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace Zenox.Wpf.Core.Common.Tutorial
+namespace Zenox.NET.Core.Common.Tutorial
 {
     /// <summary>
     /// Ermöglicht einen Tag im Xaml hinzuzufügen, zur Erkennung im Visual Tree

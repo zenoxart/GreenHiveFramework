@@ -1,11 +1,11 @@
 using System.IO;
 using System.Text.Json;
 using System.Timers;
-using Zenox.Wpf.Core.Common.Services;
-using Zenox.Wpf.Core.Common.Settings;
-using Zenox.Wpf.Core.Common.Telemetry;
+using Zenox.NET.Core.Common.Services;
+using Zenox.NET.Core.Common.Settings;
+using Zenox.NET.Core.Common.Telemetry;
 
-namespace Zenox.Wpf.Core.Common.Snapshots
+namespace Zenox.NET.Core.Common.Snapshots
 {
     /// <summary>
     /// Generischer Snapshot Manager für Anwendungszustand, Konfigurationen und Daten.

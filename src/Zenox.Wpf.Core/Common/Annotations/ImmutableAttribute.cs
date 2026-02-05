@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Zenox.Wpf.Core.Common.Annotations
+namespace Zenox.NET.Core.Common.Annotations
 {
     /// <summary>
     /// Markiert eine Klasse oder Struktur als unveränderlich (immutable).

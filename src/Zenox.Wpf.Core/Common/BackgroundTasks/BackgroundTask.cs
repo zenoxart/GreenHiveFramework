@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Zenox.Wpf.Core.Common.BackgroundTasks
+namespace Zenox.NET.Core.Common.BackgroundTasks
 {
 	/// <summary>
 	/// Repräsentiert eine Hintergrundaufgabe

@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Zenox.Wpf.Core.Common.Telemetry
+namespace Zenox.NET.Core.Common.Telemetry
 {
 	/// <summary>
 	/// Repräsentiert eine Performance-Metrik

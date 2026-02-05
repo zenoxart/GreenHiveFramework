@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
+using Zenox.NET.Core.Common.Command;
 
 namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 {

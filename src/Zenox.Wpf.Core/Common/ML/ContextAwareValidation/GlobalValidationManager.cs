@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Zenox.Wpf.Core.Common.ML.ContextAwareValidation
+namespace Zenox.NET.Core.Common.ML.ContextAwareValidation
 {
     /// <summary>
     /// Globaler Manager für automatische AI-Validierung über Kontextmenü

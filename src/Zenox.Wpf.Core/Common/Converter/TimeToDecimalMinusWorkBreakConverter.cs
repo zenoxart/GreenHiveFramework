@@ -1,4 +1,4 @@
-﻿namespace Zenox.Wpf.Core.Common.Converter
+﻿namespace Zenox.NET.Core.Common.Converter
 {
     public class TimeToDecimalMinusWorkBreakConverter : System.Windows.Data.IValueConverter
     {

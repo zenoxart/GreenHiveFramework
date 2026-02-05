@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
-using Zenox.Wpf.Core.Common.Telemetry;
+using Zenox.NET.Core.Common.Telemetry;
 
-namespace Zenox.Wpf.Core.Common.CommandReplay
+namespace Zenox.NET.Core.Common.CommandReplay
 {
 	/// <summary>
 	/// MVP Command Replay System

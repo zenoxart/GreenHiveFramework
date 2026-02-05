@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zenox.NET\Zenox.NET.Core.csproj" />
     <ProjectReference Include="..\Zenox.Wpf.Controls\Zenox.Wpf.Controls.csproj" />
-    <ProjectReference Include="..\Zenox.Wpf.Core\Zenox.Wpf.Core.csproj" />
-    <ProjectReference Include="..\Zenox.Wpf.Dto\Zenox.Wpf.Dto.csproj" />
+    <ProjectReference Include="..\Zenox.Wpf.Advanced\Zenox.Wpf.Advanced.csproj" />
   </ItemGroup>
 
  

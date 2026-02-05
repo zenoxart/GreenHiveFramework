@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
 
-namespace Zenox.Wpf.Core.Common.Threading
+namespace Zenox.NET.Core.Common.Threading
 {
     /// <summary>
     /// Stellt einen Fortschritts-Wrapper für eine Datagrid-Datenquelle bereit, inklusive Ladefortschritt, Status und asynchronem Laden.

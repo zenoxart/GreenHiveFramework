@@ -1,5 +1,5 @@
 using System.Windows.Controls;
-using Zenox.Wpf.Core.Common.Notifications;
+using Zenox.NET.Core.Common.Notifications;
 
 namespace Zenox.Wpf.Controls.Common.Notifications
 {

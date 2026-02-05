@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Zenox.Wpf.Core.Common.Command
+namespace Zenox.NET.Core.Common.Command
 {
     /// <summary>
     /// Erweitert den RelayCommand, um asynchrone Ausführung zu unterstützen.

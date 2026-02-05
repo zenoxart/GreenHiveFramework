@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Zenox.Wpf.Core.Common.MVVM.ViewModelSupport
+namespace Zenox.NET.Core.Common.MVVM.ViewModelSupport
 {
     /// <summary>
     /// Stellt ViewModels zentral bereit und ermöglicht deren Wiederverwendung oder Austausch.

@@ -1,4 +1,4 @@
-using Zenox.Wpf.Core.Common.Neuigkeiten;
+using Zenox.NET.Core.Common.Neuigkeiten;
 
 namespace Zenox.Wpf.Views.Hilfe
 {

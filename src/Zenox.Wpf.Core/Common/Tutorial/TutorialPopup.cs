@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Zenox.Wpf.Core.Common.Tutorial
+namespace Zenox.NET.Core.Common.Tutorial
 {
     /// <summary>
     /// Definiert ein Tooltip-Popup für Tutorial-Punkte

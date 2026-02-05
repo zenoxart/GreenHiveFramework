@@ -1,4 +1,4 @@
-﻿namespace Zenox.Wpf.Core.Common.MVVM.FactoryInjection
+﻿namespace Zenox.NET.Core.Common.MVVM.FactoryInjection
 {
     #region Typ-Deklaration Ereignis-Behandler Methode
 

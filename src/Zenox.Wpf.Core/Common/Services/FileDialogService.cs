@@ -1,7 +1,7 @@
 using Microsoft.Win32;
 using System.Windows;
 
-namespace Zenox.Wpf.Core.Common.Services
+namespace Zenox.NET.Core.Common.Services
 {
 
     /// <summary>

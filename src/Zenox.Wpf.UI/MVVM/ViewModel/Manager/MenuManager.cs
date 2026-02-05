@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using Zenox.Wpf.Controls.Common.CommandHistory;
 using Zenox.Wpf.Controls.Common.CommandPalette;
-using Zenox.Wpf.Core.Common.Command;
+using Zenox.NET.Core.Common.Command;
 using Zenox.Wpf.Views;
 using Zenox.Wpf.Views.Hilfe;
 
@@ -119,7 +119,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					_topMenu.Add(new RelayObject
 					{
 						Name = "Einstellungen",
-						Foreground = Brushes.White,
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -128,7 +127,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 						Children = new System.Collections.ObjectModel.ObservableCollection<RelayObject> {
 							new() {
 								Name = "Performancepanel",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -139,7 +137,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 								Name = "Anzeigeeinstellungen",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -147,7 +144,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 								Name = "Anwendungseinstellungen",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -161,7 +157,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					_topMenu.Add(new RelayObject
 					{
 						Name = "Benutzer",
-						Foreground = Brushes.White,
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -170,7 +165,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							new() {
 
 								Name = "Profil",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -180,7 +174,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							new() {
 
 								Name = "Abmelden",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -201,7 +194,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					_topMenu.Add(new RelayObject
 					{
 						Name = "Hilfe",
-						Foreground = Brushes.White,
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -210,7 +202,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							new() {
 
 								Name = "Hilfe Anzeigen",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -220,7 +211,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							new() {
 
 								Name = "Glossar",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -230,7 +220,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							new() {
 
 								Name = "Neuigkeiten",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -240,7 +229,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							new() {
 
 								Name = "Feedback senden",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -249,7 +237,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 									new() {
 
 										Name = "Problem melden",
-										Foreground = Brushes.White,
 										Command = new RelayCommand(
 										_ =>
 										{
@@ -258,7 +245,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 									new() {
 
 										Name = "Feature vorschlagen",
-										Foreground = Brushes.White,
 										Command = new RelayCommand(
 										_ =>
 										{
@@ -269,7 +255,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							new() {
 
 								Name = "About",
-								Foreground = Brushes.White,
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -297,7 +282,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					_pageMenu.Add(new RelayObject
 					{
 						Name = "Dashboard",
-						Foreground = Brushes.White,
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -320,7 +304,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					_bottomMenu.Add(new RelayObject
 					{
 						Name = "Anwendungs-Logs",
-						Foreground = Brushes.White,
 						Command = new RelayCommand(
 						_ =>
 						{

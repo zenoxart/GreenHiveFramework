@@ -250,7 +250,7 @@ dotnet run --project Zenox.Wpf.UI.csproj
 
 ### Beispiel: Einfaches Command erstellen
 ```csharp
-using Zenox.Wpf.Core.Common.Command;
+using Zenox.NET.Core.Common.Command;
 
 public class MyViewModel : NotificationObject
 {
@@ -275,7 +275,7 @@ public class MyViewModel : NotificationObject
 
 ### Beispiel: Asynchrones Command
 ```csharp
-using Zenox.Wpf.Core.Common.Command;
+using Zenox.NET.Core.Common.Command;
 
 public class MyViewModel : NotificationObject
 {
@@ -296,7 +296,7 @@ public class MyViewModel : NotificationObject
 
 ### Beispiel: Notification senden
 ```csharp
-using Zenox.Wpf.Core.Common.Notifications;
+using Zenox.NET.Core.Common.Notifications;
 
 NotificationService.Instance.Show(
     "Titel",
@@ -307,7 +307,7 @@ NotificationService.Instance.Show(
 
 ### Beispiel: Background-Task planen
 ```csharp
-using Zenox.Wpf.Core.Common.BackgroundTasks;
+using Zenox.NET.Core.Common.BackgroundTasks;
 
 var task = new BackgroundTask("MyTask", async () =>
 {
@@ -343,7 +343,7 @@ Das Framework bietet ein leistungsstarkes Command-Replay-System für Automatisier
 
 #### Command aufzeichnen
 ```csharp
-using Zenox.Wpf.Core.Common.CommandReplay;
+using Zenox.NET.Core.Common.CommandReplay;
 
 // Einfaches Command aufzeichnen
 var recordedCommand = CommandReplayManager.Instance.RecordCommand(

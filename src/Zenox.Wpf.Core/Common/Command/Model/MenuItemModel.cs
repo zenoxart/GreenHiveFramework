@@ -1,4 +1,4 @@
-﻿namespace Zenox.Wpf.Core.Common.Command.Model
+﻿namespace Zenox.NET.Core.Common.Command.Model
 {
     public class MenuItemRecord
     {

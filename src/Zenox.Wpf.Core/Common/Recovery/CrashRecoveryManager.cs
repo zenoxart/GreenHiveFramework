@@ -1,9 +1,9 @@
 using System.IO;
 using System.Text.Json;
 using System.Windows;
-using Zenox.Wpf.Core.Common.Snapshots;
+using Zenox.NET.Core.Common.Snapshots;
 
-namespace Zenox.Wpf.Core.Common.Recovery
+namespace Zenox.NET.Core.Common.Recovery
 {
 	/// <summary>
 	/// Repräsentiert den gespeicherten Anwendungs-State

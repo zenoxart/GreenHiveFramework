@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Controls;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
 
 namespace Zenox.Wpf.Core.ExtDto
 {

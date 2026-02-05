@@ -4,9 +4,9 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Controls;
-using Zenox.Wpf.Core.Common.Notifications;
+using Zenox.NET.Core.Common.Notifications;
 
-namespace Zenox.Wpf.Core.Common.ML.ContextAwareValidation
+namespace Zenox.NET.Core.Common.ML.ContextAwareValidation
 {
     /// <summary>
     /// Zentraler Service für kontextbewusste Validierung mit integriertem Feedback

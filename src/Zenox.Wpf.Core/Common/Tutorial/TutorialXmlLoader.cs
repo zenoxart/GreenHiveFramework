@@ -2,7 +2,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Zenox.Wpf.Core.Common.Tutorial
+namespace Zenox.NET.Core.Common.Tutorial
 {
     /// <summary>
     /// Lädt Tutorial-Konfigurationen aus XML-Dateien

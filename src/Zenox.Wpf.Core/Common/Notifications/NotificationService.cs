@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Zenox.Wpf.Core.Common.Notifications
+namespace Zenox.NET.Core.Common.Notifications
 {
 	/// <summary>
 	/// Singleton Service für Toast-Benachrichtigungen

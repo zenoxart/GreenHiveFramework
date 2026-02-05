@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.Updates
+namespace Zenox.NET.Core.Common.Updates
 {
 	/// <summary>
 	/// Repräsentiert Versions-Informationen

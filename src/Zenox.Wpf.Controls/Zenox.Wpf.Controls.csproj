@@ -27,17 +27,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Zenox.Wpf.Core\Zenox.Wpf.Core.csproj" />
-    <ProjectReference Include="..\Zenox.Wpf.Dto\Zenox.Wpf.Dto.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Common\DataGrid\" />
     <Folder Include="Common\Snapshots\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="SharpVectors.Wpf" Version="1.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zenox.NET\Zenox.NET.Core.csproj" />
+    <ProjectReference Include="..\Zenox.Wpf.Advanced\Zenox.Wpf.Advanced.csproj" />
   </ItemGroup>
 
   <ItemGroup>

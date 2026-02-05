@@ -1,5 +1,5 @@
 using System.Windows;
-using Zenox.Wpf.Core.Common.Recovery;
+using Zenox.NET.Core.Common.Recovery;
 
 namespace Zenox.Wpf.Controls.Common.Recovery
 {

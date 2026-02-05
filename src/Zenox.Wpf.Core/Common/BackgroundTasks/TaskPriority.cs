@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.BackgroundTasks
+namespace Zenox.NET.Core.Common.BackgroundTasks
 {
 	/// <summary>
 	/// Definiert die Priorität einer Hintergrundaufgabe

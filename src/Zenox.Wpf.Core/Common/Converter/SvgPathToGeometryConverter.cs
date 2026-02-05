@@ -4,7 +4,7 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Xml.Linq;
 
-namespace Zenox.Wpf.Core.Common.Converter
+namespace Zenox.NET.Core.Common.Converter
 {
     public class SvgPathToGeometryConverter : IValueConverter
     {

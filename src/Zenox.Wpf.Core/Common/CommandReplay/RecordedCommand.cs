@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.CommandReplay
+namespace Zenox.NET.Core.Common.CommandReplay
 {
 	/// <summary>
 	/// Represents a recorded command with parameters

@@ -23,8 +23,8 @@ namespace Zenox.Wpf.UI
 
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {
-            // Ctrl+K - Command Palette
-            if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control)
+            // Ctrl+Shift+P - Command Palette
+            if (e.Key == Key.P && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
             {
                 CommandPaletteManager.Instance.ShowPalette();
                 e.Handled = true;

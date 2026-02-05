@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Zenox.Wpf.Core.Common.CommandPalette
+namespace Zenox.NET.Core.Common.CommandPalette
 {
 	/// <summary>
 	/// Repräsentiert einen einzelnen Befehl in der Command Palette

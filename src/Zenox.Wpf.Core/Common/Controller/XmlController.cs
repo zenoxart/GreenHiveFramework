@@ -1,6 +1,6 @@
-﻿using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
+﻿using Zenox.NET.Core.Common.MVVM.FactoryInjection;
 
-namespace Zenox.Wpf.Core.Common.Controller
+namespace Zenox.NET.Core.Common.Controller
 {
     /// <summary>
     /// Stellt einen Dienst zum Schreiben

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Concurrent;
 
-namespace Zenox.Wpf.Core.Common.Threading
+namespace Zenox.NET.Core.Common.Threading
 {
     /// <summary>
     /// Ermöglicht die lose gekoppelte Kommunikation zwischen Komponenten über das Publish/Subscribe-Prinzip.

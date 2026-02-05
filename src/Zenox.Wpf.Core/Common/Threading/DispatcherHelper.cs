@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace Zenox.Wpf.Core.Common.Threading
+namespace Zenox.NET.Core.Common.Threading
 {
     /// <summary>
     /// Stellt Hilfsmethoden für den Zugriff auf den UI-Dispatcher bereit.

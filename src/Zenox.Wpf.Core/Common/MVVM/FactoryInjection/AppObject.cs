@@ -1,6 +1,6 @@
-﻿using Zenox.Wpf.Core.Common.Permission;
+﻿using Zenox.NET.Core.Common.Permission;
 
-namespace Zenox.Wpf.Core.Common.MVVM.FactoryInjection
+namespace Zenox.NET.Core.Common.MVVM.FactoryInjection
 {
 	/// <summary>
 	/// Stellt die Basisklasse für Anwendungsobjekte dar, 

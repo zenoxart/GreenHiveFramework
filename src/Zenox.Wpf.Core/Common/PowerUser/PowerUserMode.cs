@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.PowerUser
+namespace Zenox.NET.Core.Common.PowerUser
 {
 	/// <summary>
 	/// Represents different power-user features

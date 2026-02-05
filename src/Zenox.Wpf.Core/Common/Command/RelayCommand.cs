@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.CommandReplay;
-using Zenox.Wpf.Core.Common.Permission;
+using Zenox.NET.Core.Common.CommandReplay;
+using Zenox.NET.Core.Common.Permission;
 
-namespace Zenox.Wpf.Core.Common.Command
+namespace Zenox.NET.Core.Common.Command
 {
     /// <summary>
     /// Stellt einen Befehl dar, der ausgeführt werden kann und dessen Ausführbarkeit anhand einer angegebenen Bedingung bestimmt wird.

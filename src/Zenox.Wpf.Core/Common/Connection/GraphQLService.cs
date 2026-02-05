@@ -4,12 +4,12 @@ using System.Net.Http.Json;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Zenox.Wpf.Core.Common;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
-using Zenox.Wpf.Core.Common.Permission;
-using Zenox.Wpf.Core.Common.Services;
+using Zenox.NET.Core.Common;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.Permission;
+using Zenox.NET.Core.Common.Services;
 
-namespace Zenox.Wpf.Core.Common.Connection
+namespace Zenox.NET.Core.Common.Connection
 {
     /// <summary>
     /// Stellt Methoden für generische GraphQL-Requests bereit.

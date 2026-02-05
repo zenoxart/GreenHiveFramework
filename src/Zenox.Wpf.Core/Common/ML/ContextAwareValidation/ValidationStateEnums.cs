@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.ML.ContextAwareValidation
+namespace Zenox.NET.Core.Common.ML.ContextAwareValidation
 {
     /// <summary>
     /// Validierungsergebnis-Status

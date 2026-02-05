@@ -3,7 +3,7 @@ using System.IO;
 using System.Net.Http;
 using System.Text.Json;
 
-namespace Zenox.Wpf.Core.Common.Updates
+namespace Zenox.NET.Core.Common.Updates
 {
 	/// <summary>
 	/// Service für automatische Updates

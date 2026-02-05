@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace Zenox.Wpf.Core.Common.Heatmap
+namespace Zenox.NET.Core.Common.Heatmap
 {
     /// <summary>
     /// Typ der Benutzerinteraktion

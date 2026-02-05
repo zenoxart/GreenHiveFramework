@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
+		<EnableWindowsTargeting>true</EnableWindowsTargeting>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<LangVersion>latest</LangVersion>
 		<DebugType>full</DebugType>
@@ -12,6 +12,7 @@
 		<Product>WPF Base-Framework</Product>
 		<Description>Basic Functionality Framework for WPF Applications</Description>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
 
-namespace Zenox.Wpf.Core.Common.MVVM.Composite
+namespace Zenox.NET.Core.Common.MVVM.Composite
 {
     /// <summary>
     /// Verwaltet die Registrierung von Modulen sowie das dynamische Laden von Views und ViewModels in diesen Modulen.

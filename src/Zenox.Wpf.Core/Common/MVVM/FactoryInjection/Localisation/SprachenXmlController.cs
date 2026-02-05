@@ -1,6 +1,6 @@
-﻿using Zenox.Wpf.Core.Common.Controller;
+﻿using Zenox.NET.Core.Common.Controller;
 
-namespace Zenox.Wpf.Core.Common.MVVM.FactoryInjection.Localisation
+namespace Zenox.NET.Core.Common.MVVM.FactoryInjection.Localisation
 {
 
     /// <summary>
@@ -29,7 +29,7 @@ namespace Zenox.Wpf.Core.Common.MVVM.FactoryInjection.Localisation
             var Liste = new Sprachen();
 
             // Xml Text aus den Ressourcen
-            var xmlText = Zenox.Wpf.Core.Properties.Resources.Localisation;
+            var xmlText = Zenox.NET.Core.Properties.Resources.Localisation;
 
 
             // Zum Parsen in ein .Net XmlDocument

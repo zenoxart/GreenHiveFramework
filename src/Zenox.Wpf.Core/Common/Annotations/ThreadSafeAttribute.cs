@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.Annotations
+namespace Zenox.NET.Core.Common.Annotations
 {
 
     /// <summary>

@@ -2,8 +2,8 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using Zenox.Wpf.Controls.Common.Dialogs;
-using Zenox.Wpf.Core.Common.CommandReplay;
-using Zenox.Wpf.Core.Common.Notifications;
+using Zenox.NET.Core.Common.CommandReplay;
+using Zenox.NET.Core.Common.Notifications;
 
 namespace Zenox.Wpf.Controls.Common.CommandReplay
 {

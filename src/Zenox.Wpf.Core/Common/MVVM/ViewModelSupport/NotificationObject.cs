@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
 
-namespace Zenox.Wpf.Core.Common.MVVM.ViewModelSupport
+namespace Zenox.NET.Core.Common.MVVM.ViewModelSupport
 {
     /// <summary>
     /// Implementiert das INotifyPropertyChanged-Interface für eine einfache Benachrichtigung bei Eigenschaftsänderungen.

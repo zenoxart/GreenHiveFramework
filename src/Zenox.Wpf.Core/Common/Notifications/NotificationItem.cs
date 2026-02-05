@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.Notifications
+namespace Zenox.NET.Core.Common.Notifications
 {
 	/// <summary>
 	/// Repräsentiert eine einzelne Benachrichtigung

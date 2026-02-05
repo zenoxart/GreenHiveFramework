@@ -1,10 +1,10 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.CommandReplay;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.CommandReplay;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
 
-namespace Zenox.Wpf.Core.Common.CommandHistory
+namespace Zenox.NET.Core.Common.CommandHistory
 {
     /// <summary>
     /// ViewModel fuer das Command History Overlay

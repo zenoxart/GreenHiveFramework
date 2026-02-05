@@ -1,11 +1,11 @@
 using Microsoft.ML;
 using System;
 using System.IO;
-using Zenox.Wpf.Core.Common;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
-using Zenox.Wpf.Core.Common.Services;
+using Zenox.NET.Core.Common;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.Services;
 
-namespace Zenox.Wpf.Core.Common.ML
+namespace Zenox.NET.Core.Common.ML
 {
     /// <summary>
     /// Generischer, dynamischer Service für ML.NET-Modelle zur einfachen Nutzung von Vorhersagen und Training.

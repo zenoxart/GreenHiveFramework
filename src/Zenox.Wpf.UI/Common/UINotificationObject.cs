@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
 
 namespace Zenox.Wpf.UI.Common
 {

@@ -1,8 +1,8 @@
 using System.Net.Http;
 using System.Net.Http.Json;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
 
-namespace Zenox.Wpf.Core.Common.Connection
+namespace Zenox.NET.Core.Common.Connection
 {
     /// <summary>
     /// Stellt Methoden für generische HTTP-API-Aufrufe bereit.

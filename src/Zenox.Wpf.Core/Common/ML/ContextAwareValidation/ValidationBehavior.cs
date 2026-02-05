@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Zenox.Wpf.Core.Common.ML.ContextAwareValidation
+namespace Zenox.NET.Core.Common.ML.ContextAwareValidation
 {
     /// <summary>
     /// Einfaches Behavior für AI-Validierung mit Rechtsklick

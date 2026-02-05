@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.Settings
+namespace Zenox.NET.Core.Common.Settings
 {
     /// <summary>
     /// Zentrale Anwendungseinstellungen mit Snapshot-Konfiguration.

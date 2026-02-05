@@ -2,7 +2,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Zenox.Wpf.Core.Common.Storage
+namespace Zenox.NET.Core.Common.Storage
 {
     public static class SecureStorage
     {

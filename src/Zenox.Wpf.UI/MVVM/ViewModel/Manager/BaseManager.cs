@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Zenox.Wpf.Core.Common.Command;
+using Zenox.NET.Core.Common.Command;
 
 namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 {

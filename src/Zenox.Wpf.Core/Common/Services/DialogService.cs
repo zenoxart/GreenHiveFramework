@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Zenox.Wpf.Core.Common;
+using Zenox.NET.Core.Common;
 
-namespace Zenox.Wpf.Core.Common.Services
+namespace Zenox.NET.Core.Common.Services
 {
     /// <summary>
     /// Definiert einen Dienst zum Anzeigen von Dialogen und Nachrichten.

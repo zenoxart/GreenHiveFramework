@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
-using Zenox.Wpf.Core.Common.Settings;
-using Zenox.Wpf.Core.Common.Snapshots;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.Settings;
+using Zenox.NET.Core.Common.Snapshots;
 
 namespace Zenox.Wpf.Views
 {

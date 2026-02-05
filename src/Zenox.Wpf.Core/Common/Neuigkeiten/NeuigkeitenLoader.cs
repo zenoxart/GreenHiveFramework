@@ -3,7 +3,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Markup;
 
-namespace Zenox.Wpf.Core.Common.Neuigkeiten
+namespace Zenox.NET.Core.Common.Neuigkeiten
 {
 	/// <summary>
 	/// Laedt Neuigkeiten-Konfiguration aus XAML-Dateien

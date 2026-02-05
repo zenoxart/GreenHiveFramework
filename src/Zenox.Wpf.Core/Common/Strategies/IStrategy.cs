@@ -1,4 +1,4 @@
-namespace Zenox.Wpf.Core.Common.Strategies
+namespace Zenox.NET.Core.Common.Strategies
 {
 	/// <summary>
 	/// Base interface for all strategy implementations.

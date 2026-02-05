@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Markup;
 
-namespace Zenox.Wpf.Core.Common.Neuigkeiten
+namespace Zenox.NET.Core.Common.Neuigkeiten
 {
 	/// <summary>
 	/// Repräsentiert einen einzelnen Eintrag in einer Neuigkeiten-Kategorie

@@ -1,7 +1,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Zenox.Wpf.Core.Common.Input
+namespace Zenox.NET.Core.Common.Input
 {
 	/// <summary>
 	/// Globaler Keyboard Handler für Tastenkombinationen

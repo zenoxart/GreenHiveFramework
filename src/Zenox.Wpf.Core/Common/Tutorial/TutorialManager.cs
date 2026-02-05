@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace Zenox.Wpf.Core.Common.Tutorial
+namespace Zenox.NET.Core.Common.Tutorial
 {
     /// <summary>
     /// Verwaltet das Verhalten des Tutorials

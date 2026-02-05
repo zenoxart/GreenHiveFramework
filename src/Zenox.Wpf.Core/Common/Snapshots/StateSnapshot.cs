@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Zenox.Wpf.Core.Common.Snapshots
+namespace Zenox.NET.Core.Common.Snapshots
 {
 	/// <summary>
 	/// Represents a snapshot of application state at a point in time

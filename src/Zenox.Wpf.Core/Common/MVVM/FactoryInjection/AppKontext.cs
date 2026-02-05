@@ -2,15 +2,15 @@
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Reflection;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.Connection;
-using Zenox.Wpf.Core.Common.ML;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection.Localisation;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
-using Zenox.Wpf.Core.Common.Permission;
-using Zenox.Wpf.Core.Common.Storage;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.Connection;
+using Zenox.NET.Core.Common.ML;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection.Localisation;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.Permission;
+using Zenox.NET.Core.Common.Storage;
 
-namespace Zenox.Wpf.Core.Common.MVVM.FactoryInjection
+namespace Zenox.NET.Core.Common.MVVM.FactoryInjection
 {
     /// <summary>
     /// Stellt den Kontext der Anwendung dar, der für die Verwaltung von Anwendungsobjekten und deren Abhängigkeiten verantwortlich ist.

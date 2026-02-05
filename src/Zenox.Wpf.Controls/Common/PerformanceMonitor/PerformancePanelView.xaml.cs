@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using Zenox.Wpf.Core.Common.Telemetry;
+using Zenox.NET.Core.Common.Telemetry;
 
 namespace Zenox.Wpf.Controls.Common.PerformanceMonitor
 {

@@ -1,17 +1,17 @@
 ﻿using System.Windows;
 using Zenox.Wpf.Controls.Common.CommandPalette;
-using Zenox.Wpf.Core.Common.BackgroundTasks;
-using Zenox.Wpf.Core.Common.Heatmap;
-using Zenox.Wpf.Core.Common.Input;
-using Zenox.Wpf.Core.Common.ML.ContextAwareValidation;
-using Zenox.Wpf.Core.Common.MVVM.Composite;
-using Zenox.Wpf.Core.Common.Notifications;
-using Zenox.Wpf.Core.Common.Recovery;
-using Zenox.Wpf.Core.Common.Telemetry;
-using Zenox.Wpf.Core.Common.Updates;
+using Zenox.NET.Core.Common.BackgroundTasks;
+using Zenox.NET.Core.Common.Heatmap;
+using Zenox.NET.Core.Common.Telemetry;
+using Zenox.NET.Core.Common.Updates;
+using Zenox.Wpf.Advanced.MVVM.Composite;
+
+
 using Zenox.Wpf.UI.Common;
 using Zenox.Wpf.UI.MVVM.ViewModel;
 using Zenox.Wpf.UI.Properties;
+using Zenox.NET.Core.Common.Recovery;
+using Zenox.NET.Core.Common.Notifications;
 
 namespace Zenox.Wpf.UI;
 
@@ -55,13 +55,6 @@ public partial class App : Application
 			}
 		}
 
-		// Global Keyboard Handler initialisieren
-		GlobalKeyboardHandler.Initialize(() => CommandPaletteManager.Instance.ShowPalette());
-
-		// Global Validation Manager initialisieren
-		// Ermöglicht AI-basierte Validierung per Rechtsklick auf beliebigen UI-Elementen
-		GlobalValidationManager.Instance.IsEnabled = true;
-		GlobalValidationManager.Instance.Initialize();
 
 		// Auto-Update Service initialisieren (optional - URL konfigurieren!)
 		// AutoUpdateService.Instance.Initialize("https://your-server.com/updates/manifest.json");
@@ -83,7 +76,7 @@ public partial class App : Application
 
 		var uiAppKontext = new UIAppKontext();
 		ModuleHandler = new CompositeModuleHandler(uiAppKontext);
-		ModuleHandler.AppKontext.Sprachen.Festlegen(Settings.Default.LocalisationISO);
+		//ModuleHandler.AppKontext.Sprachen.Festlegen(Settings.Default.LocalisationISO);
 
 		var Shell = new MainAppShell();
 		Shell.DataContext = ModuleHandler.AppKontext;
@@ -167,7 +160,8 @@ public partial class App : Application
 		CrashRecoveryManager.Instance.SaveSnapshot(false);
 
 		_ = BackgroundTaskScheduler.Instance.StopAsync();
-		GlobalKeyboardHandler.Shutdown();
+		// TODO: Implement GlobalKeyboardHandler
+		// GlobalKeyboardHandler.Shutdown();
 		AutoUpdateService.Instance.StopAutoCheck();
 
 		TelemetryService.Instance.LogEvent("ApplicationExit", "System");

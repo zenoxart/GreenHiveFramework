@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
+using Zenox.NET.Core.Common.Command;
 using Zenox.Wpf.UI.Services;
 
 namespace Zenox.Wpf.UI.MVVM.ViewModel;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Zenox.Wpf.Core.Common.Strategies
+namespace Zenox.NET.Core.Common.Strategies
 {
     /// <summary>
     /// MVP Strategy Provider Framework

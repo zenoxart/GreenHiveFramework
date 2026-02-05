@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Media;
 
-namespace Zenox.Wpf.Core.Common.Command
+namespace Zenox.NET.Core.Common.Command
 {
 	/// <summary>
 	/// Stellt ein Relay-Baum-Knoten-Objekt dar, das Befehle und andere RelayObjects wie ganze Pools enthalten kann.

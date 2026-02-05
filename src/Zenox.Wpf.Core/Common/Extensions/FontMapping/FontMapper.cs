@@ -1,7 +1,7 @@
 ﻿using System.Resources;
 using System.Text.Json;
 
-namespace Zenox.Wpf.Core.Common.Extensions.FontMapping
+namespace Zenox.NET.Core.Common.Extensions.FontMapping
 {
     /// <summary>
     /// Singleton, der Fluent System Icons Codepoints zu Glyph-Strings abbildet.

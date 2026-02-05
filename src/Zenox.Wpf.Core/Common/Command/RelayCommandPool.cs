@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using Zenox.Wpf.Dto;
 
-namespace Zenox.Wpf.Core.Common.Command
+namespace Zenox.NET.Core.Common.Command
 {
     /// <summary>
     /// Verwaltet eine Sammlung von RelayCommands, die über eindeutige Schlüssel referenziert werden können.

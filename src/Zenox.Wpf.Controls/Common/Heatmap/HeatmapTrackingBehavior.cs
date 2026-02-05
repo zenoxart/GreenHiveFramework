@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Heatmap;
+using Zenox.NET.Core.Common.Heatmap;
 
 namespace Zenox.Wpf.Controls.Common.Heatmap
 {

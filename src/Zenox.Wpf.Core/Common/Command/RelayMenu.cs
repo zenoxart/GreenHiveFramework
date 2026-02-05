@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 
-namespace Zenox.Wpf.Core.Common.Command
+namespace Zenox.NET.Core.Common.Command
 {
     /// <summary>
     /// Stellt ein Menü dar, das eine Sammlung von RelayObject-Elementen enthält und Eigenschaftsbenachrichtigungen unterstützt.

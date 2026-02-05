@@ -1,4 +1,4 @@
-﻿namespace Zenox.Wpf.Core.Common.Exceptions
+﻿namespace Zenox.NET.Core.Common.Exceptions
 {
     public class MainRootNavigationNotInitializedException : Exception
     {

@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
 
-namespace Zenox.Wpf.Core.Common.BackgroundTasks
+namespace Zenox.NET.Core.Common.BackgroundTasks
 {
     /// <summary>
     /// Scheduler für Hintergrundaufgaben mit Prioritäts-basierter Ausführung

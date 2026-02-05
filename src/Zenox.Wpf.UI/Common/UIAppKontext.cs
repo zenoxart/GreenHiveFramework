@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
+using Zenox.Wpf.Advanced.MVVM.FactoryInjection;
 using Zenox.Wpf.UI.MVVM.ViewModel.Manager;
 
 namespace Zenox.Wpf.UI.Common
 {
-    public class UIAppKontext : Zenox.Wpf.Core.Common.MVVM.FactoryInjection.AppKontext, INotifyPropertyChanged
+    public class UIAppKontext : WPFAppKontext, INotifyPropertyChanged
     {
         public UIAppKontext AppContext => this;
 

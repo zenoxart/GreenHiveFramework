@@ -1,4 +1,4 @@
-﻿namespace Zenox.Wpf.Core.Common.MVVM.FactoryInjection.Localisation
+﻿namespace Zenox.NET.Core.Common.MVVM.FactoryInjection.Localisation
 {
     public class AppSprachenManager : AppObject
     {

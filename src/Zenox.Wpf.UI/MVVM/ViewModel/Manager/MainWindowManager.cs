@@ -2,8 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.Tutorial;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.Tutorial;
 
 namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 {

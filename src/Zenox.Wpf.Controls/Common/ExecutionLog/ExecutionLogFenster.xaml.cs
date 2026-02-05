@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
-using Zenox.Wpf.Core.Common.BackgroundTasks;
-using Zenox.Wpf.Core.Common.Telemetry;
+using Zenox.NET.Core.Common.BackgroundTasks;
+using Zenox.NET.Core.Common.Telemetry;
 using Zenox.Wpf.Dto;
 
 namespace Zenox.Wpf.Controls.Common.ExecutionLog

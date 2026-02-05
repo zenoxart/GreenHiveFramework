@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
-using Zenox.Wpf.Core.Common.Services;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.Services;
 
-namespace Zenox.Wpf.Core.Common.Workflow
+namespace Zenox.NET.Core.Common.Workflow
 {
     /// <summary>
     /// Generische, dynamische StateMachine für Workflows und Statusübergänge.

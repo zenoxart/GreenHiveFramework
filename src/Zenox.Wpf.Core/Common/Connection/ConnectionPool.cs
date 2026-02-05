@@ -1,8 +1,8 @@
-﻿using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
-using Zenox.Wpf.Core.Common.Permission;
+﻿using Zenox.NET.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.Permission;
 
-namespace Zenox.Wpf.Core.Common.Connection
+namespace Zenox.NET.Core.Common.Connection
 {
     /// <summary>
     /// Stellt eine Sammlung von Verbindungsdiensten dar, die für die Kommunikation mit verschiedenen APIs und Diensten verwendet werden.

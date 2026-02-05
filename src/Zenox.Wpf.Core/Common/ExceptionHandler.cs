@@ -1,8 +1,8 @@
 using System.Windows;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
-using Zenox.Wpf.Core.Common.Services;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.Services;
 
-namespace Zenox.Wpf.Core.Common
+namespace Zenox.NET.Core.Common
 {
 
     ///<summary>

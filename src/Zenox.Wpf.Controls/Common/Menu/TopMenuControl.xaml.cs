@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using Zenox.Wpf.Core.Common.Command;
+using Zenox.NET.Core.Common.Command;
 
 namespace Zenox.Wpf.Controls.Common.Menu
 {

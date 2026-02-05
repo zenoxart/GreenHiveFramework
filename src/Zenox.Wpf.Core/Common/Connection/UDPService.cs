@@ -3,12 +3,12 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using Zenox.Wpf.Core.Common;
-using Zenox.Wpf.Core.Common.MVVM.FactoryInjection;
-using Zenox.Wpf.Core.Common.Permission;
-using Zenox.Wpf.Core.Common.Services;
+using Zenox.NET.Core.Common;
+using Zenox.NET.Core.Common.MVVM.FactoryInjection;
+using Zenox.NET.Core.Common.Permission;
+using Zenox.NET.Core.Common.Services;
 
-namespace Zenox.Wpf.Core.Common.Connection
+namespace Zenox.NET.Core.Common.Connection
 {
     /// <summary>
     /// Stellt Methoden für den Versand und Empfang von UDP-Nachrichten bereit.

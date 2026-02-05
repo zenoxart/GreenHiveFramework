@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Zenox.Wpf.Core.Common.Command;
-using Zenox.Wpf.Core.Common.MVVM.ViewModelSupport;
+using Zenox.NET.Core.Common.Command;
+using Zenox.NET.Core.Common.MVVM.ViewModelSupport;
 
-namespace Zenox.Wpf.Core.Common.CommandPalette
+namespace Zenox.NET.Core.Common.CommandPalette
 {
 	/// <summary>
 	/// ViewModel für die Command Palette

@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Zenox.Wpf.Core.Common.Services
+namespace Zenox.NET.Core.Common.Services
 {
     /// <summary>
     /// Dienst zur Verwaltung eines Busy-Indikators für asynchrone Operationen.
