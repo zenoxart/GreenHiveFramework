@@ -221,11 +221,11 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 
 								Name = "Glossar",
 								Foreground = Brushes.White,
-					Command = new RelayCommand(
-					_ =>
-					{
-						this.AppKontext.TabView.LoadView<GlossarView>();
-					}, _ => true)
+								Command = new RelayCommand(
+								_ =>
+								{
+									this.AppKontext.TabView.LoadView<GlossarView>();
+								}, _ => true)
 							},
 							new() {
 
@@ -296,7 +296,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					// Dashboard
 					_pageMenu.Add(new RelayObject
 					{
-						PngPath = "/Assets/arrow-right-02-stroke-rounded.png",
 						Name = "Dashboard",
 						Foreground = Brushes.White,
 						Command = new RelayCommand(
