@@ -6,7 +6,7 @@ namespace Zenox.Wpf.Controls.Common.TabView.Converters
     /// <summary>
     /// Converter für Pin-Tooltip
     /// </summary>
-    public class PinTooltipConverter : IValueConverter
+    public class PinTooltipConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

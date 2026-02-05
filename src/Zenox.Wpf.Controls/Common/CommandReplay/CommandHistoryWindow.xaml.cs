@@ -7,7 +7,7 @@ using Zenox.NET.Core.Common.Notifications;
 
 namespace Zenox.Wpf.Controls.Common.CommandReplay
 {
-	public partial class CommandHistoryWindow : Window
+	public partial class CommandHistoryWindow : System.Windows.Window
 	{
 		public CommandHistoryWindow()
 		{
@@ -114,7 +114,7 @@ namespace Zenox.Wpf.Controls.Common.CommandReplay
 				ItemsSource = sequences
 			};
 
-			var window = new Window
+			var window = new System.Windows.Window
 			{
 				Title = "Sequenz auswählen",
 				Width = 400,
@@ -182,7 +182,7 @@ namespace Zenox.Wpf.Controls.Common.CommandReplay
 		}
 	}
 
-	public class BoolToStatusConverter : IValueConverter
+	public class BoolToStatusConverter : System.Windows.Data.IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
@@ -195,7 +195,7 @@ namespace Zenox.Wpf.Controls.Common.CommandReplay
 		}
 	}
 
-	public class BoolToColorConverter : IValueConverter
+	public class BoolToColorConverter : System.Windows.Data.IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{

@@ -6,7 +6,7 @@ namespace Zenox.Wpf.Controls.Common.TabView.Converters
     /// <summary>
     /// Converter für Pin-Menu-Header
     /// </summary>
-    public class PinMenuHeaderConverter : IValueConverter
+    public class PinMenuHeaderConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -11,10 +11,10 @@ namespace Zenox.NET.Core.Common.Tutorial
         private TextBlock _titleText;
         private TextBlock _contentText;
         private TextBlock _progressText;
-        private Button _nextButton;
-        private Button _previousButton;
-        private Button _skipButton;
-        private Button _closeButton;
+        private System.Windows.Controls.Button _nextButton;
+        private System.Windows.Controls.Button _previousButton;
+        private System.Windows.Controls.Button _skipButton;
+        private System.Windows.Controls.Button _closeButton;
 
         public event EventHandler? NextClicked;
         public event EventHandler? PreviousClicked;
@@ -31,13 +31,13 @@ namespace Zenox.NET.Core.Common.Tutorial
             Width = 300;
             MaxWidth = 400;
 
-            var border = new Border
+            var border = new System.Windows.Controls.Border
             {
                 Background = System.Windows.Media.Brushes.White, // Solid black background
                 BorderBrush = System.Windows.Media.Brushes.Gray, // White border for better contrast
-                BorderThickness = new Thickness(2, 2, 2, 2), // Slightly thicker border
-                CornerRadius = new CornerRadius(8),
-                Padding = new Thickness(16, 16, 16, 16),
+                BorderThickness = new System.Windows.Thickness(2, 2, 2, 2), // Slightly thicker border
+                CornerRadius = new System.Windows.CornerRadius(8),
+                Padding = new System.Windows.Thickness(16, 16, 16, 16),
                 Effect = new System.Windows.Media.Effects.DropShadowEffect
                 {
                     Color = System.Windows.Media.Colors.Black,
@@ -51,34 +51,34 @@ namespace Zenox.NET.Core.Common.Tutorial
             var stackPanel = new StackPanel();
 
             // Header mit Titel und Schließen-Button
-            var headerGrid = new Grid();
-            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            headerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            var headerGrid = new System.Windows.Controls.Grid();
+            headerGrid.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition { Width = new System.Windows.GridLength(1, System.Windows.GridUnitType.Star) });
+            headerGrid.ColumnDefinitions.Add(new System.Windows.Controls.ColumnDefinition { Width = System.Windows.GridLength.Auto });
 
             // Title-Text
             _titleText = new TextBlock
             {
-                FontWeight = FontWeights.Bold,
+                FontWeight = System.Windows.FontWeights.Bold,
                 FontSize = 16,
-                Margin = new Thickness(0, 0, 0, 8),
+                Margin = new System.Windows.Thickness(0, 0, 0, 8),
                 Foreground = System.Windows.Media.Brushes.Black // White text on black background
             };
-            Grid.SetColumn(_titleText, 0);
+            System.Windows.Controls.Grid.SetColumn(_titleText, 0);
 
             // Close-Button
-            _closeButton = new Button
+            _closeButton = new System.Windows.Controls.Button
             {
                 Content = "✕",
                 Width = 28,
                 Height = 28,
                 Background = System.Windows.Media.Brushes.Transparent,
-                BorderThickness = new Thickness(0, 0, 0, 0),
+                BorderThickness = new System.Windows.Thickness(0, 0, 0, 0),
                 FontSize = 7,
                 Cursor = System.Windows.Input.Cursors.Hand,
                 Foreground = System.Windows.Media.Brushes.Black // White X button
             };
             _closeButton.Click += (s, e) => CloseClicked?.Invoke(this, EventArgs.Empty);
-            Grid.SetColumn(_closeButton, 1);
+            System.Windows.Controls.Grid.SetColumn(_closeButton, 1);
 
             headerGrid.Children.Add(_titleText);
             headerGrid.Children.Add(_closeButton);
@@ -87,7 +87,7 @@ namespace Zenox.NET.Core.Common.Tutorial
             _contentText = new TextBlock
             {
                 TextWrapping = TextWrapping.Wrap,
-                Margin = new Thickness(0, 0, 0, 16),
+                Margin = new System.Windows.Thickness(0, 0, 0, 16),
                 LineHeight = 20,
                 Foreground = System.Windows.Media.Brushes.Black // White text on black background
             };
@@ -96,8 +96,8 @@ namespace Zenox.NET.Core.Common.Tutorial
             _progressText = new TextBlock
             {
                 FontSize = 12,
-                Margin = new Thickness(0, 0, 0, 16),
-                HorizontalAlignment = HorizontalAlignment.Center,
+                Margin = new System.Windows.Thickness(0, 0, 0, 16),
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
                 Foreground = System.Windows.Media.Brushes.LightGray // Light gray for progress text
             };
 
@@ -105,19 +105,19 @@ namespace Zenox.NET.Core.Common.Tutorial
             var buttonPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Right
+                HorizontalAlignment = System.Windows.HorizontalAlignment.Right
             };
 
             // Zurück-Button
-            _previousButton = new Button
+            _previousButton = new System.Windows.Controls.Button
             {
                 Content = "Zurück",
-                Margin = new Thickness(0, 0, 8, 0),
-                Padding = new Thickness(12, 6, 12, 6),
+                Margin = new System.Windows.Thickness(0, 0, 8, 0),
+                Padding = new System.Windows.Thickness(12, 6, 12, 6),
                 Background = System.Windows.Media.Brushes.DarkGray,
                 Foreground = System.Windows.Media.Brushes.White,
                 BorderBrush = System.Windows.Media.Brushes.Gray,
-                BorderThickness = new Thickness(1),
+                BorderThickness = new System.Windows.Thickness(1),
                 Cursor = System.Windows.Input.Cursors.Hand
             };
             _previousButton.Click += (s, e) => PreviousClicked?.Invoke(this, EventArgs.Empty);
@@ -126,15 +126,15 @@ namespace Zenox.NET.Core.Common.Tutorial
             _previousButton.MouseLeave += (s, e) => _previousButton.Background = System.Windows.Media.Brushes.DarkGray;
 
             // Überspringen-Button
-            _skipButton = new Button
+            _skipButton = new System.Windows.Controls.Button
             {
                 Content = "Überspringen",
-                Margin = new Thickness(0, 0, 8, 0),
-                Padding = new Thickness(12, 6, 12, 6),
+                Margin = new System.Windows.Thickness(0, 0, 8, 0),
+                Padding = new System.Windows.Thickness(12, 6, 12, 6),
                 Background = System.Windows.Media.Brushes.DarkGray,
                 Foreground = System.Windows.Media.Brushes.White,
                 BorderBrush = System.Windows.Media.Brushes.Gray,
-                BorderThickness = new Thickness(1),
+                BorderThickness = new System.Windows.Thickness(1),
                 Cursor = System.Windows.Input.Cursors.Hand
             };
             _skipButton.Click += (s, e) => SkipClicked?.Invoke(this, EventArgs.Empty);
@@ -143,14 +143,14 @@ namespace Zenox.NET.Core.Common.Tutorial
             _skipButton.MouseLeave += (s, e) => _skipButton.Background = System.Windows.Media.Brushes.DarkGray;
 
             // Nächster-Schritt-Button
-            _nextButton = new Button
+            _nextButton = new System.Windows.Controls.Button
             {
                 Content = "Weiter",
-                Padding = new Thickness(12, 6, 12, 6),
+                Padding = new System.Windows.Thickness(12, 6, 12, 6),
                 Background = System.Windows.Media.Brushes.SteelBlue,
                 Foreground = System.Windows.Media.Brushes.White,
                 BorderBrush = System.Windows.Media.Brushes.SteelBlue,
-                BorderThickness = new Thickness(1),
+                BorderThickness = new System.Windows.Thickness(1),
                 Cursor = System.Windows.Input.Cursors.Hand
             };
 
@@ -190,8 +190,8 @@ namespace Zenox.NET.Core.Common.Tutorial
             _contentText.Text = content ?? "";
             _progressText.Text = $"Schritt {currentStep} von {totalSteps}";
 
-            _previousButton.Visibility = canGoPrevious ? Visibility.Visible : Visibility.Collapsed;
-            _skipButton.Visibility = canSkip ? Visibility.Visible : Visibility.Collapsed;
+            _previousButton.Visibility = canGoPrevious ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
+            _skipButton.Visibility = canSkip ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             _nextButton.Content = currentStep == totalSteps ? "Fertig" : "Weiter";
         }
     }

@@ -3,7 +3,7 @@ using Zenox.NET.Core.Common.Recovery;
 
 namespace Zenox.Wpf.Controls.Common.Recovery
 {
-	public partial class CrashRecoveryDialog : Window
+	public partial class CrashRecoveryDialog : System.Windows.Window
 	{
 		private bool _shouldRestore;
 		private readonly AppStateSnapshot _crashSnapshot;
@@ -25,14 +25,14 @@ namespace Zenox.Wpf.Controls.Common.Recovery
 
 		private void ToggleDetailsButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (DetailsPanel.Visibility == Visibility.Collapsed)
+			if (DetailsPanel.Visibility == System.Windows.Visibility.Collapsed)
 			{
-				DetailsPanel.Visibility = Visibility.Visible;
+				DetailsPanel.Visibility = System.Windows.Visibility.Visible;
 				ToggleDetailsButton.Content = "Details ausblenden";
 			}
 			else
 			{
-				DetailsPanel.Visibility = Visibility.Collapsed;
+				DetailsPanel.Visibility = System.Windows.Visibility.Collapsed;
 				ToggleDetailsButton.Content = "Details anzeigen";
 			}
 		}

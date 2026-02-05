@@ -9,7 +9,7 @@ namespace Zenox.Wpf.Controls.Common.CommandHistory
     /// <summary>
     /// Command History Overlay - zeigt die ausgefuehrten Commands aehnlich der Command Palette
     /// </summary>
-    public partial class CommandHistoryOverlay : Window
+    public partial class CommandHistoryOverlay : System.Windows.Window
     {
         private readonly CommandHistoryViewModel _viewModel;
         private bool _isClosing;
@@ -116,7 +116,7 @@ namespace Zenox.Wpf.Controls.Common.CommandHistory
     /// <summary>
     /// Konvertiert Timestamp zu relativer Zeit
     /// </summary>
-    public class TimestampConverter : IValueConverter
+    public class TimestampConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -145,7 +145,7 @@ namespace Zenox.Wpf.Controls.Common.CommandHistory
     /// <summary>
     /// Konvertiert Success zu Farbe
     /// </summary>
-    public class SuccessToColorConverter : IValueConverter
+    public class SuccessToColorConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -161,15 +161,15 @@ namespace Zenox.Wpf.Controls.Common.CommandHistory
     /// <summary>
     /// Konvertiert Textlaenge zu Visibility
     /// </summary>
-    public class TextLengthToVisibilityConverter : IValueConverter
+    public class TextLengthToVisibilityConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is int length)
             {
-                return length == 0 ? Visibility.Visible : Visibility.Collapsed;
+                return length == 0 ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             }
-            return Visibility.Collapsed;
+            return System.Windows.Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

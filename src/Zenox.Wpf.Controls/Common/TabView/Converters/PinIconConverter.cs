@@ -6,7 +6,7 @@ namespace Zenox.Wpf.Controls.Common.TabView.Converters
     /// <summary>
     /// Converter für Pin-Icon
     /// </summary>
-    public class PinIconConverter : IValueConverter
+    public class PinIconConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

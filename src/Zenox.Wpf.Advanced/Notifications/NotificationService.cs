@@ -99,7 +99,7 @@ namespace Zenox.NET.Core.Common.Notifications
 				ClickAction = clickAction
 			};
 
-			Application.Current?.Dispatcher.Invoke(() =>
+			System.Windows.Application.Current?.Dispatcher.Invoke(() =>
 			{
 				// Wenn maximale Anzahl erreicht, entferne älteste
 				while (_activeNotifications.Count >= MaxActiveNotifications)
@@ -128,7 +128,7 @@ namespace Zenox.NET.Core.Common.Notifications
 		/// </summary>
 		public void Remove(Guid notificationId)
 		{
-			Application.Current?.Dispatcher.Invoke(() =>
+			System.Windows.Application.Current?.Dispatcher.Invoke(() =>
 			{
 				var notification = _activeNotifications.FirstOrDefault(n => n.Id == notificationId);
 				if (notification != null)
@@ -144,7 +144,7 @@ namespace Zenox.NET.Core.Common.Notifications
 		/// </summary>
 		public void Clear()
 		{
-			Application.Current?.Dispatcher.Invoke(() =>
+			System.Windows.Application.Current?.Dispatcher.Invoke(() =>
 			{
 				var notifications = _activeNotifications.ToList();
 				_activeNotifications.Clear();

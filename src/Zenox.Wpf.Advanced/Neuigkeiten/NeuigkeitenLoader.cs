@@ -66,7 +66,7 @@ namespace Zenox.NET.Core.Common.Neuigkeiten
 		{
 			try
 			{
-				var streamInfo = Application.GetResourceStream(resourceUri);
+				var streamInfo = System.Windows.Application.GetResourceStream(resourceUri);
 				if (streamInfo == null)
 				{
 					System.Diagnostics.Debug.WriteLine($"[NeuigkeitenLoader] Ressource nicht gefunden: {resourceUri}");

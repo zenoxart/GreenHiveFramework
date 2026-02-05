@@ -95,7 +95,7 @@ namespace Zenox.NET.Core.Common.Tutorial
         /// <param name="window">Anwendungsfenster</param>
         /// <param name="overlay">Canvas zum Ausgrauen der nicht relevanten Bereiche</param>
         /// <exception cref="ArgumentException"></exception>
-        public void StartTutorial(string tutorialKey, Window window, Canvas overlay)
+        public void StartTutorial(string tutorialKey, System.Windows.Window window, Canvas overlay)
         {
             if (!_tutorials.TryGetValue(tutorialKey, out var steps))
             {

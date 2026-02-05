@@ -10,7 +10,7 @@ namespace Zenox.NET.Core.Common.Tutorial
     /// </summary>
     public class TutorialManager
     {
-        private readonly Window _window;
+        private readonly System.Windows.Window _window;
         private readonly Canvas _overlay;
         private readonly TutorialPopup _popup;
         private int _currentIndex = -1;
@@ -26,7 +26,7 @@ namespace Zenox.NET.Core.Common.Tutorial
         public event EventHandler? TutorialCompleted;
         public event EventHandler? TutorialCancelled;
 
-        public TutorialManager(Window window, Canvas overlay)
+        public TutorialManager(System.Windows.Window window, Canvas overlay)
         {
             _window = window ?? throw new ArgumentNullException(nameof(window));
             _overlay = overlay ?? throw new ArgumentNullException(nameof(overlay));
@@ -44,7 +44,7 @@ namespace Zenox.NET.Core.Common.Tutorial
 
             IsActive = true;
             _currentIndex = -1;
-            _overlay.Visibility = Visibility.Visible;
+            _overlay.Visibility = System.Windows.Visibility.Visible;
             ShowNextStep();
         }
 
@@ -101,20 +101,20 @@ namespace Zenox.NET.Core.Common.Tutorial
         /// </summary>
         /// <param name="targetBounds">Umriss des hervorzuhebenden Elements</param>
         /// <param name="step"></param>
-        private void ShowOverlay(Rect targetBounds, TutorialStep step)
+        private void ShowOverlay(System.Windows.Rect targetBounds, TutorialStep step)
         {
             // Overlay mit Ausschnitt für das Target-Element erstellen
             _overlay.Children.Clear();
 
             var overlayGeometry = new CombinedGeometry(
                 GeometryCombineMode.Exclude,
-                new RectangleGeometry(new Rect(0, 0, _overlay.ActualWidth, _overlay.ActualHeight)),
+                new RectangleGeometry(new System.Windows.Rect(0, 0, _overlay.ActualWidth, _overlay.ActualHeight)),
                 new RectangleGeometry(targetBounds)
             );
 
             var overlayPath = new System.Windows.Shapes.Path
             {
-                Fill = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0)),
+                Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(128, 0, 0, 0)),
                 Data = overlayGeometry
             };
 
@@ -127,15 +127,15 @@ namespace Zenox.NET.Core.Common.Tutorial
         /// <summary>
         /// Positioniert das Helper-Popup
         /// </summary>
-        private void PositionPopup(Rect targetBounds, TutorialStep step)
+        private void PositionPopup(System.Windows.Rect targetBounds, TutorialStep step)
         {
             _popup.UpdateContent(step.Title, step.InstructionText,
                 _currentIndex + 1, Steps.Count,
                 _currentIndex > 0, step.CanSkip);
 
             // Sicherstellen, dass die Popup-Größe aktualisiert wurde
-            _popup.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-            _popup.Arrange(new Rect(_popup.DesiredSize));
+            _popup.Measure(new System.Windows.Size(double.PositiveInfinity, double.PositiveInfinity));
+            _popup.Arrange(new System.Windows.Rect(_popup.DesiredSize));
 
             var popupWidth = _popup.DesiredSize.Width;
             var popupHeight = _popup.DesiredSize.Height;
@@ -144,13 +144,13 @@ namespace Zenox.NET.Core.Common.Tutorial
             const double margin = 10;
             const double edgeMargin = 20; // Abstand zu den Bildschirmrändern
 
-            Point popupPosition = step.Position switch
+            System.Windows.Point popupPosition = step.Position switch
             {
                 TutorialPosition.Top => CalculateTopPosition(targetBounds, popupWidth, popupHeight, margin),
                 TutorialPosition.Bottom => CalculateBottomPosition(targetBounds, popupWidth, popupHeight, margin),
                 TutorialPosition.Left => CalculateLeftPosition(targetBounds, popupWidth, popupHeight, margin),
                 TutorialPosition.Right => CalculateRightPosition(targetBounds, popupWidth, popupHeight, margin),
-                TutorialPosition.Center => new Point(
+                TutorialPosition.Center => new System.Windows.Point(
                     (_overlay.ActualWidth - popupWidth) / 2,
                     (_overlay.ActualHeight - popupHeight) / 2),
                 _ => CalculateAutoPosition(targetBounds, popupWidth, popupHeight)
@@ -170,7 +170,7 @@ namespace Zenox.NET.Core.Common.Tutorial
         /// <summary>
         /// Berechnet die Position zum Oberen Rand der Anwendung
         /// </summary>
-        private Point CalculateTopPosition(Rect targetBounds, double popupWidth, double popupHeight, double margin)
+        private System.Windows.Point CalculateTopPosition(System.Windows.Rect targetBounds, double popupWidth, double popupHeight, double margin)
         {
             var x = targetBounds.X + (targetBounds.Width - popupWidth) / 2; // Zentralisiert über dem Element
             var y = targetBounds.Y - popupHeight - margin;
@@ -181,13 +181,13 @@ namespace Zenox.NET.Core.Common.Tutorial
                 y = targetBounds.Bottom + margin;
             }
 
-            return new Point(x, y);
+            return new System.Windows.Point(x, y);
         }
 
         /// <summary>
         /// Berechnet die Position zum Unteren Rand der Anwendung
         /// </summary>
-        private Point CalculateBottomPosition(Rect targetBounds, double popupWidth, double popupHeight, double margin)
+        private System.Windows.Point CalculateBottomPosition(System.Windows.Rect targetBounds, double popupWidth, double popupHeight, double margin)
         {
             var x = targetBounds.X + (targetBounds.Width - popupWidth) / 2; // Zentralisiert unter dem Element
             var y = targetBounds.Bottom + margin;
@@ -198,13 +198,13 @@ namespace Zenox.NET.Core.Common.Tutorial
                 y = targetBounds.Y - popupHeight - margin;
             }
 
-            return new Point(x, y);
+            return new System.Windows.Point(x, y);
         }
 
         /// <summary>
         /// Berechnet die Position zum Linken Rand der Anwendung
         /// </summary>
-        private Point CalculateLeftPosition(Rect targetBounds, double popupWidth, double popupHeight, double margin)
+        private System.Windows.Point CalculateLeftPosition(System.Windows.Rect targetBounds, double popupWidth, double popupHeight, double margin)
         {
             var x = targetBounds.X - popupWidth - margin;
             var y = targetBounds.Y + (targetBounds.Height - popupHeight) / 2; // Vertikal zentralisiert
@@ -215,13 +215,13 @@ namespace Zenox.NET.Core.Common.Tutorial
                 x = targetBounds.Right + margin;
             }
 
-            return new Point(x, y);
+            return new System.Windows.Point(x, y);
         }
 
         /// <summary>
         /// Berechnet die Position zum Rechten Rand der Anwendung
         /// </summary>
-        private Point CalculateRightPosition(Rect targetBounds, double popupWidth, double popupHeight, double margin)
+        private System.Windows.Point CalculateRightPosition(System.Windows.Rect targetBounds, double popupWidth, double popupHeight, double margin)
         {
             var x = targetBounds.Right + margin;
             var y = targetBounds.Y + (targetBounds.Height - popupHeight) / 2; // Vertikal zentralisiert
@@ -232,7 +232,7 @@ namespace Zenox.NET.Core.Common.Tutorial
                 x = targetBounds.X - popupWidth - margin;
             }
 
-            return new Point(x, y);
+            return new System.Windows.Point(x, y);
         }
 
         /// <summary> 
@@ -242,7 +242,7 @@ namespace Zenox.NET.Core.Common.Tutorial
         /// <param name="popupWidth"></param>
         /// <param name="popupHeight"></param>
         /// <returns></returns>
-        private Point CalculateAutoPosition(Rect targetBounds, double popupWidth, double popupHeight)
+        private System.Windows.Point CalculateAutoPosition(System.Windows.Rect targetBounds, double popupWidth, double popupHeight)
         {
             const double margin = 10;
 
@@ -276,7 +276,7 @@ namespace Zenox.NET.Core.Common.Tutorial
             else
             {
                 // Fallback: Zentrieren
-                return new Point(
+                return new System.Windows.Point(
                     (_overlay.ActualWidth - popupWidth) / 2,
                     (_overlay.ActualHeight - popupHeight) / 2);
             }
@@ -332,13 +332,13 @@ namespace Zenox.NET.Core.Common.Tutorial
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        private Rect GetElementBounds(FrameworkElement element)
+        private System.Windows.Rect GetElementBounds(FrameworkElement element)
         {
             var transform = element.TransformToAncestor(_window);
-            var topLeft = transform.Transform(new Point(0, 0));
-            var bottomRight = transform.Transform(new Point(element.ActualWidth, element.ActualHeight));
+            var topLeft = transform.Transform(new System.Windows.Point(0, 0));
+            var bottomRight = transform.Transform(new System.Windows.Point(element.ActualWidth, element.ActualHeight));
 
-            return new Rect(topLeft, bottomRight);
+            return new System.Windows.Rect(topLeft, bottomRight);
         }
 
         /// <summary>
@@ -367,7 +367,7 @@ namespace Zenox.NET.Core.Common.Tutorial
         private void CompleteTutorial()
         {
             IsActive = false;
-            _overlay.Visibility = Visibility.Collapsed;
+            _overlay.Visibility = System.Windows.Visibility.Collapsed;
             _completionTimer?.Stop();
             TutorialCompleted?.Invoke(this, EventArgs.Empty);
         }
@@ -378,7 +378,7 @@ namespace Zenox.NET.Core.Common.Tutorial
         private void CancelTutorial()
         {
             IsActive = false;
-            _overlay.Visibility = Visibility.Collapsed;
+            _overlay.Visibility = System.Windows.Visibility.Collapsed;
             _completionTimer?.Stop();
             TutorialCancelled?.Invoke(this, EventArgs.Empty);
         }

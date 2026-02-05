@@ -96,7 +96,7 @@ namespace Zenox.NET.Core.Common.Recovery
 			if (_isInitialized) return;
 
 			// Exception Handler registrieren
-			Application.Current.DispatcherUnhandledException += OnDispatcherUnhandledException;
+			System.Windows.Application.Current.DispatcherUnhandledException += OnDispatcherUnhandledException;
 			AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
 			// Prüfe auf vorherigen Crash

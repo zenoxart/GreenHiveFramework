@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zenox.Api", "..\Zenox.Api\Z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zenox.Maui.UI", "..\Zenox.Maui.UI\Zenox.Maui.UI.csproj", "{0E28C490-6B44-4987-98FD-9F5C162E01BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zenox.NET.Core", "..\Zenox.NET\Zenox.NET.Core.csproj", "{64386C09-28A3-4C00-8438-17A2B1A8AF85}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zenox.Wpf.Advanced", "..\Zenox.Wpf.Advanced\Zenox.Wpf.Advanced.csproj", "{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zenox.NET.Core", "..\Zenox.Maui.Core\Zenox.NET.Core.csproj", "{35B5CAB3-0D2D-4D42-B185-D962F38C427B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,14 +43,14 @@ Global
 		{0E28C490-6B44-4987-98FD-9F5C162E01BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E28C490-6B44-4987-98FD-9F5C162E01BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E28C490-6B44-4987-98FD-9F5C162E01BF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64386C09-28A3-4C00-8438-17A2B1A8AF85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64386C09-28A3-4C00-8438-17A2B1A8AF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64386C09-28A3-4C00-8438-17A2B1A8AF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64386C09-28A3-4C00-8438-17A2B1A8AF85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

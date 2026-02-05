@@ -250,9 +250,9 @@ namespace Zenox.Wpf.Controls.Common.Heatmap
             private readonly Stopwatch _stopwatch;
 
             public UIElement Element { get; }
-            public Point Position { get; }
+            public System.Windows.Point Position { get; }
 
-            public HoverTracker(UIElement element, Point position)
+            public HoverTracker(UIElement element, System.Windows.Point position)
             {
                 Element = element;
                 Position = position;

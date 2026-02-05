@@ -12,7 +12,7 @@ namespace Zenox.Wpf.Controls.Common.ExecutionLog
 	/// <summary>
 	/// Interaktionslogik für ExecutionLogFenster.xaml
 	/// </summary>
-	public partial class ExecutionLogFenster : Window, INotifyPropertyChanged
+	public partial class ExecutionLogFenster : System.Windows.Window, INotifyPropertyChanged
 	{
 		public static readonly DependencyProperty ExecutionLogListProperty =
 			DependencyProperty.Register(

@@ -66,7 +66,7 @@ namespace Zenox.NET.Core.Common.Neuigkeiten
 	/// <summary>
 	/// Root-Element für die Neuigkeiten-Konfiguration
 	/// </summary>
-	[ContentProperty(nameof(Versionen))]
+	[System.Windows.Markup.ContentProperty(nameof(Versionen))]
 	public class NeuigkeitenKonfiguration
 	{
 		/// <summary>

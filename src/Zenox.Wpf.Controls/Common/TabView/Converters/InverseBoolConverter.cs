@@ -6,7 +6,7 @@ namespace Zenox.Wpf.Controls.Common.TabView.Converters
     /// <summary>
     /// Converter für inverse Boolean-Werte
     /// </summary>
-    public class InverseBoolConverter : IValueConverter
+    public class InverseBoolConverter : System.Windows.Data.IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

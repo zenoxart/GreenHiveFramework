@@ -9,7 +9,7 @@ namespace Zenox.Wpf.Controls.Common.CommandPalette
 	/// <summary>
 	/// Command Palette Window - Schnellzugriff auf alle Befehle
 	/// </summary>
-	public partial class CommandPaletteWindow : Window
+	public partial class CommandPaletteWindow : System.Windows.Window
 	{
 		private CommandPaletteViewModel? _viewModel;
 
@@ -87,44 +87,6 @@ namespace Zenox.Wpf.Controls.Common.CommandPalette
 		private void CloseButton_Click(object sender, RoutedEventArgs e)
 		{
 			Close();
-		}
-	}
-
-	/// <summary>
-	/// Converter für Textlänge zu Visibility (für Placeholder)
-	/// </summary>
-	public class TextLengthToVisibilityConverter : IValueConverter
-	{
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			if (value is int length)
-			{
-				return length == 0 ? Visibility.Visible : Visibility.Collapsed;
-			}
-			return Visibility.Visible;
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			throw new NotImplementedException();
-		}
-	}
-
-	/// <summary>
-	/// Converter für Null zu Visibility
-	/// </summary>
-	public class NullToVisibilityConverter : IValueConverter
-	{
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			return value == null || (value is string str && string.IsNullOrEmpty(str))
-				? Visibility.Collapsed
-				: Visibility.Visible;
-		}
-
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }
