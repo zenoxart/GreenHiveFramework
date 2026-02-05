@@ -305,11 +305,6 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 						}, _ => true)
 					});
 
-					
-
-					
-
-					
 				}
 				return _pageMenu;
 			}
