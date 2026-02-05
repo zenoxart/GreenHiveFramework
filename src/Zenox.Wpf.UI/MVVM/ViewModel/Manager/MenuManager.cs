@@ -221,10 +221,11 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 
 								Name = "Glossar",
 								Foreground = Brushes.White,
-								Command = new RelayCommand(
-								_ =>
-								{
-								}, _ => true)
+					Command = new RelayCommand(
+					_ =>
+					{
+						this.AppKontext.TabView.LoadView<GlossarView>();
+					}, _ => true)
 							},
 							new() {
 

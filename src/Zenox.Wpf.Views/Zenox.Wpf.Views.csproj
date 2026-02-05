@@ -14,5 +14,7 @@
     <ProjectReference Include="..\Zenox.Wpf.Dto\Zenox.Wpf.Dto.csproj" />
   </ItemGroup>
 
+ 
+
 </Project>
 
