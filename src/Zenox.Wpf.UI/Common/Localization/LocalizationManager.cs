@@ -280,8 +280,26 @@ namespace Zenox.Wpf.UI.Common.Localization
 
                 // Füge neue Sprachressourcen hinzu
                 var newResource = _languageResources[languageCode];
+                
+                // Prüfe auf null-Werte in den Ressourcen
+                var nullKeys = new List<object>();
+                foreach (var key in newResource.Keys)
+                {
+                    if (newResource[key] == null)
+                    {
+                        nullKeys.Add(key);
+                        System.Diagnostics.Debug.WriteLine($"  ? NULL-Wert gefunden für Key: {key}");
+                    }
+                }
+                
+                // Entferne null-Werte aus dem Dictionary
+                foreach (var key in nullKeys)
+                {
+                    newResource.Remove(key);
+                }
+                
                 app.Resources.MergedDictionaries.Add(newResource);
-                System.Diagnostics.Debug.WriteLine($"? Sprachressource hinzugefügt: {languageCode} ({newResource.Count} keys)");
+                System.Diagnostics.Debug.WriteLine($"? Sprachressource hinzugefügt: {languageCode} ({newResource.Count} keys, {nullKeys.Count} null-Werte entfernt)");
                 
                 // Liste die ersten 5 Keys auf
                 int count = 0;
@@ -289,7 +307,9 @@ namespace Zenox.Wpf.UI.Common.Localization
                 {
                     if (count++ < 5)
                     {
-                        System.Diagnostics.Debug.WriteLine($"  Key: {key} = {newResource[key]}");
+                        var value = newResource[key];
+                        var valueStr = value?.ToString() ?? "<null>";
+                        System.Diagnostics.Debug.WriteLine($"  Key: {key} = {valueStr}");
                     }
                 }
 

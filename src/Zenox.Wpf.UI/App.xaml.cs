@@ -39,7 +39,7 @@ public partial class App : Application
 		BackgroundTaskScheduler.Instance.Start();
 
 		// Telemetrie-Service initialisieren
-		//TelemetryService.Instance.Initialize();
+		TelemetryService.Instance.Initialize();
 
 		// Interaction Heatmap Controller initialisieren und starten
 		InteractionHeatmapController.Instance.Initialize(new HeatmapConfiguration
