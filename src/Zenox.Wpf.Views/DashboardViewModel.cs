@@ -496,7 +496,12 @@ namespace Zenox.Wpf.Views
     /// </summary>
     public class ProjectProgressItem : NotificationObject
     {
-        public string Name { get; set; } = string.Empty;
+        private string _name = string.Empty;
+        public string Name
+        {
+            get => _name;
+            set => SetProperty(ref _name, value);
+        }
 
         private int _percent;
         public int Percent
@@ -504,18 +509,30 @@ namespace Zenox.Wpf.Views
             get => _percent;
             set
             {
-                _percent = value;
-                OnPropertyChanged(nameof(Percent));
+                SetProperty(ref _percent, value);
                 OnPropertyChanged(nameof(ProgressWidth));
+                OnPropertyChanged(nameof(ProgressWidthPercent));
             }
         }
 
-        public Brush ProgressColor { get; set; } = Brushes.Green;
+        private Brush _progressColor = Brushes.Green;
+        public Brush ProgressColor
+        {
+            get => _progressColor;
+            set => SetProperty(ref _progressColor, value);
+        }
 
         /// <summary>
-        /// Berechnet die Breite des Fortschrittsbalkens.
+        /// Berechnet die Breite des Fortschrittsbalkens als GridLength.
         /// </summary>
         public GridLength ProgressWidth => new GridLength(Percent, GridUnitType.Star);
+
+        /// <summary>
+        /// Berechnet die tatsächliche Breite des Fortschrittsbalkens für Border.Width Binding.
+        /// Maximale Breite = 100% (wird durch ActualWidth des Parents bestimmt).
+        /// Diese Property liefert einen Multiplikator (0.0 - 1.0).
+        /// </summary>
+        public double ProgressWidthPercent => Percent / 100.0;
     }
 
     #endregion

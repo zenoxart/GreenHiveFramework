@@ -11,6 +11,9 @@
 
     <UserControl.Resources>
         <local:DashboardViewModel x:Key="DashboardVM"/>
+        
+        <!-- Converters -->
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
 
         <!-- Quick Actions Animation Storyboard als Ressource -->
         <Storyboard x:Key="QuickActionsStoryboard">
@@ -390,7 +393,7 @@
                                                 Padding="8,2" 
                                                 Margin="10,0,0,0"
                                                 VerticalAlignment="Center"
-                                                Visibility="{Binding HasUnreadNotifications}">
+                                                Visibility="{Binding HasUnreadNotifications, Converter={StaticResource BoolToVisConverter}}">
                                             <TextBlock Text="{Binding UnreadNotificationsCount}"
                                                        Foreground="White"
                                                        FontSize="11"
@@ -481,13 +484,19 @@
                                                        FontSize="12"/>
                                         </Grid>
                                         
+                                        
                                         <!-- Progress Bar -->
                                         <Grid Grid.Row="1" Height="8">
-                                            <Border Background="#1E1E1E" CornerRadius="4"/>
-                                            <Border Background="{Binding ProgressColor}" 
-                                                    CornerRadius="4"
-                                                    HorizontalAlignment="Left"
-                                                    Width="{Binding ProgressWidth}"/>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="{Binding ProgressWidth}"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" 
+                                                    Background="{Binding ProgressColor}" 
+                                                    CornerRadius="4,0,0,4"/>
+                                            <Border Grid.Column="1" 
+                                                    Background="#1E1E1E" 
+                                                    CornerRadius="0,4,4,0"/>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
