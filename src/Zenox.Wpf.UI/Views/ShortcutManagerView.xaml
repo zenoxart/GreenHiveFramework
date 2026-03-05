@@ -1,0 +1,91 @@
+<UserControl x:Class="Zenox.Wpf.UI.Views.ShortcutManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Zenox.Wpf.UI.MVVM.ViewModel">
+    <UserControl.DataContext>
+        <vm:ShortcutManagerViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style x:Key="ShortcutTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="MinWidth" Value="160"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontFamily" Value="Consolas, Courier New"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#F8F8F8"/>
+                    <Setter Property="BorderBrush" Value="#2196F3"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding IsRecording}" Value="True">
+                    <Setter Property="Background" Value="#FFFACD"/>
+                    <Setter Property="BorderBrush" Value="#FF9800"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsModifiable}" Value="False">
+                    <Setter Property="Background" Value="#E8E8E8"/>
+                    <Setter Property="Foreground" Value="#999999"/>
+                    <Setter Property="Cursor" Value="No"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Tastenkuerzel verwalten" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+        <TextBox Grid.Row="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Padding="10,8"/>
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Categories}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,0,0,20">
+                            <TextBlock Text="{Binding CategoryName}" FontSize="16" FontWeight="Bold" Foreground="#2196F3" Margin="0,10,0,10"/>
+                            <ItemsControl ItemsSource="{Binding Shortcuts}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="80"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding DisplayName}" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Description}" VerticalAlignment="Center" Foreground="Gray" Margin="10,0"/>
+                                            <TextBox Grid.Column="2" Text="{Binding KeyGestureText, Mode=OneWay}" Style="{StaticResource ShortcutTextBoxStyle}" PreviewKeyDown="ShortcutTextBox_PreviewKeyDown" GotFocus="ShortcutTextBox_GotFocus" LostFocus="ShortcutTextBox_LostFocus" VerticalAlignment="Center" Margin="5,0"/>
+                                            <CheckBox Grid.Column="3" IsChecked="{Binding IsEnabled}" Content="Aktiv" VerticalAlignment="Center"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <TextBlock Grid.Row="3" Text="{Binding ConflictMessage}" Foreground="Red" FontWeight="Bold" Margin="0,10" Visibility="{Binding ConflictMessage, Converter={StaticResource NullToVisibilityConverter}}"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="Importieren" Command="{Binding ImportCommand}" Margin="5,0" Padding="15,8" Background="#757575" Foreground="White"/>
+            <Button Content="Exportieren" Command="{Binding ExportCommand}" Margin="5,0" Padding="15,8" Background="#757575" Foreground="White"/>
+            <Button Content="Reset" Command="{Binding ResetSelectedCommand}" Margin="5,0" Padding="15,8" Background="#FF9800" Foreground="White"/>
+            <Button Content="Reset All" Command="{Binding ResetAllCommand}" Margin="5,0" Padding="15,8" Background="#F44336" Foreground="White"/>
+            <Button Content="Speichern" Command="{Binding SaveCommand}" Margin="5,0" Padding="15,8" Background="#4CAF50" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

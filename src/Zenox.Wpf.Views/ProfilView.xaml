@@ -1,4 +1,4 @@
-<UserControl x:Class="Zenox.Wpf.Views.ProfilView"
+﻿<UserControl x:Class="Zenox.Wpf.Views.ProfilView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -91,162 +91,295 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="20,20,20,10">
-            <TextBlock Text="Profil"
+            <TextBlock Text="{DynamicResource Profile_Title}"
                        FontSize="24"
                        FontWeight="Bold"
                        Foreground="White"/>
-            <TextBlock Text="Verwalten Sie Ihre persoenlichen Informationen und Einstellungen."
+            <TextBlock Text="{DynamicResource Profile_Description}"
                        Foreground="#B0B0B0"
                        TextWrapping="Wrap"
                        Margin="0,5,0,0"/>
         </StackPanel>
 
-        <!-- Profile Content -->
-        <ScrollViewer Grid.Row="1" 
-                      VerticalScrollBarVisibility="Auto"
-                      Margin="20,10,20,0">
-            <StackPanel>
 
-                <!-- Profile Card Section -->
-                <GroupBox Header="Profiluebersicht" Style="{StaticResource ProfileSectionStyle}">
-                    <Grid Margin="0,10,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+        <!-- Profile Content with TreeView -->
+        <Grid Grid.Row="1" Margin="20,10,20,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-                        <!-- Avatar -->
-                        <StackPanel Grid.Column="0" Margin="0,0,25,0">
-                            <Border Width="100" 
-                                    Height="100" 
-                                    CornerRadius="50"
-                                    Background="#4A4A6A">
-                                <TextBlock Text="{Binding Initials}"
-                                           FontSize="36"
-                                           FontWeight="Bold"
-                                           Foreground="White"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
-                            </Border>
-                            <Button Content="Aendern"
-                                    Command="{Binding ChangeAvatarCommand}"
-                                    Style="{DynamicResource FluentTabButtonStyle}"
-                                    HorizontalAlignment="Center"
-                                    Padding="15,6"
-                                    Margin="0,10,0,0"
-                                    FontSize="11"/>
-                        </StackPanel>
+            <!-- TreeView Navigation -->
+            <Border Grid.Column="0" 
+                    Background="#1E1E1E" 
+                    BorderBrush="#3A3A3A" 
+                    BorderThickness="1"
+                    CornerRadius="4">
+                <TreeView x:Name="ProfileTree"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          Margin="10"
+                          SelectedItemChanged="ProfileTree_SelectedItemChanged">
+                    <TreeView.Resources>
+                        <Style TargetType="TreeViewItem">
+                            <Setter Property="Foreground" Value="#E0E0E0"/>
+                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="Padding" Value="8,6"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="TreeViewItem">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Border x:Name="ItemBorder"
+                                                    Grid.Row="0"
+                                                    Background="Transparent"
+                                                    CornerRadius="4"
+                                                    Padding="{TemplateBinding Padding}">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <ToggleButton x:Name="Expander"
+                                                                  Grid.Column="0"
+                                                                  IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                  ClickMode="Press"
+                                                                  Background="Transparent"
+                                                                  BorderThickness="0"
+                                                                  Padding="4"
+                                                                  Margin="0,0,4,0"
+                                                                  Visibility="Collapsed">
+                                                        <ToggleButton.Style>
+                                                            <Style TargetType="ToggleButton">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate TargetType="ToggleButton">
+                                                                            <TextBlock x:Name="ExpanderText" Text="►" Foreground="#808080" FontSize="10"/>
+                                                                            <ControlTemplate.Triggers>
+                                                                                <Trigger Property="IsChecked" Value="True">
+                                                                                    <Setter TargetName="ExpanderText" Property="Text" Value="▼"/>
+                                                                                </Trigger>
+                                                                            </ControlTemplate.Triggers>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </Style>
+                                                        </ToggleButton.Style>
+                                                    </ToggleButton>
+                                                    <ContentPresenter x:Name="PART_Header"
+                                                                      Grid.Column="1"
+                                                                      ContentSource="Header"
+                                                                      VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                            <ItemsPresenter Grid.Row="1" 
+                                                            x:Name="ItemsHost" 
+                                                            Margin="20,0,0,0"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="HasItems" Value="True">
+                                                <Setter TargetName="Expander" Property="Visibility" Value="Visible"/>
+                                            </Trigger>
+                                            <Trigger Property="IsExpanded" Value="False">
+                                                <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ItemBorder" Property="Background" Value="#2A2A2A"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="ItemBorder" Property="Background" Value="#4A4A6A"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TreeView.Resources>
+                    
+                    <TreeViewItem Header="{DynamicResource Profile_Overview}" Tag="ProfileOverview" IsExpanded="False"/>
+                    <TreeViewItem Header="{DynamicResource Profile_PersonalInfo}" Tag="PersonalInfo" IsExpanded="False"/>
+                    <TreeViewItem Header="{DynamicResource Profile_Notifications}" Tag="Notifications" IsExpanded="False"/>
+                    <TreeViewItem Header="{DynamicResource Profile_Privacy}" Tag="Privacy" IsExpanded="False"/>
+                    <TreeViewItem Header="{DynamicResource Profile_Security}" Tag="Security" IsExpanded="False"/>
+                </TreeView>
+            </Border>
 
-                        <!-- Basic Info -->
-                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding DisplayName}"
-                                       FontSize="22"
-                                       FontWeight="SemiBold"
-                                       Foreground="White"/>
-                            <TextBlock Text="{Binding Email}"
-                                       FontSize="13"
-                                       Foreground="#808080"
-                                       Margin="0,4,0,0"/>
-                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                                <Border Background="#3A3A3A" 
-                                        CornerRadius="4" 
-                                        Padding="10,5"
-                                        Margin="0,0,10,0">
-                                    <TextBlock Text="{Binding Role}" 
-                                               FontSize="11" 
-                                               Foreground="#B0B0B0"/>
+
+            <!-- Content Panel -->
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="ContentPanel">
+                    
+                    <!-- Profile Overview Panel -->
+                    <StackPanel x:Name="ProfileOverviewPanel" Visibility="Visible">
+                        <TextBlock Text="{DynamicResource Profile_Overview}" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="White" 
+                                   Margin="0,0,0,20"/>
+
+                        
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Avatar -->
+                            <StackPanel Grid.Column="0" Margin="0,0,25,0">
+                                <Border Width="100" 
+                                        Height="100" 
+                                        CornerRadius="50"
+                                        Background="#4A4A6A">
+                                    <TextBlock Text="{Binding Initials}"
+                                               FontSize="36"
+                                               FontWeight="Bold"
+                                               Foreground="White"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
                                 </Border>
-                                <Border Background="#3A3A3A" 
-                                        CornerRadius="4" 
-                                        Padding="10,5">
-                                    <TextBlock Text="{Binding Department}" 
+                                <Button Content="{DynamicResource Profile_Change}"
+                                        Command="{Binding ChangeAvatarCommand}"
+                                        Style="{DynamicResource FluentTabButtonStyle}"
+                                        HorizontalAlignment="Center"
+                                        Padding="15,6"
+                                        Margin="0,10,0,0"
+                                        FontSize="11"/>
+                            </StackPanel>
+
+                            <!-- Basic Info -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding DisplayName}"
+                                           FontSize="22"
+                                           FontWeight="SemiBold"
+                                           Foreground="White"/>
+                                <TextBlock Text="{Binding Email}"
+                                           FontSize="13"
+                                           Foreground="#808080"
+                                           Margin="0,4,0,0"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                    <Border Background="#3A3A3A" 
+                                            CornerRadius="4" 
+                                            Padding="10,5"
+                                            Margin="0,0,10,0">
+                                        <TextBlock Text="{Binding Role}" 
+                                                   FontSize="11" 
+                                                   Foreground="#B0B0B0"/>
+                                    </Border>
+                                    <Border Background="#3A3A3A" 
+                                            CornerRadius="4" 
+                                            Padding="10,5">
+                                        <TextBlock Text="{Binding Department}" 
+                                                   FontSize="11" 
+                                                   Foreground="#B0B0B0"/>
+                                    </Border>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                                    <TextBlock FontSize="11" Foreground="#606060">
+                                        <Run Text="{DynamicResource Profile_MemberSince}"/>
+                                        <Run Text=": "/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding MemberSince, StringFormat='{}{0:dd.MM.yyyy}'}" 
                                                FontSize="11" 
-                                               Foreground="#B0B0B0"/>
-                                </Border>
+                                               Foreground="#808080"/>
+                                    <TextBlock Text="  |  " 
+                                               FontSize="11" 
+                                               Foreground="#606060"/>
+                                    <TextBlock FontSize="11" Foreground="#606060">
+                                        <Run Text="{DynamicResource Profile_LastLogin}"/>
+                                        <Run Text=": "/>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding LastLogin, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}" 
+                                               FontSize="11" 
+                                               Foreground="#808080"/>
+                                </StackPanel>
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
-                                <TextBlock Text="Mitglied seit: " 
-                                           FontSize="11" 
-                                           Foreground="#606060"/>
-                                <TextBlock Text="{Binding MemberSince, StringFormat='{}{0:dd.MM.yyyy}'}" 
-                                           FontSize="11" 
-                                           Foreground="#808080"/>
-                                <TextBlock Text="  |  Letzter Login: " 
-                                           FontSize="11" 
-                                           Foreground="#606060"/>
-                                <TextBlock Text="{Binding LastLogin, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}" 
-                                           FontSize="11" 
-                                           Foreground="#808080"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Personal Info Panel -->
+                    <StackPanel x:Name="PersonalInfoPanel" Visibility="Collapsed">
+                        <TextBlock Text="{DynamicResource Profile_PersonalInfo}" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="White" 
+                                   Margin="0,0,0,20"/>
+
+                        
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Anzeigename -->
+                            <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,5,0,15">
+                                <TextBlock Text="Anzeigename" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ProfileTextBoxStyle}"/>
                             </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </GroupBox>
 
-                <!-- Personal Information Section -->
-                <GroupBox Header="Persoenliche Informationen" Style="{StaticResource ProfileSectionStyle}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                            <!-- Benutzername -->
+                            <StackPanel Grid.Column="2" Grid.Row="0" Margin="0,5,0,15">
+                                <TextBlock Text="Benutzername" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ProfileTextBoxStyle}"
+                                         IsReadOnly="True"
+                                         Opacity="0.7"/>
+                            </StackPanel>
 
-                        <!-- Anzeigename -->
-                        <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,5,0,15">
-                            <TextBlock Text="Anzeigename" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{StaticResource ProfileTextBoxStyle}"/>
-                        </StackPanel>
+                            <!-- E-Mail -->
+                            <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,0,15">
+                                <TextBlock Text="E-Mail" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ProfileTextBoxStyle}"/>
+                            </StackPanel>
 
-                        <!-- Benutzername -->
-                        <StackPanel Grid.Column="2" Grid.Row="0" Margin="0,5,0,15">
-                            <TextBlock Text="Benutzername" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{StaticResource ProfileTextBoxStyle}"
-                                     IsReadOnly="True"
-                                     Opacity="0.7"/>
-                        </StackPanel>
+                            <!-- Telefon -->
+                            <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,0,15">
+                                <TextBlock Text="Telefon" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ProfileTextBoxStyle}"/>
+                            </StackPanel>
 
-                        <!-- E-Mail -->
-                        <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,0,15">
-                            <TextBlock Text="E-Mail" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{StaticResource ProfileTextBoxStyle}"/>
-                        </StackPanel>
+                            <!-- Abteilung -->
+                            <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,0,0,15">
+                                <TextBlock Text="Abteilung" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBox Text="{Binding Department, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ProfileTextBoxStyle}"/>
+                            </StackPanel>
 
-                        <!-- Telefon -->
-                        <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,0,15">
-                            <TextBlock Text="Telefon" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{StaticResource ProfileTextBoxStyle}"/>
-                        </StackPanel>
+                            <!-- Standort -->
+                            <StackPanel Grid.Column="2" Grid.Row="2" Margin="0,0,0,15">
+                                <TextBlock Text="Standort" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBox Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource ProfileTextBoxStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
 
-                        <!-- Abteilung -->
-                        <StackPanel Grid.Column="0" Grid.Row="2" Margin="0,0,0,15">
-                            <TextBlock Text="Abteilung" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding Department, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{StaticResource ProfileTextBoxStyle}"/>
-                        </StackPanel>
-
-                        <!-- Standort -->
-                        <StackPanel Grid.Column="2" Grid.Row="2" Margin="0,0,0,15">
-                            <TextBlock Text="Standort" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}"
-                                     Style="{StaticResource ProfileTextBoxStyle}"/>
-                        </StackPanel>
-                    </Grid>
-                </GroupBox>
-
-                <!-- Notification Settings Section -->
-                <GroupBox Header="Benachrichtigungen" Style="{StaticResource ProfileSectionStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Legen Sie fest, wie Sie benachrichtigt werden moechten."
+                    <!-- Notifications Panel -->
+                    <StackPanel x:Name="NotificationsPanel" Visibility="Collapsed">
+                        <TextBlock Text="{DynamicResource Profile_Notifications}" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="White" 
+                                   Margin="0,0,0,20"/>
+                        
+                        <TextBlock Text="{DynamicResource Profile_NotificationsDesc}"
                                    Foreground="#808080"
                                    FontSize="12"
                                    Margin="0,0,0,15"/>
@@ -258,8 +391,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="E-Mail-Benachrichtigungen" Style="{StaticResource ProfileLabelStyle}"/>
-                                <TextBlock Text="Erhalten Sie wichtige Updates per E-Mail." 
+                                <TextBlock Text="{DynamicResource Profile_EmailNotifications}" Style="{StaticResource ProfileLabelStyle}"/>
+                                <TextBlock Text="{DynamicResource Profile_EmailNotificationsDesc}" 
                                            Style="{StaticResource ProfileDescriptionStyle}"/>
                             </StackPanel>
                             <ToggleButton Grid.Column="1" 
@@ -275,8 +408,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Push-Benachrichtigungen" Style="{StaticResource ProfileLabelStyle}"/>
-                                <TextBlock Text="Desktop-Benachrichtigungen fuer wichtige Ereignisse." 
+                                <TextBlock Text="{DynamicResource Profile_PushNotifications}" Style="{StaticResource ProfileLabelStyle}"/>
+                                <TextBlock Text="{DynamicResource Profile_PushNotificationsDesc}" 
                                            Style="{StaticResource ProfileDescriptionStyle}"/>
                             </StackPanel>
                             <ToggleButton Grid.Column="1" 
@@ -292,8 +425,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Ton-Benachrichtigungen" Style="{StaticResource ProfileLabelStyle}"/>
-                                <TextBlock Text="Akustische Signale bei Benachrichtigungen." 
+                                <TextBlock Text="{DynamicResource Profile_SoundNotifications}" Style="{StaticResource ProfileLabelStyle}"/>
+                                <TextBlock Text="{DynamicResource Profile_SoundNotificationsDesc}" 
                                            Style="{StaticResource ProfileDescriptionStyle}"/>
                             </StackPanel>
                             <ToggleButton Grid.Column="1" 
@@ -302,12 +435,16 @@
                                           VerticalAlignment="Center"/>
                         </Grid>
                     </StackPanel>
-                </GroupBox>
 
-                <!-- Privacy Settings Section -->
-                <GroupBox Header="Datenschutz" Style="{StaticResource ProfileSectionStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Verwalten Sie Ihre Privatsphaere-Einstellungen."
+                    <!-- Privacy Panel -->
+                    <StackPanel x:Name="PrivacyPanel" Visibility="Collapsed">
+                        <TextBlock Text="{DynamicResource Profile_Privacy}" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="White" 
+                                   Margin="0,0,0,20"/>
+                        
+                        <TextBlock Text="{DynamicResource Profile_PrivacyDesc}"
                                    Foreground="#808080"
                                    FontSize="12"
                                    Margin="0,0,0,15"/>
@@ -319,8 +456,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Online-Status anzeigen" Style="{StaticResource ProfileLabelStyle}"/>
-                                <TextBlock Text="Andere Benutzer koennen sehen, ob Sie online sind." 
+                                <TextBlock Text="{DynamicResource Profile_ShowOnlineStatus}" Style="{StaticResource ProfileLabelStyle}"/>
+                                <TextBlock Text="{DynamicResource Profile_ShowOnlineStatusDesc}" 
                                            Style="{StaticResource ProfileDescriptionStyle}"/>
                             </StackPanel>
                             <ToggleButton Grid.Column="1" 
@@ -336,8 +473,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Zuletzt gesehen anzeigen" Style="{StaticResource ProfileLabelStyle}"/>
-                                <TextBlock Text="Zeigt an, wann Sie zuletzt aktiv waren." 
+                                <TextBlock Text="{DynamicResource Profile_ShowLastSeen}" Style="{StaticResource ProfileLabelStyle}"/>
+                                <TextBlock Text="{DynamicResource Profile_ShowLastSeenDesc}" 
                                            Style="{StaticResource ProfileDescriptionStyle}"/>
                             </StackPanel>
                             <ToggleButton Grid.Column="1" 
@@ -353,8 +490,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Profil sichtbar" Style="{StaticResource ProfileLabelStyle}"/>
-                                <TextBlock Text="Andere Benutzer koennen Ihr Profil einsehen." 
+                                <TextBlock Text="{DynamicResource Profile_ProfileVisible}" Style="{StaticResource ProfileLabelStyle}"/>
+                                <TextBlock Text="{DynamicResource Profile_ProfileVisibleDesc}" 
                                            Style="{StaticResource ProfileDescriptionStyle}"/>
                             </StackPanel>
                             <ToggleButton Grid.Column="1" 
@@ -363,12 +500,16 @@
                                           VerticalAlignment="Center"/>
                         </Grid>
                     </StackPanel>
-                </GroupBox>
 
-                <!-- Security Section -->
-                <GroupBox Header="Sicherheit" Style="{StaticResource ProfileSectionStyle}">
-                    <StackPanel>
-                        <TextBlock Text="Aendern Sie Ihr Passwort fuer mehr Sicherheit."
+                    <!-- Security Panel -->
+                    <StackPanel x:Name="SecurityPanel" Visibility="Collapsed">
+                        <TextBlock Text="{DynamicResource Profile_Security}" 
+                                   FontSize="20" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="White" 
+                                   Margin="0,0,0,20"/>
+                        
+                        <TextBlock Text="{DynamicResource Profile_ChangePasswordDesc}"
                                    Foreground="#808080"
                                    FontSize="12"
                                    Margin="0,0,0,15"/>
@@ -384,34 +525,35 @@
 
                             <!-- Aktuelles Passwort -->
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="Aktuelles Passwort" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBlock Text="{DynamicResource Profile_CurrentPassword}" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
                                 <PasswordBox Style="{StaticResource ProfilePasswordBoxStyle}"/>
                             </StackPanel>
 
                             <!-- Neues Passwort -->
                             <StackPanel Grid.Column="2">
-                                <TextBlock Text="Neues Passwort" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBlock Text="{DynamicResource Profile_NewPassword}" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
                                 <PasswordBox Style="{StaticResource ProfilePasswordBoxStyle}"/>
                             </StackPanel>
 
                             <!-- Passwort bestaetigen -->
                             <StackPanel Grid.Column="4">
-                                <TextBlock Text="Passwort bestaetigen" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
+                                <TextBlock Text="{DynamicResource Profile_ConfirmPassword}" Style="{StaticResource ProfileLabelStyle}" Margin="0,0,0,5"/>
                                 <PasswordBox Style="{StaticResource ProfilePasswordBoxStyle}"/>
                             </StackPanel>
                         </Grid>
 
-                        <Button Content="Passwort aendern"
+                        <Button Content="{DynamicResource Profile_ChangePassword}"
                                 Command="{Binding ChangePasswordCommand}"
                                 Style="{DynamicResource FluentTabButtonStyle}"
                                 HorizontalAlignment="Left"
                                 Padding="20,8"
                                 Margin="0,15,0,0"/>
                     </StackPanel>
-                </GroupBox>
 
-            </StackPanel>
-        </ScrollViewer>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
 
         <!-- Status Bar -->
         <Border Grid.Row="2" 
@@ -430,7 +572,7 @@
                            VerticalAlignment="Center"/>
 
                 <Button Grid.Column="1"
-                        Content="Zuruecksetzen"
+                        Content="{DynamicResource Profile_ResetProfile}"
                         Command="{Binding ResetProfileCommand}"
                         Style="{DynamicResource FluentTabButtonStyle}"
                         Padding="20,8"
@@ -438,7 +580,7 @@
                         Foreground="#808080"/>
 
                 <Button Grid.Column="2"
-                        Content="Profil speichern"
+                        Content="{DynamicResource Profile_SaveProfile}"
                         Command="{Binding SaveProfileCommand}"
                         Style="{DynamicResource FluentTabButtonStyle}"
                         Padding="20,8"/>

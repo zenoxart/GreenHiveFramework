@@ -4,11 +4,35 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Zenox.Maui.UI"
-    Title="Zenox.Maui.UI">
+    xmlns:pages="clr-namespace:Zenox.Maui.UI.Pages"
+    Title="Zenox.Maui.UI"
+    FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="🏠 Start"
+            ContentTemplate="{DataTemplate pages:HomePage}"
+            Route="home" />
+
+        <ShellContent
+            Title="📊 Daten"
+            ContentTemplate="{DataTemplate pages:DataPage}"
+            Route="data" />
+
+        <ShellContent
+            Title="✏️ Bearbeiten"
+            ContentTemplate="{DataTemplate pages:EditPage}"
+            Route="edit" />
+
+        <ShellContent
+            Title="🔧 Werkzeuge"
+            ContentTemplate="{DataTemplate pages:ToolsPage}"
+            Route="tools" />
+
+        <ShellContent
+            Title="❓ Hilfe"
+            ContentTemplate="{DataTemplate pages:HelpPage}"
+            Route="help" />
+    </TabBar>
 
 </Shell>

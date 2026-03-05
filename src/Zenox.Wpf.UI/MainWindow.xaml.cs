@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Zenox.Wpf.Controls.Common.TabView;
 using Zenox.Wpf.UI.MVVM.ViewModel;
 using Zenox.Wpf.UI.MVVM.ViewModel.Manager;
+using Zenox.Wpf.UI.Common.Shortcuts;
 
 namespace Zenox.Wpf.UI;
 
@@ -50,6 +51,14 @@ public partial class MainWindow : UserControl
 
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
+        // Verwende den ShortcutManager für zentrale Shortcut-Behandlung
+        if (ShortcutManager.Instance.HandleKeyPress(e.Key, Keyboard.Modifiers))
+        {
+            e.Handled = true;
+            return;
+        }
+
+        // Fallback für nicht im ShortcutManager registrierte Shortcuts
         if (DataContext is AppViewModel appViewModel)
         {
             switch (e.Key)

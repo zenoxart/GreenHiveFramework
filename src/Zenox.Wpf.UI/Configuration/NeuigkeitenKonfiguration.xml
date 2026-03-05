@@ -2,14 +2,16 @@
 <neuigkeiten:NeuigkeitenKonfiguration 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:neuigkeiten="clr-namespace:Zenox.NET.Core.Common.Neuigkeiten;assembly=Zenox.Wpf.Core"
+    xmlns:neuigkeiten="clr-namespace:Zenox.NET.Core.Common.Neuigkeiten;assembly=Zenox.NET.Core"
     Titel="What's New">
+
+    <neuigkeiten:AnzeigeEinstellungen SortOrder="Datum" ShowCategories="true" Theme="Light" />
 
     <!-- Version 1.0 -->
     <neuigkeiten:VersionNeuigkeiten Version="1.0">
         
         <!-- What's new -->
-        <neuigkeiten:NeuigkeitenKategorie Titel="What's new in v1.0">
+		<neuigkeiten:NeuigkeitenKategorie Titel="What's new in v1.0">
             <neuigkeiten:NeuigkeitEintrag Text="Implemented Config" Beschreibung="Konfigurationssystem fuer flexible Anpassungen"/>
             <neuigkeiten:NeuigkeitEintrag Text="Command Palette" Beschreibung="Schnellzugriff auf alle Befehle mit Ctrl+K"/>
             <neuigkeiten:NeuigkeitEintrag Text="Notification System" Beschreibung="Toast-Benachrichtigungen fuer Benutzer-Feedback"/>

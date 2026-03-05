@@ -12,6 +12,8 @@ using Zenox.Wpf.UI.MVVM.ViewModel;
 using Zenox.Wpf.UI.Properties;
 using Zenox.NET.Core.Common.Recovery;
 using Zenox.NET.Core.Common.Notifications;
+using Zenox.Wpf.UI.Common.Shortcuts;
+using System.Windows.Input;
 
 namespace Zenox.Wpf.UI;
 
@@ -21,11 +23,23 @@ public partial class App : Application
 
 	private void Application_Startup(object sender, StartupEventArgs e)
 	{
+		// Window Manager Service initialisieren
+		Zenox.Wpf.Views.Helpers.WindowManagerServiceLocator.Instance = new Services.WindowManagerService();
+
+		// Language Service initialisieren
+		Zenox.Wpf.Views.Helpers.LanguageServiceLocator.Instance = new Services.LanguageService();
+		
+		// Lokalisierung initialisieren
+		Common.Localization.LocalizationManager.Instance.Initialize();
+
+		// Shortcut Manager initialisieren und konfigurieren
+		InitializeShortcutManager();
+
 		// Background Task Scheduler starten
 		BackgroundTaskScheduler.Instance.Start();
 
 		// Telemetrie-Service initialisieren
-		TelemetryService.Instance.Initialize();
+		//TelemetryService.Instance.Initialize();
 
 		// Interaction Heatmap Controller initialisieren und starten
 		InteractionHeatmapController.Instance.Initialize(new HeatmapConfiguration
@@ -39,7 +53,7 @@ public partial class App : Application
 		InteractionHeatmapController.Instance.StartTracking();
 
 		// Crash Recovery Manager initialisieren
-		CrashRecoveryManager.Instance.Initialize();
+		//CrashRecoveryManager.Instance.Initialize();
 
 		// Check for previous crash
 		var crashSnapshot = CrashRecoveryManager.Instance.GetLastCrashSnapshot();
@@ -80,6 +94,12 @@ public partial class App : Application
 
 		var Shell = new MainAppShell();
 		Shell.DataContext = ModuleHandler.AppKontext;
+		
+		// Window Manager initialisieren und Main Shell tracken
+		Zenox.Wpf.UI.Common.WindowManager.Instance.TrackWindow(Shell, "MainAppShell");
+
+
+		
 		Shell.Show();
 
 		// Prüfe ob Benutzer angemeldet ist
@@ -148,10 +168,95 @@ public partial class App : Application
 		shell.MainModule.Content = authView;
 	}
 
+	private void InitializeShortcutManager()
+	{
+		// Shortcuts laden
+		ShortcutManager.Instance.LoadConfiguration();
+
+		// Standard-Shortcuts registrieren (werden später über ModuleHandler verfügbar gemacht)
+		ShortcutManager.Instance.RegisterShortcut(new ShortcutAction(
+			"tutorial_main",
+			"Hauptfenster-Tutorial starten",
+			new KeyGesture(Key.F1),
+			() => 
+			{
+				// Tutorial wird über MainWindow.xaml.cs KeyDown Handler ausgeführt
+			},
+			"Tutorial",
+			"Startet das Tutorial für das Hauptfenster"));
+
+		ShortcutManager.Instance.RegisterShortcut(new ShortcutAction(
+			"tutorial_menu",
+			"Menü-Navigation-Tutorial starten",
+			new KeyGesture(Key.F2),
+			() => 
+			{
+				// Tutorial wird über MainWindow.xaml.cs KeyDown Handler ausgeführt
+			},
+			"Tutorial",
+			"Startet das Tutorial für die Menü-Navigation"));
+
+		ShortcutManager.Instance.RegisterShortcut(new ShortcutAction(
+			"save",
+			"Speichern",
+			new KeyGesture(Key.S, ModifierKeys.Control),
+			() => NotificationService.Instance.ShowInfo("Speichern", "Speichern-Funktion ausgeführt"),
+			"Datei",
+			"Speichert die aktuelle Datei"));
+
+		ShortcutManager.Instance.RegisterShortcut(new ShortcutAction(
+			"open_settings",
+			"Einstellungen öffnen",
+			new KeyGesture(Key.OemComma, ModifierKeys.Control),
+			() => OpenShortcutSettings(),
+			"Navigation",
+			"Öffnet die Einstellungen"));
+
+		ShortcutManager.Instance.RegisterShortcut(new ShortcutAction(
+			"quit",
+			"Anwendung beenden",
+			new KeyGesture(Key.Q, ModifierKeys.Control),
+			() => Application.Current.Shutdown(),
+			"Anwendung",
+			"Beendet die Anwendung"));
+
+		// Debug: Lokalisierungs-Scanner
+		#if DEBUG
+		ShortcutManager.Instance.RegisterShortcut(new ShortcutAction(
+			"scan_localization",
+			"Lokalisierungs-Scanner",
+			new KeyGesture(Key.L, ModifierKeys.Control | ModifierKeys.Shift),
+			() => Common.Localization.LocalizationScanner.ShowScanDialog(),
+			"Debug",
+			"Scannt die Anwendung nach hardcodierten Strings"));
+		#endif
+	}
+
+
+	private void OpenShortcutSettings()
+	{
+		var settingsWindow = new Window
+		{
+			Title = "Tastenkürzel verwalten",
+			Width = 900,
+			Height = 600,
+			Content = new Views.ShortcutManagerView(),
+			WindowStartupLocation = WindowStartupLocation.CenterScreen
+		};
+		settingsWindow.ShowDialog();
+	}
+
 	protected override void OnExit(ExitEventArgs e)
 	{
-		Settings.Default.LocalisationISO = this.ModuleHandler.AppKontext.Sprachen.AktuelleSprache.Code;
-		Settings.Default.Save();
+		var aktuelleSprache = this.ModuleHandler?.AppKontext?.Sprachen?.AktuelleSprache;
+		if (aktuelleSprache != null)
+		{
+			Settings.Default.LocalisationISO = aktuelleSprache.Code;
+			Settings.Default.Save();
+		}
+
+		// Save Shortcuts
+		ShortcutManager.Instance.SaveConfiguration();
 
 		// Stop Heatmap Tracking
 		InteractionHeatmapController.Instance.StopTracking();
@@ -168,5 +273,49 @@ public partial class App : Application
 
 		base.OnExit(e);
 	}
+
+	/// <summary>
+	/// Initialisiert die Lokalisierung mit ausführlichem Logging
+	/// </summary>
+	private void InitializeLocalization()
+	{
+		System.Diagnostics.Debug.WriteLine("========================================");
+		System.Diagnostics.Debug.WriteLine("=== LOKALISIERUNG STARTEN ===");
+		System.Diagnostics.Debug.WriteLine("========================================");
+
+		try
+		{
+			// Language Service initialisieren
+			Zenox.Wpf.Views.Helpers.LanguageServiceLocator.Instance = new Services.LanguageService();
+			System.Diagnostics.Debug.WriteLine("✓ LanguageService bereit");
+			
+			// Lokalisierung initialisieren
+			Common.Localization.LocalizationManager.Instance.Initialize();
+			System.Diagnostics.Debug.WriteLine("✓ LocalizationManager initialisiert");
+
+			// Diagnostik im Debug-Modus
+			#if DEBUG
+			Common.Localization.LocalizationDiagnostics.RunDiagnostics();
+			#endif
+
+			System.Diagnostics.Debug.WriteLine("========================================");
+			System.Diagnostics.Debug.WriteLine("=== LOKALISIERUNG ERFOLGREICH ===");
+			System.Diagnostics.Debug.WriteLine("========================================");
+		}
+		catch (Exception ex)
+		{
+			System.Diagnostics.Debug.WriteLine($"✗ FEHLER bei Lokalisierung: {ex.Message}");
+			System.Diagnostics.Debug.WriteLine($"StackTrace: {ex.StackTrace}");
+			
+			MessageBox.Show(
+				$"Die Spracheinstellungen konnten nicht geladen werden:\n\n{ex.Message}\n\n" +
+				$"Die Anwendung wird mit Standardeinstellungen fortgesetzt.\n\n" +
+				$"Tipp: Führen Sie 'Scripts\\ResetLanguageSettings.bat' aus, um die Einstellungen zurückzusetzen.",
+				"Lokalisierungs-Warnung",
+				MessageBoxButton.OK,
+				MessageBoxImage.Warning);
+		}
+	}
 }
+
 

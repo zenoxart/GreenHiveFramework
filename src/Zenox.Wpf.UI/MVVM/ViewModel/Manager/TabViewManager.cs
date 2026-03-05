@@ -68,6 +68,9 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
                 System.Diagnostics.Debug.WriteLine($"Versuche {tabTitle} zu laden...");
                 view.DataContext = this.AppKontext;
 
+                // Spezielle Initialisierung für bestimmte Views
+                InitializeViewSpecificFeatures(view);
+
                 // Prüfen, ob bereits ein Tab mit diesem Titel existiert
                 var existingTab = TabItems.FirstOrDefault(t => t.Name == tabTitle);
                 if (existingTab != null)
@@ -92,6 +95,18 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
             {
                 System.Diagnostics.Debug.WriteLine($"Fehler beim Laden der View: {ex.Message}");
                 MessageBox.Show($"Fehler beim Laden der View: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Initialisiert view-spezifische Features
+        /// </summary>
+        private void InitializeViewSpecificFeatures(UserControl view)
+        {
+            // Initialisiere EinstellungenView-spezifische Features
+            if (view is Zenox.Wpf.Views.EinstellungenView settingsView)
+            {
+                Helpers.ViewInitializationHelper.InitializeEinstellungenView(settingsView);
             }
         }
 

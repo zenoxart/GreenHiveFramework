@@ -83,12 +83,12 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
             try
             {
                 // Pfad zur XML-Konfigurationsdatei
-                var xmlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configuration", "TutorialConfiguration.xml");
+                var xmlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Configuration", "TutorialKonfiguration.xml");
 
                 // Fallback-Pfad falls die Datei im Hauptverzeichnis nicht gefunden wird
                 if (!File.Exists(xmlFilePath))
                 {
-                    xmlFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "TutorialConfiguration.xml");
+                    xmlFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Configuration", "TutorialKonfiguration.xml");
                 }
 
                 if (File.Exists(xmlFilePath))

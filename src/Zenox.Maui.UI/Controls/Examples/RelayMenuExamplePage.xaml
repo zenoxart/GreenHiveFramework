@@ -1,0 +1,27 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Zenox.Maui.UI.Controls"
+             xmlns:examples="clr-namespace:Zenox.Maui.UI.Controls"
+             x:Class="Zenox.Maui.UI.Controls.RelayMenuExamplePage"
+             Title="RelayMenu Beispiel">
+
+    <ContentPage.BindingContext>
+        <examples:RelayMenuExampleViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0"
+               Text="RelayMenu Beispiel"
+               FontSize="24"
+               FontAttributes="Bold"
+               Margin="0,0,0,20"/>
+
+        <controls:RelayMenuControl Grid.Row="1"
+                                   MenuGroup="{Binding MenuGroup}"/>
+    </Grid>
+</ContentPage>

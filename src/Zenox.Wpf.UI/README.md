@@ -507,6 +507,7 @@ public class DocumentViewModel : NotificationObject
             async (json) => await HandleSaveCommand(json));
     }
 }
+```
 
 ## ?? Performance-Features
 

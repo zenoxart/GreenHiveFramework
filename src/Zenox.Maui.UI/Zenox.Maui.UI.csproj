@@ -84,10 +84,14 @@
 	  </EmbeddedResource>
 	</ItemGroup>
 
-	<!-- Note: Zenox.NET.Core targets net10.0-windows and cannot be referenced by a cross-platform MAUI project.
-	     If you need shared code, create a separate .NET Standard or multi-targeted library. -->
-	<!--<ItemGroup>
-	  <ProjectReference Include="..\Zenox.NET\Zenox.NET.Core.csproj" />
-	</ItemGroup>-->
+	<ItemGroup>
+	  <ProjectReference Include="..\Zenox.Maui.Core\Zenox.NET.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Controls\Examples\RelayMenuExamplePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 
 </Project>

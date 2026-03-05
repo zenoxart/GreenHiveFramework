@@ -1,0 +1,225 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Common -->
+    <sys:String x:Key="Common_Save">Save</sys:String>
+    <sys:String x:Key="Common_Cancel">Cancel</sys:String>
+    <sys:String x:Key="Common_Delete">Delete</sys:String>
+    <sys:String x:Key="Common_Edit">Edit</sys:String>
+    <sys:String x:Key="Common_Create">Create</sys:String>
+    <sys:String x:Key="Common_Close">Close</sys:String>
+    <sys:String x:Key="Common_Open">Open</sys:String>
+    <sys:String x:Key="Common_Export">Export</sys:String>
+    <sys:String x:Key="Common_Import">Import</sys:String>
+    <sys:String x:Key="Common_Reset">Reset</sys:String>
+    <sys:String x:Key="Common_Refresh">Refresh</sys:String>
+    <sys:String x:Key="Common_Apply">Apply</sys:String>
+    <sys:String x:Key="Common_Search">Search</sys:String>
+    <sys:String x:Key="Common_Settings">Settings</sys:String>
+    <sys:String x:Key="Common_Yes">Yes</sys:String>
+    <sys:String x:Key="Common_No">No</sys:String>
+    <sys:String x:Key="Common_OK">OK</sys:String>
+    <sys:String x:Key="Common_Help">Help</sys:String>
+
+    <!-- Menu -->
+    <sys:String x:Key="Menu_Settings">Settings</sys:String>
+    <sys:String x:Key="Menu_User">User</sys:String>
+    <sys:String x:Key="Menu_Help">Help</sys:String>
+    <sys:String x:Key="Menu_Profile">Profile</sys:String>
+    <sys:String x:Key="Menu_Logout">Logout</sys:String>
+    <sys:String x:Key="Menu_Dashboard">Dashboard</sys:String>
+    <sys:String x:Key="Menu_PerformancePanel">Performance Panel</sys:String>
+    <sys:String x:Key="Menu_ApplicationSettings">Application Settings</sys:String>
+    <sys:String x:Key="Menu_ShowHelp">Show Help</sys:String>
+    <sys:String x:Key="Menu_Glossary">Glossary</sys:String>
+    <sys:String x:Key="Menu_News">News</sys:String>
+    <sys:String x:Key="Menu_SendFeedback">Send Feedback</sys:String>
+    <sys:String x:Key="Menu_ReportProblem">Report Problem</sys:String>
+    <sys:String x:Key="Menu_SuggestFeature">Suggest Feature</sys:String>
+    <sys:String x:Key="Menu_About">About</sys:String>
+    <sys:String x:Key="Menu_ApplicationLogs">Application Logs</sys:String>
+
+    <!-- Settings - General -->
+    <sys:String x:Key="Settings_Title">Settings</sys:String>
+    <sys:String x:Key="Settings_Description">Configure application settings and the snapshot system.</sys:String>
+    <sys:String x:Key="Settings_SnapshotSettings">Snapshot Settings</sys:String>
+    <sys:String x:Key="Settings_Automation">Automation</sys:String>
+    <sys:String x:Key="Settings_Categories">Categories</sys:String>
+    <sys:String x:Key="Settings_Management">Management</sys:String>
+    <sys:String x:Key="Settings_LoadSnapshot">Load Snapshot</sys:String>
+    <sys:String x:Key="Settings_Shortcuts">Shortcuts</sys:String>
+    <sys:String x:Key="Settings_WindowManagement">Window Management</sys:String>
+    <sys:String x:Key="Settings_Language">Language</sys:String>
+    <sys:String x:Key="Settings_SaveSettings">Save Settings</sys:String>
+
+    <!-- Settings - Automation -->
+    <sys:String x:Key="Settings_AutomationTitle">Automation</sys:String>
+    <sys:String x:Key="Settings_AutoSnapshots">Automatic Snapshots</sys:String>
+    <sys:String x:Key="Settings_AutoSnapshotsDesc">Automatically creates snapshots of the application state at regular intervals.</sys:String>
+    <sys:String x:Key="Settings_Interval">Interval (Minutes)</sys:String>
+    <sys:String x:Key="Settings_IntervalDesc">Time between automatic snapshots.</sys:String>
+    <sys:String x:Key="Settings_MaxCount">Maximum Count</sys:String>
+    <sys:String x:Key="Settings_MaxCountDesc">Maximum number of snapshots to keep.</sys:String>
+    <sys:String x:Key="Settings_SnapshotOnStartup">Snapshot on Startup</sys:String>
+    <sys:String x:Key="Settings_SnapshotOnStartupDesc">Creates a snapshot when the application starts.</sys:String>
+    <sys:String x:Key="Settings_SnapshotOnShutdown">Snapshot on Shutdown</sys:String>
+    <sys:String x:Key="Settings_SnapshotOnShutdownDesc">Creates a snapshot when the application exits.</sys:String>
+
+    <!-- Settings - Categories -->
+    <sys:String x:Key="Settings_CategoriesTitle">Snapshot Categories</sys:String>
+    <sys:String x:Key="Settings_CategoriesDesc">Select which data should be saved in snapshots.</sys:String>
+    <sys:String x:Key="Settings_WindowLayout">Window Layout</sys:String>
+    <sys:String x:Key="Settings_UserSettings">User Settings</sys:String>
+    <sys:String x:Key="Settings_AppConfiguration">Application Configuration</sys:String>
+    <sys:String x:Key="Settings_SessionData">Session Data</sys:String>
+    <sys:String x:Key="Settings_CustomData">Custom Data</sys:String>
+
+    <!-- Settings - Management -->
+    <sys:String x:Key="Settings_ManagementTitle">Snapshot Management</sys:String>
+    <sys:String x:Key="Settings_SavedSnapshots">Saved Snapshots</sys:String>
+    <sys:String x:Key="Settings_TotalSize">Total Size</sys:String>
+    <sys:String x:Key="Settings_CreateSnapshot">Create Snapshot</sys:String>
+    <sys:String x:Key="Settings_DeleteAllSnapshots">Delete All Snapshots</sys:String>
+
+    <!-- Settings - Load Snapshot -->
+    <sys:String x:Key="Settings_LoadSnapshotTitle">Load Snapshot</sys:String>
+    <sys:String x:Key="Settings_AvailableSnapshots">Available Snapshots</sys:String>
+    <sys:String x:Key="Settings_RefreshList">Refresh list</sys:String>
+    <sys:String x:Key="Settings_Details">Details</sys:String>
+    <sys:String x:Key="Settings_DeleteSnapshot">Delete Snapshot</sys:String>
+
+    <!-- Settings - Shortcuts -->
+    <sys:String x:Key="Settings_ShortcutsTitle">Manage Shortcuts</sys:String>
+    <sys:String x:Key="Settings_ShortcutsDesc">Click on a shortcut to change it. Press ESC to cancel or Del to delete.</sys:String>
+    <sys:String x:Key="Settings_ShortcutsInfo">The complete shortcut management can be found in the main menu under:</sys:String>
+    <sys:String x:Key="Settings_ShortcutsPath">Settings ? Manage Shortcuts</sys:String>
+    <sys:String x:Key="Settings_ShortcutsHint">Or press</sys:String>
+    <sys:String x:Key="Settings_ShortcutsKey">Ctrl+Comma</sys:String>
+    <sys:String x:Key="Settings_ShortcutsQuickAccess">for quick access.</sys:String>
+    <sys:String x:Key="Settings_QuickActions">Quick Actions</sys:String>
+    <sys:String x:Key="Settings_ShortcutManager">Shortcut Manager</sys:String>
+    <sys:String x:Key="Settings_ShortcutManagerDesc">Opens the complete shortcut manager in a separate window.</sys:String>
+    <sys:String x:Key="Settings_OpenManager">Open</sys:String>
+    <sys:String x:Key="Settings_ExportConfig">Export Configuration</sys:String>
+    <sys:String x:Key="Settings_ExportConfigDesc">Saves your shortcut configuration to a file.</sys:String>
+    <sys:String x:Key="Settings_Export">Export</sys:String>
+    <sys:String x:Key="Settings_ResetToDefault">Reset to Default</sys:String>
+    <sys:String x:Key="Settings_ResetToDefaultDesc">Resets all shortcuts to default values.</sys:String>
+    <sys:String x:Key="Settings_ResetButton">Reset</sys:String>
+
+    <!-- Settings - Window Management -->
+    <sys:String x:Key="Settings_WindowMgmtTitle">Window Management</sys:String>
+    <sys:String x:Key="Settings_WindowMgmtDesc">Manage the position and size of all application windows. Supports multiple instances.</sys:String>
+    <sys:String x:Key="Settings_GlobalSettings">Global Settings</sys:String>
+    <sys:String x:Key="Settings_RestoreOnStartup">Restore position on startup</sys:String>
+    <sys:String x:Key="Settings_RestoreOnStartupDesc">Automatically restores the last window position.</sys:String>
+    <sys:String x:Key="Settings_AutoSave">Auto-save</sys:String>
+    <sys:String x:Key="Settings_AutoSaveDesc">Automatically saves window positions when changed.</sys:String>
+    <sys:String x:Key="Settings_MultipleInstances">Support multiple instances</sys:String>
+    <sys:String x:Key="Settings_MultipleInstancesDesc">Allows saving positions for multiple window instances.</sys:String>
+    <sys:String x:Key="Settings_MaxWindowCount">Maximum number of saved windows</sys:String>
+    <sys:String x:Key="Settings_MaxWindowCountDesc">Older entries will be automatically deleted.</sys:String>
+    <sys:String x:Key="Settings_SavedWindows">Saved Windows</sys:String>
+    <sys:String x:Key="Settings_ActiveWindows">Active Windows</sys:String>
+    <sys:String x:Key="Settings_WindowList">Saved Windows</sys:String>
+    <sys:String x:Key="Settings_Updated">Updated</sys:String>
+    <sys:String x:Key="Settings_Position">Position</sys:String>
+    <sys:String x:Key="Settings_Size">Size</sys:String>
+    <sys:String x:Key="Settings_RefreshList2">Refresh</sys:String>
+    <sys:String x:Key="Settings_ClearAll">Clear All</sys:String>
+
+    <!-- Performance Monitor -->
+    <sys:String x:Key="Performance_Monitor">Performance Monitor</sys:String>
+    <sys:String x:Key="Performance_MonitorDesc">Real-time monitoring of system resources</sys:String>
+    <sys:String x:Key="Performance_Heatmap">Interaction Heatmap</sys:String>
+    <sys:String x:Key="Performance_Telemetry">Telemetry</sys:String>
+    <sys:String x:Key="Performance_TelemetryEvents">Telemetry Events</sys:String>
+    <sys:String x:Key="Performance_TelemetryDesc">Logged application events</sys:String>
+
+    <!-- Dashboard -->
+    <sys:String x:Key="Dashboard_Title">Dashboard</sys:String>
+    <sys:String x:Key="Dashboard_WelcomeMessage">Welcome back!</sys:String>
+    <sys:String x:Key="Dashboard_Refresh">Refresh</sys:String>
+    <sys:String x:Key="Dashboard_ActiveUsers">Active Users</sys:String>
+    <sys:String x:Key="Dashboard_CompletedTasks">Completed Tasks</sys:String>
+    <sys:String x:Key="Dashboard_PendingTasks">Pending Tasks</sys:String>
+    <sys:String x:Key="Dashboard_SystemStatus">System Status</sys:String>
+    <sys:String x:Key="Dashboard_ThisWeek">this week</sys:String>
+    <sys:String x:Key="Dashboard_QuickActions">Quick Actions</sys:String>
+    <sys:String x:Key="Dashboard_NewTask">?? New Task</sys:String>
+    <sys:String x:Key="Dashboard_Reports">?? Reports</sys:String>
+    <sys:String x:Key="Dashboard_Team">?? Team</sys:String>
+    <sys:String x:Key="Dashboard_Documents">?? Documents</sys:String>
+    <sys:String x:Key="Dashboard_RecentActivity">Recent Activity</sys:String>
+    <sys:String x:Key="Dashboard_ViewAll">View All</sys:String>
+    <sys:String x:Key="Dashboard_Notifications">Notifications</sys:String>
+    <sys:String x:Key="Dashboard_MarkAllRead">Mark all read</sys:String>
+    <sys:String x:Key="Dashboard_ProjectProgress">Project Progress</sys:String>
+
+    <!-- Profile -->
+    <sys:String x:Key="Profile_Title">Profile</sys:String>
+    <sys:String x:Key="Profile_Description">Manage your personal information and settings.</sys:String>
+    <sys:String x:Key="Profile_Overview">Profile Overview</sys:String>
+    <sys:String x:Key="Profile_PersonalInfo">Personal Information</sys:String>
+    <sys:String x:Key="Profile_Notifications">Notifications</sys:String>
+    <sys:String x:Key="Profile_NotificationsDesc">Configure how you want to be notified.</sys:String>
+    <sys:String x:Key="Profile_Privacy">Privacy</sys:String>
+    <sys:String x:Key="Profile_PrivacyDesc">Manage your privacy settings.</sys:String>
+    <sys:String x:Key="Profile_Security">Security</sys:String>
+    <sys:String x:Key="Profile_Change">Change</sys:String>
+    <sys:String x:Key="Profile_MemberSince">Member since</sys:String>
+    <sys:String x:Key="Profile_LastLogin">Last login</sys:String>
+    <sys:String x:Key="Profile_DisplayName">Display Name</sys:String>
+    <sys:String x:Key="Profile_Username">Username</sys:String>
+    <sys:String x:Key="Profile_Email">Email</sys:String>
+    <sys:String x:Key="Profile_Phone">Phone</sys:String>
+    <sys:String x:Key="Profile_Department">Department</sys:String>
+    <sys:String x:Key="Profile_Location">Location</sys:String>
+    <sys:String x:Key="Profile_EmailNotifications">Email Notifications</sys:String>
+    <sys:String x:Key="Profile_EmailNotificationsDesc">Receive important updates via email.</sys:String>
+    <sys:String x:Key="Profile_PushNotifications">Push Notifications</sys:String>
+    <sys:String x:Key="Profile_PushNotificationsDesc">Desktop notifications for important events.</sys:String>
+    <sys:String x:Key="Profile_SoundNotifications">Sound Notifications</sys:String>
+    <sys:String x:Key="Profile_SoundNotificationsDesc">Audio signals for notifications.</sys:String>
+    <sys:String x:Key="Profile_ShowOnlineStatus">Show Online Status</sys:String>
+    <sys:String x:Key="Profile_ShowOnlineStatusDesc">Other users can see if you are online.</sys:String>
+    <sys:String x:Key="Profile_ShowLastSeen">Show Last Seen</sys:String>
+    <sys:String x:Key="Profile_ShowLastSeenDesc">Shows when you were last active.</sys:String>
+    <sys:String x:Key="Profile_ProfileVisible">Profile Visible</sys:String>
+    <sys:String x:Key="Profile_ProfileVisibleDesc">Other users can view your profile.</sys:String>
+    <sys:String x:Key="Profile_CurrentPassword">Current Password</sys:String>
+    <sys:String x:Key="Profile_NewPassword">New Password</sys:String>
+    <sys:String x:Key="Profile_ConfirmPassword">Confirm Password</sys:String>
+    <sys:String x:Key="Profile_ChangePassword">Change Password</sys:String>
+    <sys:String x:Key="Profile_ChangePasswordDesc">Change your password for better security.</sys:String>
+    <sys:String x:Key="Profile_SaveProfile">Save Profile</sys:String>
+    <sys:String x:Key="Profile_ResetProfile">Reset</sys:String>
+
+    <!-- Language Settings -->
+    <sys:String x:Key="Language_Title">Language / Sprache</sys:String>
+    <sys:String x:Key="Language_Description">Choose your preferred language for the application.</sys:String>
+    <sys:String x:Key="Language_Current">Current Language</sys:String>
+    <sys:String x:Key="Language_Select">Select Language</sys:String>
+    <sys:String x:Key="Language_RestartRequired">Note: The application will apply the new language immediately.</sys:String>
+    <sys:String x:Key="Language_German">German</sys:String>
+    <sys:String x:Key="Language_English">English</sys:String>
+
+    <!-- Messages -->
+    <sys:String x:Key="Message_Success">Success</sys:String>
+    <sys:String x:Key="Message_Error">Error</sys:String>
+    <sys:String x:Key="Message_Warning">Warning</sys:String>
+    <sys:String x:Key="Message_Info">Information</sys:String>
+    <sys:String x:Key="Message_Confirmation">Confirmation</sys:String>
+    <sys:String x:Key="Message_SavedSuccessfully">Saved successfully!</sys:String>
+    <sys:String x:Key="Message_DeleteConfirmation">Do you really want to delete?</sys:String>
+    <sys:String x:Key="Message_ResetConfirmation">Do you really want to reset?</sys:String>
+    <sys:String x:Key="Message_ApplicationLogs">Application Logs!</sys:String>
+
+    <!-- Command Palette -->
+    <sys:String x:Key="CommandPalette_Open">Open Command Palette</sys:String>
+    <sys:String x:Key="CommandPalette_Description">Opens the command palette</sys:String>
+
+   
+
+</ResourceDictionary>

@@ -23,6 +23,7 @@
 	<ItemGroup>
 	  <Folder Include="Common\Converter\" />
 	  <Folder Include="Common\MVVM\ViewSupport\" />
+	  <Folder Include="Common\Shortcuts\" />
 	</ItemGroup>
 
 </Project>

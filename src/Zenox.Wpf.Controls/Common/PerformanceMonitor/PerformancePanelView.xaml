@@ -50,7 +50,7 @@
             </TabControl.Resources>
 
             <!-- Performance Monitor Tab -->
-            <TabItem Header="Performance Monitor">
+            <TabItem Header="{DynamicResource Performance_Monitor}">
                 <Grid Margin="15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -59,11 +59,11 @@
 
                     <!-- Header -->
                     <StackPanel Grid.Row="0" Margin="0,0,0,15">
-                        <TextBlock Text="Performance Monitor"
+                        <TextBlock Text="{DynamicResource Performance_Monitor}"
                                    FontSize="18"
                                    FontWeight="Bold"
                                    Foreground="White"/>
-                        <TextBlock Text="Echtzeit-Ueberwachung von Systemressourcen"
+                        <TextBlock Text="{DynamicResource Performance_MonitorDesc}"
                                    Foreground="#808080"
                                    FontSize="11"
                                    Margin="0,3,0,0"/>
@@ -77,12 +77,12 @@
             </TabItem>
 
             <!-- Interaction Heatmap Tab -->
-            <TabItem Header="Interaction Heatmap">
+            <TabItem Header="{DynamicResource Performance_Heatmap}">
                 <heatmap:InteractionHeatmapView/>
             </TabItem>
 
             <!-- Telemetry Events Tab -->
-            <TabItem Header="Telemetrie">
+            <TabItem Header="{DynamicResource Performance_Telemetry}">
                 <Grid Margin="15">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -91,15 +91,16 @@
 
                     <!-- Header -->
                     <StackPanel Grid.Row="0" Margin="0,0,0,15">
-                        <TextBlock Text="Telemetrie Events"
+                        <TextBlock Text="{DynamicResource Performance_TelemetryEvents}"
                                    FontSize="18"
                                    FontWeight="Bold"
                                    Foreground="White"/>
-                        <TextBlock Text="Protokollierte Anwendungsereignisse"
+                        <TextBlock Text="{DynamicResource Performance_TelemetryDesc}"
                                    Foreground="#808080"
                                    FontSize="11"
                                    Margin="0,3,0,0"/>
                     </StackPanel>
+
 
                     <!-- Events List -->
                     <Border Grid.Row="1" 

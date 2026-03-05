@@ -31,10 +31,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Configuration\TutorialConfiguration.xml">
+	  <Content Include="Configuration\TutorialKonfiguration.xml">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="Configuration\NeuigkeitenKonfiguration.xaml">
+	  <Content Include="Configuration\NeuigkeitenKonfiguration.xml">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
@@ -68,6 +68,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Debug\" />
+	  <Folder Include="Extensions\" />
 	</ItemGroup>
 
 </Project>

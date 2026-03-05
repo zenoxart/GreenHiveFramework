@@ -5,6 +5,7 @@ using Zenox.Wpf.Controls.Common.CommandPalette;
 using Zenox.NET.Core.Common.Command;
 using Zenox.Wpf.Views;
 using Zenox.Wpf.Views.Hilfe;
+using Zenox.Wpf.UI.Common.Localization;
 
 namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 {
@@ -21,6 +22,15 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 		}
 
 		/// <summary>
+		/// Gibt einen lokalisierten String zurück
+		/// </summary>
+		private string L(string key, string fallback = null)
+		{
+			return LocalizationHelper.GetString(key, fallback);
+		}
+
+
+		/// <summary>
 		/// Initialisiert die Command Palette automatisch aus den Menü-Strukturen
 		/// </summary>
 		private void InitializeCommandPalette()
@@ -31,10 +41,10 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 			RegisterMenuCommands(BottomMenu, "System");
 
 			paletteManager.RegisterCommand(
-				"Befehlspalette öffnen",
+				L("CommandPalette_Open", "Befehlspalette öffnen"),
 				"System",
 				() => CommandPaletteManager.Instance.ShowPalette(),
-				"Öffnet die Befehlspalette",
+				L("CommandPalette_Description", "Öffnet die Befehlspalette"),
 				"Ctrl+K",
 				keywords: new[] { "befehl", "command", "palette", "suche", "search" }
 			);
@@ -105,7 +115,34 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 				keywords.Add(word.ToLower());
 			}
 
+
 			return keywords.ToArray();
+		}
+
+		/// <summary>
+		/// Findet ein Visual Child eines bestimmten Typs im Visual Tree
+		/// </summary>
+		private static T FindVisualChild<T>(System.Windows.DependencyObject parent) where T : System.Windows.DependencyObject
+		{
+			if (parent == null) return null;
+
+			for (int i = 0; i < System.Windows.Media.VisualTreeHelper.GetChildrenCount(parent); i++)
+			{
+				var child = System.Windows.Media.VisualTreeHelper.GetChild(parent, i);
+				
+				if (child is T typedChild)
+				{
+					return typedChild;
+				}
+
+				var childOfChild = FindVisualChild<T>(child);
+				if (childOfChild != null)
+				{
+					return childOfChild;
+				}
+			}
+
+			return null;
 		}
 
 		public RelayMenu TopMenu
@@ -113,12 +150,13 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 			get
 			{
 				if (_topMenu == null)
+
 				{
 					_topMenu = new RelayMenu();
 
 					_topMenu.Add(new RelayObject
 					{
-						Name = "Einstellungen",
+						Name = L("Menu_Settings", "Einstellungen"),
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -126,7 +164,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 						}, _ => true),
 						Children = new System.Collections.ObjectModel.ObservableCollection<RelayObject> {
 							new() {
-								Name = "Performancepanel",
+								Name = L("Menu_PerformancePanel", "Performancepanel"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -136,14 +174,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 								}, _ => true)
 							},
 							new() {
-								Name = "Anzeigeeinstellungen",
-								Command = new RelayCommand(
-								_ =>
-								{
-								}, _ => true)
-							},
-							new() {
-								Name = "Anwendungseinstellungen",
+								Name = L("Menu_ApplicationSettings", "Anwendungseinstellungen"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -156,7 +187,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 
 					_topMenu.Add(new RelayObject
 					{
-						Name = "Benutzer",
+						Name = L("Menu_Profile", "Benutzer"),
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -164,7 +195,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 						Children = new System.Collections.ObjectModel.ObservableCollection<RelayObject> {
 							new() {
 
-								Name = "Profil",
+								Name = L("Menu_Profile", "Profil"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -173,7 +204,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 
-								Name = "Abmelden",
+								Name = L("Menu_Logout", "Abmelden"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -193,7 +224,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 
 					_topMenu.Add(new RelayObject
 					{
-						Name = "Hilfe",
+						Name = L("Menu_Help", "Hilfe"),
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -201,7 +232,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 						Children = new System.Collections.ObjectModel.ObservableCollection<RelayObject> {
 							new() {
 
-								Name = "Hilfe Anzeigen",
+								Name = L("Menu_Help", "Hilfe"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -210,7 +241,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 
-								Name = "Glossar",
+								Name = L("Menu_Glossary", "Glossar"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -219,7 +250,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 
-								Name = "Neuigkeiten",
+								Name = L("Menu_News", "Neuigkeiten"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -228,7 +259,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 
-								Name = "Feedback senden",
+								Name = L("Menu_SendFeedback", "Feedback senden"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -236,7 +267,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 								Children = new System.Collections.ObjectModel.ObservableCollection<RelayObject> {
 									new() {
 
-										Name = "Problem melden",
+										Name = L("Menu_ReportProblem", "Problem melden"),
 										Command = new RelayCommand(
 										_ =>
 										{
@@ -244,7 +275,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 									},
 									new() {
 
-										Name = "Feature vorschlagen",
+										Name = L("Menu_SuggestFeature", "Feature vorschlagen"),
 										Command = new RelayCommand(
 										_ =>
 										{
@@ -254,7 +285,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 							},
 							new() {
 
-								Name = "About",
+								Name = L("Menu_About", "Anwendungsinformation"),
 								Command = new RelayCommand(
 								_ =>
 								{
@@ -281,7 +312,7 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					// Dashboard
 					_pageMenu.Add(new RelayObject
 					{
-						Name = "Dashboard",
+						Name = L("Menu_Dashboard", "Dashboard"),
 						Command = new RelayCommand(
 						_ =>
 						{
@@ -303,11 +334,11 @@ namespace Zenox.Wpf.UI.MVVM.ViewModel.Manager
 					_bottomMenu = new RelayMenu();
 					_bottomMenu.Add(new RelayObject
 					{
-						Name = "Anwendungs-Logs",
+						Name = L("Menu_ApplicationLogs", "Anwendungs-Logs"),
 						Command = new RelayCommand(
 						_ =>
 						{
-							MessageBox.Show("Anwendungs-Logs!");
+						MessageBox.Show(L("Message_ApplicationLogs", "Anwendungs-Logs!"));
 						}, _ => true)
 					});
 				}

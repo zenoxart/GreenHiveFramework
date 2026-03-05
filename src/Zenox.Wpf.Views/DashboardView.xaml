@@ -12,6 +12,19 @@
     <UserControl.Resources>
         <local:DashboardViewModel x:Key="DashboardVM"/>
 
+        <!-- Quick Actions Animation Storyboard als Ressource -->
+        <Storyboard x:Key="QuickActionsStoryboard">
+            <!-- Swipe gradient from right to left in 0.5s -->
+            <PointAnimation Storyboard.TargetName="QuickActionsGradient" Storyboard.TargetProperty="StartPoint" To="0,0" Duration="0:0:0.5"/>
+            <PointAnimation Storyboard.TargetName="QuickActionsGradient" Storyboard.TargetProperty="EndPoint" To="1,0" Duration="0:0:0.5"/>
+            <DoubleAnimation Storyboard.TargetName="GS1" Storyboard.TargetProperty="Offset" From="1.0" To="0.0" Duration="0:0:0.5"/>
+            <DoubleAnimation Storyboard.TargetName="GS3" Storyboard.TargetProperty="Offset" From="0.0" To="1.0" Duration="0:0:0.5"/>
+            <!-- Fade to solid #2A2A2A after 0.5s (0.2s fade) -->
+            <ColorAnimation Storyboard.TargetName="GS1" Storyboard.TargetProperty="Color" To="#FF2A2A2A" BeginTime="0:0:0.5" Duration="0:0:0.2"/>
+            <ColorAnimation Storyboard.TargetName="GS2" Storyboard.TargetProperty="Color" To="#FF2A2A2A" BeginTime="0:0:0.5" Duration="0:0:0.2"/>
+            <ColorAnimation Storyboard.TargetName="GS3" Storyboard.TargetProperty="Color" To="#FF2A2A2A" BeginTime="0:0:0.5" Duration="0:0:0.2"/>
+        </Storyboard>
+
         <!-- Stat Card Style -->
         <Style x:Key="StatCardStyle" TargetType="Border">
             <Setter Property="Background" Value="#2A2A2A"/>
@@ -101,9 +114,9 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button Content="🔄 Aktualisieren"
+                <Button x:Name="RefreshButton" Content="{DynamicResource Dashboard_Refresh}"
                         Command="{Binding RefreshCommand}"
-                        Style="{StaticResource QuickActionButtonStyle}"/>
+                        Style="{StaticResource QuickActionButtonStyle}" />
             </StackPanel>
         </Grid>
 
@@ -123,7 +136,7 @@
                 <UniformGrid Grid.Row="0" Rows="1" Columns="4" Margin="0,0,0,10">
                     
                     <!-- Total Users Card -->
-                    <Border Style="{StaticResource StatCardStyle}">
+                    <Border x:Name="StatCard1" Style="{StaticResource StatCardStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -131,7 +144,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                                       Text="Aktive Benutzer" 
+                                       Text="{DynamicResource Dashboard_ActiveUsers}" 
                                        Foreground="#808080" 
                                        FontSize="12"/>
                             <TextBlock Grid.Row="1" 
@@ -142,15 +155,17 @@
                                        Margin="0,5,0,5"/>
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                 <TextBlock Text="▲ " Foreground="#4CAF50" FontSize="12"/>
-                                <TextBlock Text="{Binding ActiveUsersChange, StringFormat='{}{0}% diese Woche'}" 
-                                           Foreground="#4CAF50" 
-                                           FontSize="12"/>
+                                <TextBlock Foreground="#4CAF50" FontSize="12">
+                                    <Run Text="{Binding ActiveUsersChange, Mode=OneWay}"/>
+                                    <Run Text="% "/>
+                                    <Run Text="{DynamicResource Dashboard_ThisWeek}"/>
+                                </TextBlock>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Tasks Completed Card -->
-                    <Border Style="{StaticResource StatCardStyle}">
+                    <Border x:Name="StatCard2" Style="{StaticResource StatCardStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -158,7 +173,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                                       Text="Erledigte Aufgaben" 
+                                       Text="{DynamicResource Dashboard_CompletedTasks}" 
                                        Foreground="#808080" 
                                        FontSize="12"/>
                             <TextBlock Grid.Row="1" 
@@ -169,15 +184,17 @@
                                        Margin="0,5,0,5"/>
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                 <TextBlock Text="▲ " Foreground="#4CAF50" FontSize="12"/>
-                                <TextBlock Text="{Binding CompletedTasksChange, StringFormat='{}{0}% diese Woche'}" 
-                                           Foreground="#4CAF50" 
-                                           FontSize="12"/>
+                                <TextBlock Foreground="#4CAF50" FontSize="12">
+                                    <Run Text="{Binding CompletedTasksChange, Mode=OneWay}"/>
+                                    <Run Text="% "/>
+                                    <Run Text="{DynamicResource Dashboard_ThisWeek}"/>
+                                </TextBlock>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Pending Tasks Card -->
-                    <Border Style="{StaticResource StatCardStyle}">
+                    <Border x:Name="StatCard3" Style="{StaticResource StatCardStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -185,7 +202,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                                       Text="Offene Aufgaben" 
+                                       Text="{DynamicResource Dashboard_PendingTasks}" 
                                        Foreground="#808080" 
                                        FontSize="12"/>
                             <TextBlock Grid.Row="1" 
@@ -204,7 +221,7 @@
                     </Border>
 
                     <!-- System Health Card -->
-                    <Border Style="{StaticResource StatCardStyle}" Margin="0,0,0,15">
+                    <Border x:Name="StatCard4" Style="{StaticResource StatCardStyle}" Margin="0,0,0,15">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -212,9 +229,10 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" 
-                                       Text="Systemstatus" 
+                                       Text="{DynamicResource Dashboard_SystemStatus}" 
                                        Foreground="#808080" 
                                        FontSize="12"/>
+
                             <TextBlock Grid.Row="1" 
                                        Text="{Binding SystemHealthPercent, StringFormat='{}{0}%'}" 
                                        Foreground="White" 
@@ -243,26 +261,38 @@
                     <StackPanel Grid.Column="0">
                         
                         <!-- Quick Actions Section -->
-                        <Border Background="#2A2A2A" CornerRadius="8" Padding="20" Margin="0,0,0,15">
+                        <Border x:Name="QuickActionsBorder" CornerRadius="8" Padding="20" Margin="0,0,0,15">
+                            <Border.Background>
+                                <LinearGradientBrush x:Name="QuickActionsGradient" StartPoint="1,0" EndPoint="0,0">
+                                    <GradientStop x:Name="GS1" Color="#FFB16CEA" Offset="1.0"/>
+                                    <GradientStop x:Name="GS2" Color="#FFE94057" Offset="0.5"/> 
+                                    <GradientStop x:Name="GS3" Color="#FF8A2387" Offset="0.0"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Border.Triggers>
+                                <EventTrigger RoutedEvent="Border.Loaded">
+                                    <BeginStoryboard Storyboard="{StaticResource QuickActionsStoryboard}"/>
+                                </EventTrigger>
+                            </Border.Triggers>
                             <StackPanel>
-                                <TextBlock Text="Schnellzugriff" Style="{StaticResource SectionHeaderStyle}"/>
+                                <TextBlock Text="{DynamicResource Dashboard_QuickActions}" Style="{StaticResource SectionHeaderStyle}"/>
                                 <WrapPanel>
-                                    <Button Content="📝 Neue Aufgabe"
+                                    <Button Content="{DynamicResource Dashboard_NewTask}"
                                             Command="{Binding NewTaskCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"/>
-                                    <Button Content="📊 Berichte"
+                                    <Button Content="{DynamicResource Dashboard_Reports}"
                                             Command="{Binding OpenReportsCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"/>
-                                    <Button Content="👥 Team"
+                                    <Button Content="{DynamicResource Dashboard_Team}"
                                             Command="{Binding OpenTeamCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"/>
-                                    <Button Content="📁 Dokumente"
+                                    <Button Content="{DynamicResource Dashboard_Documents}"
                                             Command="{Binding OpenDocumentsCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"/>
-                                    <Button Content="⚙️ Einstellungen"
+                                    <Button Content="{DynamicResource Common_Settings}"
                                             Command="{Binding OpenSettingsCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"/>
-                                    <Button Content="❓ Hilfe"
+                                    <Button Content="{DynamicResource Common_Help}"
                                             Command="{Binding OpenHelpCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"/>
                                 </WrapPanel>
@@ -278,17 +308,18 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" 
-                                               Text="Letzte Aktivitaeten" 
+                                               Text="{DynamicResource Dashboard_RecentActivity}" 
                                                Style="{StaticResource SectionHeaderStyle}"
                                                Margin="0"/>
                                     <Button Grid.Column="1" 
-                                            Content="Alle anzeigen"
+                                            Content="{DynamicResource Dashboard_ViewAll}"
                                             Command="{Binding ViewAllActivitiesCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"
                                             Padding="10,6"
                                             Margin="0"
                                             FontSize="11"/>
                                 </Grid>
+
                                 
                                 <ItemsControl ItemsSource="{Binding RecentActivities}">
                                     <ItemsControl.ItemTemplate>
@@ -351,7 +382,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <StackPanel Grid.Column="0" Orientation="Horizontal">
-                                        <TextBlock Text="Benachrichtigungen" 
+                                        <TextBlock Text="{DynamicResource Dashboard_Notifications}" 
                                                    Style="{StaticResource SectionHeaderStyle}"
                                                    Margin="0"/>
                                         <Border Background="#E53935" 
@@ -367,13 +398,14 @@
                                         </Border>
                                     </StackPanel>
                                     <Button Grid.Column="1" 
-                                            Content="Alle lesen"
+                                            Content="{DynamicResource Dashboard_MarkAllRead}"
                                             Command="{Binding MarkAllReadCommand}"
                                             Style="{StaticResource QuickActionButtonStyle}"
                                             Padding="10,6"
                                             Margin="0"
                                             FontSize="11"/>
                                 </Grid>
+
                                 
                                 <ItemsControl ItemsSource="{Binding Notifications}">
                                     <ItemsControl.ItemTemplate>
@@ -422,7 +454,8 @@
                 <!-- Bottom Section: Progress Overview -->
                 <Border Grid.Row="2" Background="#2A2A2A" CornerRadius="8" Padding="20">
                     <StackPanel>
-                        <TextBlock Text="Projektfortschritt" Style="{StaticResource SectionHeaderStyle}"/>
+                        <TextBlock Text="{DynamicResource Dashboard_ProjectProgress}" Style="{StaticResource SectionHeaderStyle}"/>
+
                         
                         <ItemsControl ItemsSource="{Binding ProjectProgress}">
                             <ItemsControl.ItemTemplate>

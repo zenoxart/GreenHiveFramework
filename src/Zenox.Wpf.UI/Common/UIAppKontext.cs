@@ -62,5 +62,20 @@ namespace Zenox.Wpf.UI.Common
             set { _AdminView = value; }
         }
         #endregion
+
+        #region MainWindowManager
+        private MainWindowManager _mainWindowManager;
+        public MainWindowManager MainWindow
+        {
+            get
+            {
+                if (_mainWindowManager == null)
+                {
+                    _mainWindowManager = this.Produziere<MainWindowManager>();
+                }
+                return _mainWindowManager;
+            }
+        }
+        #endregion
     }
 }
