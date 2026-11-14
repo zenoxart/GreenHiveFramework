@@ -347,7 +347,7 @@ GreenHiveFramework/
 │  │  ├─ DocumentManagement/     manifest.json · Contracts/ · Backend/ · Client/
 │  │  ├─ Reporting/
 │  │  └─ UserManagement/
-│  └─ GreenHive.Maui.* · GreenHive.Wpf.Core · GreenHive.Api   earlier experiments (not part of the solution)
+│  └─ GreenHive.Wpf.Core · GreenHive.Api   earlier experiments (not part of the solution)
 ├─ Deployment/
 │  ├─ Docker/                    docker-compose.yml · .env.example · database/*.sql
 │  └─ ModulePackages/            pack-modules.ps1 · demo-updates/

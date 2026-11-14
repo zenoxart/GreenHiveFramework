@@ -93,7 +93,7 @@ The solution `GreenHiveFramework.slnx` (repository root) groups the projects int
 | | `GreenHive.NET.Modules.<Feature>.Backend` | ASP.NET Core | Feature API as Docker container |
 | | `manifest.json` | – | Module manifest (client package + backend service + contract surface) |
 
-The earlier experiments `GreenHive.Maui.*`, `GreenHive.Wpf.Core`, `GreenHive.Wpf.Dto` and `GreenHive.Api` (EF in-memory auth API,
+The earlier experiments `GreenHive.Wpf.Core`, `GreenHive.Wpf.Dto` and `GreenHive.Api` (EF in-memory auth API,
 replaced by the identity service) remain in `src/` but are not part of the solution.
 
 ### Project references

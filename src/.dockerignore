@@ -5,7 +5,7 @@
 **/*.user
 **/*.ico
 **/*.png
-# WPF client, classic WPF/MAUI libraries and the host are not part of any container.
+# WPF client, classic WPF libraries and the host are not part of any container.
 Client/
 GreenHive.*/
 Modules/*/Client/

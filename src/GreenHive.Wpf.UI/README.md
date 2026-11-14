@@ -552,7 +552,6 @@ Beiträge sind willkommen! Bitte beachten Sie die Coding-Standards:
 - [ ] Weitere UI-Controls
 - [ ] Erweiterte ML-Integration
 - [ ] Cloud-Integration
-- [ ] Mobile Support (MAUI)
 - [ ] Plugin-Marketplace
 
 ---
