@@ -1,0 +1,22 @@
+﻿<Application x:Class="GreenHive.Wpf.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GreenHive.Wpf.UI"
+             xmlns:converters="clr-namespace:GreenHive.Wpf.UI.Converters"
+             xmlns:commandPaletteConverters="clr-namespace:GreenHive.Wpf.Controls.Common.CommandPalette;assembly=GreenHive.Wpf.Controls"
+             Startup="Application_Startup">
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/GreenHive.Wpf.Controls;component/Themes/FluentExtension.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			
+			<!-- Converter -->
+			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+			<converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+			<converters:StringNullOrEmptyToVisibilityConverter x:Key="StringNullOrEmptyToVisibilityConverter"/>
+			<commandPaletteConverters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

@@ -1,0 +1,173 @@
+<Window x:Class="GreenHive.Wpf.Controls.Common.Recovery.CrashRecoveryDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wiederherstellung nach Absturz"
+        Width="500" Height="300"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize">
+
+    <Border Background="#1E1E1E" 
+            BorderBrush="#404040" 
+            BorderThickness="1"
+            CornerRadius="8">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" Opacity="0.5" BlurRadius="20" ShadowDepth="4"/>
+        </Border.Effect>
+
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <Border Width="48" Height="48" 
+                            Background="#E81123" 
+                            CornerRadius="24"
+                            Margin="0,0,12,0">
+                        <TextBlock Text="&#x26A0;" 
+                                  FontSize="28" 
+                                  Foreground="White"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                    </Border>
+                    
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Anwendung wurde unerwartet beendet" 
+                                  FontSize="16" 
+                                  FontWeight="Bold"
+                                  Foreground="White"/>
+                        <TextBlock x:Name="TimestampText"
+                                  Text="Zeitpunkt: --" 
+                                  FontSize="12" 
+                                  Foreground="#808080"
+                                  Margin="0,4,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Content -->
+            <ScrollViewer Grid.Row="1" 
+                         VerticalScrollBarVisibility="Auto"
+                         Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock FontSize="13" 
+                              Foreground="#B0B0B0"
+                              TextWrapping="Wrap"
+                              Margin="0,0,0,12">
+                        <Run Text="Die Anwendung wurde beim letzten Mal unerwartet beendet. Moechten Sie die letzte Sitzung wiederherstellen?"/>
+                    </TextBlock>
+
+                    <Border Background="#2D2D2D" 
+                            BorderBrush="#404040" 
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Padding="12"
+                            Visibility="Collapsed"
+                            x:Name="DetailsPanel">
+                        <StackPanel>
+                            <TextBlock Text="Fehlerdetails:" 
+                                      FontSize="12" 
+                                      FontWeight="SemiBold"
+                                      Foreground="White"
+                                      Margin="0,0,0,8"/>
+                            
+                            <TextBlock x:Name="CrashDetailsText"
+                                      Text="Keine Details verfuegbar" 
+                                      FontSize="11" 
+                                      Foreground="#808080"
+                                      TextWrapping="Wrap"
+                                      FontFamily="Consolas"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Button Content="Details anzeigen" 
+                            x:Name="ToggleDetailsButton"
+                            HorizontalAlignment="Left"
+                            Margin="0,12,0,0"
+                            Click="ToggleDetailsButton_Click"
+                            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+                            Foreground="MediumPurple"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Cursor="Hand"/>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Actions -->
+            <StackPanel Grid.Row="2" 
+                       Orientation="Horizontal" 
+                       HorizontalAlignment="Right">
+                <Button Content="Neu starten" 
+                        Width="120" 
+                        Height="36"
+                        Margin="0,0,12,0"
+                        Click="RestartButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#2D2D2D"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderBrush" Value="#404040"/>
+                            <Setter Property="BorderThickness" Value="1"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                               BorderBrush="{TemplateBinding BorderBrush}"
+                                               BorderThickness="{TemplateBinding BorderThickness}"
+                                               CornerRadius="4">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#404040"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                
+                <Button Content="Wiederherstellen" 
+                        Width="140" 
+                        Height="36"
+                        Click="RestoreButton_Click">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="MediumPurple"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}"
+                                               BorderBrush="{TemplateBinding BorderBrush}"
+                                               BorderThickness="{TemplateBinding BorderThickness}"
+                                               CornerRadius="4">
+                                            <ContentPresenter HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#7B5DAA"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,49 @@
+<Project>
+  <!--
+    Shared build settings of the module client projects (imported by Modules/*/Client/*.csproj).
+    - Framework assemblies are referenced with Private=false: the host provides them at runtime and the module's
+      AssemblyLoadContext resolves them from the host (one copy, shared types).
+    - The wire contracts in ..\Contracts are compiled into the client (the backend compiles the same files).
+    - After the build the module dll (+ pdb) and manifest.json are staged to artifacts\modules\<moduleId>\ (repository root),
+      where the host build picks them up (copied to Modules\ next to the host exe = development modules) and
+      pack-modules.ps1 zips them.
+  -->
+  <PropertyGroup>
+    <GreenHiveSourceRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\'))</GreenHiveSourceRoot>
+    <GreenHiveRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\'))</GreenHiveRoot>
+    <ModuleManifestPath>$(MSBuildProjectDirectory)\..\manifest.json</ModuleManifestPath>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildProjectDirectory)\..\Contracts\**\*.cs" LinkBase="Contracts" />
+    <None Include="$(ModuleManifestPath)" Link="manifest.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(GreenHiveSourceRoot)Shared\GreenHive.NET.Monads\GreenHive.NET.Monads.csproj" Private="false" />
+    <ProjectReference Include="$(GreenHiveSourceRoot)Shared\GreenHive.NET.Contracts\GreenHive.NET.Contracts.csproj" Private="false" />
+    <ProjectReference Include="$(GreenHiveSourceRoot)Shared\GreenHive.NET.ModuleContracts\GreenHive.NET.ModuleContracts.csproj" Private="false" />
+    <ProjectReference Include="$(GreenHiveSourceRoot)Shared\GreenHive.NET.CommandContracts\GreenHive.NET.CommandContracts.csproj" Private="false" />
+    <ProjectReference Include="$(GreenHiveSourceRoot)Shared\GreenHive.NET.NotificationContracts\GreenHive.NET.NotificationContracts.csproj" Private="false" />
+    <ProjectReference Include="$(GreenHiveSourceRoot)Shared\GreenHive.NET.WorkflowContracts\GreenHive.NET.WorkflowContracts.csproj" Private="false" />
+    <ProjectReference Include="$(GreenHiveSourceRoot)Client\GreenHive.Wpf.Framework.Core\GreenHive.Wpf.Framework.Core.csproj" Private="false" />
+    <ProjectReference Include="$(GreenHiveSourceRoot)Client\GreenHive.Wpf.Framework\GreenHive.Wpf.Framework.csproj" Private="false" />
+  </ItemGroup>
+
+  <Target Name="StageGreenHiveModule" AfterTargets="Build">
+    <PropertyGroup>
+      <_ManifestText>$([System.IO.File]::ReadAllText('$(ModuleManifestPath)'))</_ManifestText>
+      <_ModuleId>$([System.Text.RegularExpressions.Regex]::Match($(_ManifestText), '"moduleId"\s*:\s*"([^"]+)"').Groups[1].Value)</_ModuleId>
+      <_ModuleStage>$(GreenHiveRoot)artifacts\modules\$(_ModuleId)\</_ModuleStage>
+    </PropertyGroup>
+    <ItemGroup>
+      <_ModuleFiles Include="$(TargetPath);$(ModuleManifestPath)" />
+      <_ModuleFiles Include="$(TargetDir)$(TargetName).pdb" Condition="Exists('$(TargetDir)$(TargetName).pdb')" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_ModuleFiles)" DestinationFolder="$(_ModuleStage)" SkipUnchangedFiles="true" />
+    <Error Condition="'$(_ModuleId)' == ''" Text="moduleId not found in $(ModuleManifestPath)." />
+    <Message Importance="high" Text="Green Hive module $(_ModuleId) staged to $(_ModuleStage) (@(_ModuleFiles->Count()) files)" />
+  </Target>
+</Project>

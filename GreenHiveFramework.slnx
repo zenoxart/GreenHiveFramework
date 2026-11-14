@@ -1,0 +1,64 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+    <File Path="ARCHITECTURE.md" />
+    <File Path="build.cmd" />
+    <File Path="src/.gitignore" />
+  </Folder>
+  <Folder Name="/Host/">
+    <Project Path="src/GreenHive.Wpf.UI/GreenHive.Wpf.UI.csproj" />
+  </Folder>
+  <Folder Name="/Client/">
+    <Project Path="src/Client/GreenHive.Wpf.Framework.Core/GreenHive.Wpf.Framework.Core.csproj" />
+    <Project Path="src/Client/GreenHive.Wpf.Framework/GreenHive.Wpf.Framework.csproj" />
+  </Folder>
+  <Folder Name="/Client/Classic/">
+    <Project Path="src/GreenHive.NET/GreenHive.NET.Core.csproj" />
+    <Project Path="src/GreenHive.Wpf.Advanced/GreenHive.Wpf.Advanced.csproj" />
+    <Project Path="src/GreenHive.Wpf.Controls/GreenHive.Wpf.Controls.csproj" />
+    <Project Path="src/GreenHive.Wpf.Views/GreenHive.Wpf.Views.csproj" />
+  </Folder>
+  <Folder Name="/Shared/">
+    <Project Path="src/Shared/GreenHive.NET.CommandContracts/GreenHive.NET.CommandContracts.csproj" />
+    <Project Path="src/Shared/GreenHive.NET.Contracts/GreenHive.NET.Contracts.csproj" />
+    <Project Path="src/Shared/GreenHive.NET.ModuleContracts/GreenHive.NET.ModuleContracts.csproj" />
+    <Project Path="src/Shared/GreenHive.NET.Monads/GreenHive.NET.Monads.csproj" />
+    <Project Path="src/Shared/GreenHive.NET.NotificationContracts/GreenHive.NET.NotificationContracts.csproj" />
+    <Project Path="src/Shared/GreenHive.NET.WorkflowContracts/GreenHive.NET.WorkflowContracts.csproj" />
+  </Folder>
+  <Folder Name="/Backend/">
+    <Project Path="src/Backend/GreenHive.NET.Backend.AiAgentService/GreenHive.NET.Backend.AiAgentService.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.ApiGateway/GreenHive.NET.Backend.ApiGateway.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.ConfigurationService/GreenHive.NET.Backend.ConfigurationService.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.Core/GreenHive.NET.Backend.Core.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.IdentityService/GreenHive.NET.Backend.IdentityService.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.ModuleDeliveryService/GreenHive.NET.Backend.ModuleDeliveryService.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.ModuleRegistryService/GreenHive.NET.Backend.ModuleRegistryService.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.NotificationPoint/GreenHive.NET.Backend.NotificationPoint.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.UpdateOrchestrator/GreenHive.NET.Backend.UpdateOrchestrator.csproj" />
+    <Project Path="src/Backend/GreenHive.NET.Backend.WorkflowService/GreenHive.NET.Backend.WorkflowService.csproj" />
+  </Folder>
+  <Folder Name="/Modules/">
+    <File Path="src/Modules/ModuleClient.targets" />
+  </Folder>
+  <Folder Name="/Modules/DocumentManagement/">
+    <File Path="src/Modules/DocumentManagement/manifest.json" />
+    <Project Path="src/Modules/DocumentManagement/Backend/GreenHive.NET.Modules.DocumentManagement.Backend.csproj" />
+    <Project Path="src/Modules/DocumentManagement/Client/GreenHive.NET.Modules.DocumentManagement.Client.csproj" />
+  </Folder>
+  <Folder Name="/Modules/Reporting/">
+    <File Path="src/Modules/Reporting/manifest.json" />
+    <Project Path="src/Modules/Reporting/Backend/GreenHive.NET.Modules.Reporting.Backend.csproj" />
+    <Project Path="src/Modules/Reporting/Client/GreenHive.NET.Modules.Reporting.Client.csproj" />
+  </Folder>
+  <Folder Name="/Modules/UserManagement/">
+    <File Path="src/Modules/UserManagement/manifest.json" />
+    <Project Path="src/Modules/UserManagement/Backend/GreenHive.NET.Modules.UserManagement.Backend.csproj" />
+    <Project Path="src/Modules/UserManagement/Client/GreenHive.NET.Modules.UserManagement.Client.csproj" />
+  </Folder>
+  <Folder Name="/Deployment/">
+    <File Path="Deployment/Docker/docker-compose.yml" />
+    <File Path="Deployment/Docker/.env.example" />
+    <File Path="Deployment/ModulePackages/pack-modules.ps1" />
+  </Folder>
+</Solution>

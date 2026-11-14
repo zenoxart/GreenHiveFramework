@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Tutorials>
+  <Tutorial Key="MainWindow">
+    <Step Key="TopMenuArea" Title="Willkommen in Green Hive" Position="Bottom" CanSkip="true" StepType="Highlight">
+      <InstructionText>Das Hauptmenü wird aus dem zentralen Befehlsmanager erzeugt. Jedes geladene Modul ergänzt hier seine eigenen Befehle - mit Symbol, Tooltip und Tastenkürzel.</InstructionText>
+    </Step>
+    <Step Key="LeftMenuArea" Title="Module Explorer" Position="Right" CanSkip="true" StepType="Highlight">
+      <InstructionText>Der Module Explorer zeigt alle Ansichten der geladenen Module, die Workflows und die klassischen GreenHive-Ansichten. Werkzeugfenster lassen sich andocken, ausblenden (Pin) oder abreißen.</InstructionText>
+    </Step>
+    <Step Key="TabArea" Title="Dokumentbereich" Position="Bottom" CanSkip="true" StepType="Highlight" DelayMs="300">
+      <InstructionText>Ansichten öffnen sich als Tabs. Ziehen Sie einen Tab, um ihn mit den Andock-Führungen links, rechts oder unten anzudocken oder in einem eigenen Fenster schweben zu lassen. Strg+Tab öffnet das Navigationsrad, Strg+Umschalt+P die Befehlspalette.</InstructionText>
+    </Step>
+    <Step Key="StatusArea" Title="Statusleiste" Position="Top" CanSkip="true" StepType="Highlight">
+      <InstructionText>Die Statusleiste zeigt Verbindung und Live-Ereignisse, ungelesene Benachrichtigungen, die aktive Ansicht, die Größenklasse des Layouts und die Sprache.</InstructionText>
+    </Step>
+    <Step Key="ProfileArea" Title="Profil" Position="Bottom" CanSkip="true" StepType="Highlight">
+      <InstructionText>Hier sehen Sie den angemeldeten Benutzer mit Rollen und Freigabelimit, ändern Bild oder Passwort und melden sich ab.</InstructionText>
+    </Step>
+  </Tutorial>
+
+  <Tutorial Key="MenuNavigation">
+    <Step Key="TopMenuItems" Title="Haupt-Navigation" Position="Bottom" CanSkip="true" StepType="Highlight">
+      <InstructionText>Diese Leiste enthält die wichtigsten Funktionen. Jeder Bereich hat spezifische Aufgaben und Werkzeuge.</InstructionText>
+    </Step>
+    <Step Key="LeftMenuItems" Title="Seiten-Navigation" Position="Right" CanSkip="true" StepType="Highlight">
+      <InstructionText>Verwenden Sie diese Buttons, um zwischen verschiedenen Arbeitsbereichen zu wechseln. Jeder Button öffnet eine neue Ansicht im Tab-Bereich.</InstructionText>
+    </Step>
+  </Tutorial>
+</Tutorials>

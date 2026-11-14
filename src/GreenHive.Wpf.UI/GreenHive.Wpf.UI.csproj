@@ -1,0 +1,102 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<LangVersion>latest</LangVersion>
+		<DebugType>full</DebugType>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Title>Green Hive</Title>
+		<Product>Green Hive</Product>
+		<Company>ZenoxArt</Company>
+		<Description>Host of the Green Hive platform: modular, server-driven WPF client with hot-swappable modules, workflows and an AI agent.</Description>
+		<!-- Modules are loaded at run time: no trimming (it would remove types the modules use). -->
+		<PublishTrimmed>false</PublishTrimmed>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<ApplicationIcon>Assets\GreenHive.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Resource Include="Assets\GreenHive.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Client\GreenHive.Wpf.Framework\GreenHive.Wpf.Framework.csproj" />
+	  <ProjectReference Include="..\Client\GreenHive.Wpf.Framework.Core\GreenHive.Wpf.Framework.Core.csproj" />
+	  <ProjectReference Include="..\GreenHive.Wpf.Advanced\GreenHive.Wpf.Advanced.csproj" />
+	  <ProjectReference Include="..\GreenHive.Wpf.Controls\GreenHive.Wpf.Controls.csproj" />
+	  <ProjectReference Include="..\GreenHive.Wpf.Views\GreenHive.Wpf.Views.csproj" />
+	</ItemGroup>
+
+	<!--
+	  Development modules: building the host also builds the module clients. Their dll + manifest are staged to
+	  ..\..\artifacts\modules\<moduleId>\ (see src\Modules\ModuleClient.targets) and copied to Modules\ next to the host
+	  exe, where the ModuleLoader finds them as development modules (no server package needed).
+	-->
+	<ItemGroup>
+	  <ProjectReference Include="..\Modules\DocumentManagement\Client\GreenHive.NET.Modules.DocumentManagement.Client.csproj" ReferenceOutputAssembly="false" Private="false" />
+	  <ProjectReference Include="..\Modules\Reporting\Client\GreenHive.NET.Modules.Reporting.Client.csproj" ReferenceOutputAssembly="false" Private="false" />
+	  <ProjectReference Include="..\Modules\UserManagement\Client\GreenHive.NET.Modules.UserManagement.Client.csproj" ReferenceOutputAssembly="false" Private="false" />
+	</ItemGroup>
+
+	<Target Name="IncludeDevelopmentModules" AfterTargets="ResolveProjectReferences">
+	  <ItemGroup>
+	    <_DevelopmentModuleFile Include="$(MSBuildThisFileDirectory)..\..\artifacts\modules\**\*.*" />
+	    <Content Include="@(_DevelopmentModuleFile)" Link="Modules\%(_DevelopmentModuleFile.RecursiveDir)%(_DevelopmentModuleFile.Filename)%(_DevelopmentModuleFile.Extension)" CopyToOutputDirectory="PreserveNewest" />
+	  </ItemGroup>
+	</Target>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Http" Version="10.0.2" />
+		<PackageReference Include="StackExchange.Redis" Version="2.10.14" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Configuration\TutorialKonfiguration.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Configuration\NeuigkeitenKonfiguration.xml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Debug\" />
+	  <Folder Include="Extensions\" />
+	</ItemGroup>
+
+</Project>

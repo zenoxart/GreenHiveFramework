@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    WPF part of the Green Hive client framework: dock layout, windows, menus and attached properties for commands,
+    navigation wheel, shortcut input, toasts, the module SDK controls and the workflow views.
+    The UI-free logic lives in GreenHive.Wpf.Framework.Core.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>GreenHive.Wpf.Framework</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GreenHive.Wpf.Framework.Core\GreenHive.Wpf.Framework.Core.csproj" />
+  </ItemGroup>
+
+</Project>

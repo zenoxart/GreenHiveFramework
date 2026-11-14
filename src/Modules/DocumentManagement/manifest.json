@@ -1,0 +1,254 @@
+{
+  // Green Hive module manifest - DocumentManagement
+  "moduleId": "document-management",
+  "version": "1.0.0",
+  "displayName": "documents:module.name",
+  "description": "Documents, versions and invoice approval.",
+  "icon": "documents.home",
+  "accentColor": "#2FA65A",
+  "minHostVersion": "1.0.0",
+  "contractsVersion": 1,
+  "prefix": "documents",
+  "client": {
+    "platform": "wpf",
+    "targetFramework": "net10.0-windows",
+    "desktopRuntime": ">=10.0.0",
+    "package": "document-management-1.0.0.zip",
+    "entryAssembly": "GreenHive.NET.Modules.DocumentManagement.Client.dll",
+    "entryType": "GreenHive.NET.Modules.DocumentManagement.Client.DocumentManagementModule",
+    "viewMode": "codeOnly",
+    "hotSwap": "supported"
+  },
+  "backend": {
+    "service": "http://document-service:8080",
+    "apiVersion": "v1",
+    "route": "/api/documents"
+  },
+  "permissions": [
+    "documents.view",
+    "documents.edit",
+    "documents.approve"
+  ],
+  "dependencies": [
+    {
+      "moduleId": "user-management",
+      "versionRange": ">=1.0.0 <3.0.0"
+    }
+  ],
+  "languages": [
+    "en",
+    "de"
+  ],
+  "defaultLanguage": "en",
+  "contractSurface": {
+    "backendApiVersion": "v1",
+    "commands": [
+      {
+        "id": "documents.create",
+        "workflowCapable": true
+      },
+      {
+        "id": "documents.invoice.submit",
+        "workflowCapable": true,
+        "aiAllowed": true,
+        "endpoint": "/api/documents/workflow-steps/documents.submitInvoice"
+      },
+      {
+        "id": "documents.invoice.approve",
+        "workflowCapable": true
+      },
+      {
+        "id": "documents.send",
+        "workflowCapable": true,
+        "aiAllowed": true,
+        "endpoint": "/api/documents/workflow-steps/documents.send"
+      }
+    ],
+    "inputSchemas": [
+      {
+        "schemaId": "documents.invoiceReview",
+        "version": 1,
+        "fields": [
+          {
+            "name": "invoiceId",
+            "type": "text",
+            "label": "documents:field.invoiceId",
+            "required": true
+          },
+          {
+            "name": "supplier",
+            "type": "text",
+            "label": "documents:field.supplier"
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "label": "documents:field.amount",
+            "required": true,
+            "min": 0,
+            "span": "half"
+          },
+          {
+            "name": "costCenter",
+            "type": "entityRef",
+            "label": "documents:field.costCenter",
+            "lookup": "/api/documents/lookups/cost-centers",
+            "span": "half"
+          },
+          {
+            "name": "recommendation",
+            "type": "choice",
+            "label": "documents:field.recommendation",
+            "required": true,
+            "options": [
+              {
+                "value": "approve",
+                "label": "documents:recommendation.approve"
+              },
+              {
+                "value": "reject",
+                "label": "documents:recommendation.reject"
+              },
+              {
+                "value": "clarify",
+                "label": "documents:recommendation.clarify"
+              }
+            ]
+          },
+          {
+            "name": "note",
+            "type": "multiLine",
+            "label": "documents:field.note",
+            "maxLength": 500
+          }
+        ]
+      }
+    ],
+    "stepTypes": [
+      {
+        "id": "documents.lookupInvoice",
+        "version": 1,
+        "title": "documents:step.lookupInvoice",
+        "headless": true,
+        "endpoint": "/api/documents/workflow-steps/documents.lookupInvoice",
+        "outputs": [
+          "invoiceId",
+          "number",
+          "supplier",
+          "amount",
+          "currency",
+          "costCenter",
+          "status",
+          "submittedBy",
+          "dueOn"
+        ],
+        "input": {
+          "schemaId": "documents.lookupInvoice",
+          "fields": [
+            {
+              "name": "invoiceId",
+              "type": "text",
+              "label": "documents:field.invoiceId",
+              "required": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "documents.approveInvoice",
+        "version": 1,
+        "title": "documents:step.approveInvoice",
+        "headless": true,
+        "endpoint": "/api/documents/workflow-steps/documents.approveInvoice",
+        "outputs": [
+          "status",
+          "decidedBy"
+        ],
+        "input": {
+          "schemaId": "documents.approveInvoice",
+          "fields": [
+            {
+              "name": "invoiceId",
+              "type": "text",
+              "label": "documents:field.invoiceId",
+              "required": true
+            },
+            {
+              "name": "comment",
+              "type": "multiLine",
+              "label": "documents:field.comment",
+              "maxLength": 500
+            }
+          ]
+        }
+      },
+      {
+        "id": "documents.rejectInvoice",
+        "version": 1,
+        "title": "documents:step.rejectInvoice",
+        "headless": true,
+        "endpoint": "/api/documents/workflow-steps/documents.rejectInvoice",
+        "outputs": [
+          "status",
+          "decidedBy"
+        ],
+        "input": {
+          "schemaId": "documents.rejectInvoice",
+          "fields": [
+            {
+              "name": "invoiceId",
+              "type": "text",
+              "label": "documents:field.invoiceId",
+              "required": true
+            },
+            {
+              "name": "comment",
+              "type": "multiLine",
+              "label": "documents:field.comment",
+              "required": true,
+              "maxLength": 500
+            }
+          ]
+        }
+      },
+      {
+        "id": "documents.archiveInvoice",
+        "version": 1,
+        "title": "documents:step.archiveInvoice",
+        "headless": true,
+        "endpoint": "/api/documents/workflow-steps/documents.archiveInvoice",
+        "outputs": [
+          "archived"
+        ],
+        "input": {
+          "schemaId": "documents.archiveInvoice",
+          "fields": [
+            {
+              "name": "invoiceId",
+              "type": "text",
+              "label": "documents:field.invoiceId",
+              "required": true
+            }
+          ]
+        }
+      }
+    ],
+    "events": [
+      {
+        "type": "documents.created"
+      },
+      {
+        "type": "documents.updated"
+      },
+      {
+        "type": "documents.invoice.submitted"
+      },
+      {
+        "type": "documents.invoice.approved"
+      },
+      {
+        "type": "documents.invoice.rejected"
+      }
+    ]
+  }
+}

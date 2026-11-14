@@ -1,0 +1,11 @@
+# Build context of the service images is the src folder - send only what the backend needs.
+**/bin/
+**/obj/
+**/.vs/
+**/*.user
+**/*.ico
+**/*.png
+# WPF client, classic WPF/MAUI libraries and the host are not part of any container.
+Client/
+GreenHive.*/
+Modules/*/Client/

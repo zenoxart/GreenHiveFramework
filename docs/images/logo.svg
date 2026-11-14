@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#B9F5C8"/>
+      <stop offset="0.45" stop-color="#3FBF6A"/>
+      <stop offset="1" stop-color="#1E7A3E"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#E6FCEB"/>
+      <stop offset="0.5" stop-color="#6FD98F"/>
+      <stop offset="1" stop-color="#2E9E57"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+<polygon points="128.00,90.00 160.91,109.00 160.91,147.00 128.00,166.00 95.09,147.00 95.09,109.00" fill="url(#core)" stroke="#145C2D" stroke-width="9" stroke-linejoin="round"/>
+<polygon points="128.00,90.00 160.91,109.00 160.91,147.00 128.00,166.00 95.09,147.00 95.09,109.00" fill="url(#core)" stroke="#6FD98F" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="128.00,93.97 147.53,105.25 147.53,127.79 128.00,139.07 108.47,127.79 108.47,105.24" fill="url(#shine)" opacity="0.8"/>
+<polygon points="208.01,90.00 240.92,109.00 240.92,147.00 208.01,166.00 175.11,147.00 175.11,109.00" fill="url(#gold)" stroke="#145C2D" stroke-width="9" stroke-linejoin="round"/>
+<polygon points="208.01,90.00 240.92,109.00 240.92,147.00 208.01,166.00 175.11,147.00 175.11,109.00" fill="url(#gold)" stroke="#3FBF6A" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="208.01,93.97 227.54,105.25 227.54,127.79 208.01,139.07 188.49,127.79 188.49,105.24" fill="url(#shine)" opacity="0.8"/>
+<polygon points="168.01,159.29 200.92,178.29 200.92,216.29 168.01,235.29 135.10,216.29 135.10,178.29" fill="url(#gold)" stroke="#145C2D" stroke-width="9" stroke-linejoin="round"/>
+<polygon points="168.01,159.29 200.92,178.29 200.92,216.29 168.01,235.29 135.10,216.29 135.10,178.29" fill="url(#gold)" stroke="#3FBF6A" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="168.01,163.26 187.54,174.54 187.54,197.09 168.01,208.36 148.48,197.09 148.48,174.54" fill="url(#shine)" opacity="0.8"/>
+<polygon points="87.99,159.29 120.90,178.29 120.90,216.29 87.99,235.29 55.08,216.29 55.08,178.29" fill="url(#gold)" stroke="#145C2D" stroke-width="9" stroke-linejoin="round"/>
+<polygon points="87.99,159.29 120.90,178.29 120.90,216.29 87.99,235.29 55.08,216.29 55.08,178.29" fill="url(#gold)" stroke="#3FBF6A" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="87.99,163.26 107.52,174.54 107.52,197.09 87.99,208.36 68.46,197.09 68.46,174.54" fill="url(#shine)" opacity="0.8"/>
+<polygon points="47.99,90.00 80.89,109.00 80.89,147.00 47.99,166.00 15.08,147.00 15.08,109.00" fill="url(#gold)" stroke="#145C2D" stroke-width="9" stroke-linejoin="round"/>
+<polygon points="47.99,90.00 80.89,109.00 80.89,147.00 47.99,166.00 15.08,147.00 15.08,109.00" fill="url(#gold)" stroke="#3FBF6A" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="47.99,93.97 67.51,105.25 67.51,127.79 47.99,139.07 28.46,127.79 28.46,105.24" fill="url(#shine)" opacity="0.8"/>
+<polygon points="87.99,20.71 120.90,39.71 120.90,77.71 87.99,96.71 55.08,77.71 55.08,39.71" fill="url(#gold)" stroke="#145C2D" stroke-width="9" stroke-linejoin="round"/>
+<polygon points="87.99,20.71 120.90,39.71 120.90,77.71 87.99,96.71 55.08,77.71 55.08,39.71" fill="url(#gold)" stroke="#3FBF6A" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="87.99,24.68 107.52,35.95 107.52,58.50 87.99,69.78 68.46,58.50 68.46,35.95" fill="url(#shine)" opacity="0.8"/>
+<polygon points="168.01,20.71 200.92,39.71 200.92,77.71 168.01,96.71 135.10,77.71 135.10,39.71" fill="url(#gold)" stroke="#145C2D" stroke-width="9" stroke-linejoin="round"/>
+<polygon points="168.01,20.71 200.92,39.71 200.92,77.71 168.01,96.71 135.10,77.71 135.10,39.71" fill="url(#gold)" stroke="#3FBF6A" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="168.01,24.68 187.54,35.95 187.54,58.50 168.01,69.78 148.48,58.50 148.48,35.95" fill="url(#shine)" opacity="0.8"/>
+<polygon points="128.00,110.78 142.91,119.39 142.91,136.61 128.00,145.22 113.09,136.61 113.09,119.39" fill="none" stroke="#145C2D" stroke-width="5" stroke-linejoin="round" opacity="0.85"/>
+</svg>

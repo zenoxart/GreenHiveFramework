@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    UI-free part of the Green Hive WPF client framework: application context (MVVM core), command manager,
+    shortcut table, module loader, hot-swap, security, live notifications, navigation, docking model and
+    workflow logic. Everything WPF-specific lives in GreenHive.Wpf.Framework, which builds on this library.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>GreenHive.Wpf.Framework</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.Monads\GreenHive.NET.Monads.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.Contracts\GreenHive.NET.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.CommandContracts\GreenHive.NET.CommandContracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.NotificationContracts\GreenHive.NET.NotificationContracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.WorkflowContracts\GreenHive.NET.WorkflowContracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.ModuleContracts\GreenHive.NET.ModuleContracts.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenHive.Wpf.UI", "GreenHive.Wpf.UI.csproj", "{626F0946-B825-EE2F-9FE2-7A7C1D4DDEF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenHive.Wpf.Controls", "..\GreenHive.Wpf.Controls\GreenHive.Wpf.Controls.csproj", "{588373DB-14D9-4ACA-8CE8-AF6263545224}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenHive.Wpf.Views", "..\GreenHive.Wpf.Views\GreenHive.Wpf.Views.csproj", "{068318D1-8580-4587-BDBE-547612EE8FFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenHive.Api", "..\GreenHive.Api\GreenHive.Api.csproj", "{B6D28BBE-F04F-4E05-AFB0-B08357CD6581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenHive.Wpf.Advanced", "..\GreenHive.Wpf.Advanced\GreenHive.Wpf.Advanced.csproj", "{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenHive.NET.Core", "..\GreenHive.NET\GreenHive.NET.Core.csproj", "{35B5CAB3-0D2D-4D42-B185-D962F38C427B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{626F0946-B825-EE2F-9FE2-7A7C1D4DDEF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{626F0946-B825-EE2F-9FE2-7A7C1D4DDEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{626F0946-B825-EE2F-9FE2-7A7C1D4DDEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{626F0946-B825-EE2F-9FE2-7A7C1D4DDEF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{588373DB-14D9-4ACA-8CE8-AF6263545224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{588373DB-14D9-4ACA-8CE8-AF6263545224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{588373DB-14D9-4ACA-8CE8-AF6263545224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{588373DB-14D9-4ACA-8CE8-AF6263545224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068318D1-8580-4587-BDBE-547612EE8FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068318D1-8580-4587-BDBE-547612EE8FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068318D1-8580-4587-BDBE-547612EE8FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068318D1-8580-4587-BDBE-547612EE8FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D28BBE-F04F-4E05-AFB0-B08357CD6581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D28BBE-F04F-4E05-AFB0-B08357CD6581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D28BBE-F04F-4E05-AFB0-B08357CD6581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D28BBE-F04F-4E05-AFB0-B08357CD6581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E4CB8A5-239E-433F-94D9-8B3B40FEAB0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35B5CAB3-0D2D-4D42-B185-D962F38C427B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9F15C209-0177-4D96-9825-57F6129A3EAA}
+	EndGlobalSection
+EndGlobal

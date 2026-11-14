@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ContextExtractor">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CAAAICCAABhAQAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ContextExtractor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.GlobalValidationManager">
+    <Position X="3" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAQAgAAEAAAgCAAAAAICAQAAkAAAAAAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\GlobalValidationManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ValidationBehavior">
+    <Position X="5.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAAAAAAARAAADBAACAAAAAAAAAAAAAAAkAgAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ValidationContext">
+    <Position X="13" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAICAAAEAAgIAgAAAACBAAQRAAAgAAAAGAg=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ValidationResult">
+    <Position X="10.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAABAQAAAAAAQBAABoAAQAAAAAAAJAQAAQA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ValidationService">
+    <Position X="8" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIEAAAQACACBAggAAAAAAAAAAAAQAAAQIQgAABAAAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ValidationState">
+    <Position X="3.25" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAQBAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationStateEnums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ValidationSeverity">
+    <Position X="1" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAABAAAgAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationStateEnums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.ValidationFeedbackOptions">
+    <Position X="3.25" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAAAAAIAAAAAAAAAIAAAAAAAEBAAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationStateEnums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GreenHive.NET.Core.Common.ML.ContextAwareValidation.AnomalySensitivity">
+    <Position X="1" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAgIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\ML\ContextAwareValidation\ValidationStateEnums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

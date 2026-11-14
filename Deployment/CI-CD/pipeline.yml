@@ -1,0 +1,26 @@
+# =============================================================================
+# Project : Deployment
+# File    : pipeline.yml
+# Layer   : Deployment
+# Status  : Architecture sketch - comments only, no implementation yet
+# =============================================================================
+#
+# PURPOSE
+#   Build and release pipeline.
+#
+# STAGES
+#   1. Build and test all projects.
+#   2. Backend: build Docker images, scan them, push to the registry.
+#   3. Client modules: publish, pack (zip), compute SHA-256, sign the manifest,
+#      upload the package to the Module Delivery Service, publish the manifest in the registry.
+#   4. Host: build and sign the MSIX, update the .appinstaller file.
+#   5. Roll out via the Update Orchestrator (pilot -> everyone).
+#
+# WORKFLOWS
+#   - Generate each module's ModuleContractSurface and sign it with the manifest.
+#   - Run the module's workflow templates and declared migrations against sample workflows
+#     (dry run) before the module version is published.
+#
+# LOCALIZATION CHECK
+#   Fails the module build when a TextKey used in code, XAML, commands or workflow schemas is missing
+#   in one of the module's declared languages, or an IconRef cannot be resolved.

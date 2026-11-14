@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>GreenHive.NET.Backend.Core</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The only external package of the backend: the PostgreSQL driver (used in Data/PostgresDataSource.cs). -->
+    <PackageReference Include="Npgsql" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.Monads\GreenHive.NET.Monads.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.Contracts\GreenHive.NET.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.NotificationContracts\GreenHive.NET.NotificationContracts.csproj" />
+  </ItemGroup>
+
+</Project>

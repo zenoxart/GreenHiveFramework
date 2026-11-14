@@ -1,0 +1,88 @@
+{
+  // Green Hive module manifest - Reporting
+  "moduleId": "reporting",
+  "version": "1.0.0",
+  "displayName": "reports:module.name",
+  "description": "Report catalogue, parameters and charts.",
+  "icon": "reports.home",
+  "accentColor": "#23874A",
+  "minHostVersion": "1.0.0",
+  "contractsVersion": 1,
+  "prefix": "reports",
+  "client": {
+    "platform": "wpf",
+    "targetFramework": "net10.0-windows",
+    "desktopRuntime": ">=10.0.0",
+    "package": "reporting-1.0.0.zip",
+    "entryAssembly": "GreenHive.NET.Modules.Reporting.Client.dll",
+    "entryType": "GreenHive.NET.Modules.Reporting.Client.ReportingModule",
+    "viewMode": "codeOnly",
+    "hotSwap": "supported"
+  },
+  "backend": {
+    "service": "http://reporting-module:8080",
+    "apiVersion": "v1",
+    "route": "/api/reports"
+  },
+  "permissions": [
+    "reports.view",
+    "reports.run"
+  ],
+  "dependencies": [
+    {
+      "moduleId": "user-management",
+      "versionRange": ">=1.0.0 <3.0.0"
+    }
+  ],
+  "languages": [
+    "en",
+    "de"
+  ],
+  "defaultLanguage": "en",
+  "contractSurface": {
+    "backendApiVersion": "v1",
+    "commands": [
+      {
+        "id": "reports.run",
+        "workflowCapable": true,
+        "aiAllowed": true,
+        "endpoint": "/api/reports/workflow-steps/reports.runReport"
+      }
+    ],
+    "stepTypes": [
+      {
+        "id": "reports.runReport",
+        "version": 1,
+        "title": "reports:step.runReport",
+        "headless": true,
+        "endpoint": "/api/reports/workflow-steps/reports.runReport",
+        "outputs": [
+          "runId",
+          "rowCount",
+          "total"
+        ],
+        "input": {
+          "schemaId": "reports.runReport",
+          "fields": [
+            {
+              "name": "reportId",
+              "type": "text",
+              "label": "reports:field.report",
+              "required": true
+            },
+            {
+              "name": "parameters",
+              "type": "text",
+              "label": "reports:field.parameters"
+            }
+          ]
+        }
+      }
+    ],
+    "events": [
+      {
+        "type": "reports.ready"
+      }
+    ]
+  }
+}

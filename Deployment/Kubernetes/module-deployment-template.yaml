@@ -1,0 +1,15 @@
+# =============================================================================
+# Project : Deployment
+# File    : module-deployment-template.yaml
+# Layer   : Deployment
+# Status  : Architecture sketch - comments only, no implementation yet
+# =============================================================================
+#
+# PURPOSE
+#   Template for Kubernetes deployments (higher requirements).
+#
+# PER SERVICE/MODULE
+#   - Deployment with RollingUpdate (maxUnavailable 0), readiness/liveness on /health/*.
+#   - Service (ClusterIP); Ingress only for the gateway.
+#   - HorizontalPodAutoscaler, resource limits, PodDisruptionBudget.
+#   - Configuration via ConfigMap, secrets via Secret or an external key vault.

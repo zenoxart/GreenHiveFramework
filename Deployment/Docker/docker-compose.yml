@@ -1,0 +1,149 @@
+# =============================================================================
+# Green Hive - complete backend with Docker Compose
+#
+#   cd Deployment/Docker
+#   copy .env.example .env        (optional - the defaults work for a local demo)
+#   docker compose up --build -d
+#
+# Gateway: http://localhost:8080   (the WPF client connects here)
+# Demo users: admin, maria.huber, lukas.berger, sophie.wagner, elena.rossi, david.novak - password GreenHive!2026
+#
+# Only the gateway is published to the host (plus PostgreSQL on 5433 for database tools).
+# The database is created from ./database/*.sql the first time the volume is empty;
+# "docker compose down -v" resets everything to the demo data.
+# =============================================================================
+
+name: greenhive
+
+x-service: &service
+  restart: unless-stopped
+  networks: [greenhive]
+  depends_on:
+    database:
+      condition: service_healthy
+  environment: &environment
+    ConnectionStrings__Database: "Host=database;Port=5432;Database=greenhive;Username=greenhive;Password=${POSTGRES_PASSWORD:-greenhive}"
+    GreenHive__JwtKey: "${GREENHIVE_JWT_KEY:-change-me-greenhive-demo-signing-key-0123456789}"
+    GreenHive__InternalKey: "${GREENHIVE_INTERNAL_KEY:-change-me-greenhive-internal-key}"
+    GreenHive__ShowErrorDetails: "${GREENHIVE_SHOW_ERROR_DETAILS:-false}"
+    GreenHive__Services__api-gateway: "http://api-gateway:8080"
+    GreenHive__Services__identity-service: "http://identity-service:8080"
+    GreenHive__Services__configuration-service: "http://configuration-service:8080"
+    GreenHive__Services__module-registry: "http://module-registry:8080"
+    GreenHive__Services__module-delivery: "http://module-delivery:8080"
+    GreenHive__Services__update-orchestrator: "http://update-orchestrator:8080"
+    GreenHive__Services__notification-point: "http://notification-point:8080"
+    GreenHive__Services__workflow-service: "http://workflow-service:8080"
+    GreenHive__Services__ai-agent-service: "http://ai-agent-service:8080"
+
+services:
+  database:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    networks: [greenhive]
+    environment:
+      POSTGRES_DB: greenhive
+      POSTGRES_USER: greenhive
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-greenhive}"
+    ports:
+      - "5433:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U greenhive -d greenhive"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # ---------------------------------------------------------------- platform services
+  api-gateway:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.ApiGateway/Dockerfile }
+    image: greenhive/api-gateway:1.0.0
+    ports:
+      - "${GREENHIVE_PORT:-8080}:8080"
+    depends_on:
+      identity-service: { condition: service_started }
+      module-registry: { condition: service_started }
+
+  identity-service:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.IdentityService/Dockerfile }
+    image: greenhive/identity-service:1.0.0
+
+  configuration-service:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.ConfigurationService/Dockerfile }
+    image: greenhive/configuration-service:1.0.0
+
+  module-registry:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.ModuleRegistryService/Dockerfile }
+    image: greenhive/module-registry:1.0.0
+
+  module-delivery:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.ModuleDeliveryService/Dockerfile }
+    image: greenhive/module-delivery:1.0.0
+    volumes:
+      # Client packages; Deployment/ModulePackages/pack-modules.ps1 copies the module zips here.
+      - packages:/data/packages
+
+  update-orchestrator:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.UpdateOrchestrator/Dockerfile }
+    image: greenhive/update-orchestrator:1.0.0
+
+  notification-point:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.NotificationPoint/Dockerfile }
+    image: greenhive/notification-point:1.0.0
+    environment:
+      <<: *environment
+      # Backend subscribers of all events (workflow triggers).
+      GreenHive__Subscribers__0: "http://workflow-service:8080/internal/events"
+      # Windows push for offline users (optional, Partner Center / Azure app registration).
+      GreenHive__Wns__ClientId: "${GREENHIVE_WNS_CLIENT_ID:-}"
+      GreenHive__Wns__ClientSecret: "${GREENHIVE_WNS_CLIENT_SECRET:-}"
+
+  workflow-service:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.WorkflowService/Dockerfile }
+    image: greenhive/workflow-service:1.0.0
+
+  ai-agent-service:
+    <<: *service
+    build: { context: ../../src, dockerfile: Backend/GreenHive.NET.Backend.AiAgentService/Dockerfile }
+    image: greenhive/ai-agent-service:1.0.0
+    environment:
+      <<: *environment
+      # "rules" = deterministic offline agent (default); "openai" = any OpenAI-compatible endpoint.
+      GreenHive__Ai__Provider: "${GREENHIVE_AI_PROVIDER:-rules}"
+      GreenHive__Ai__Endpoint: "${GREENHIVE_AI_ENDPOINT:-https://api.openai.com/v1}"
+      GreenHive__Ai__ApiKey: "${GREENHIVE_AI_API_KEY:-}"
+      GreenHive__Ai__Model: "${GREENHIVE_AI_MODEL:-gpt-4o-mini}"
+      GreenHive__Ai__Rules__ReviewAbove: "${GREENHIVE_AI_REVIEW_ABOVE:-20000}"
+
+  # ---------------------------------------------------------------- module backends
+  document-service:
+    <<: *service
+    build: { context: ../../src, dockerfile: Modules/DocumentManagement/Backend/Dockerfile }
+    image: greenhive/document-service:1.0.0
+
+  reporting-module:
+    <<: *service
+    build: { context: ../../src, dockerfile: Modules/Reporting/Backend/Dockerfile }
+    image: greenhive/reporting-module:1.0.0
+
+  user-module:
+    <<: *service
+    build: { context: ../../src, dockerfile: Modules/UserManagement/Backend/Dockerfile }
+    image: greenhive/user-module:1.0.0
+
+networks:
+  greenhive:
+
+volumes:
+  database:
+  packages:

@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<UseWPF>true</UseWPF>
+		<EnableWindowsTargeting>true</EnableWindowsTargeting>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>latest</LangVersion>
+		<DebugType>full</DebugType>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Title>GreenHive WPF Core Framework</Title>
+		<Product>WPF Base-Framework</Product>
+		<Description>Basic Functionality Framework for WPF Applications</Description>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Assets\Fonts\FluentSystemIcons-Regular.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.ML" Version="5.0.0-preview.1.25127.4" />
+		<PackageReference Include="StackExchange.Redis" Version="2.8.37" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Common\MVVM\ViewSupport\" />
+		<Folder Include="Common\Permission\" />
+		<ProjectReference Include="..\GreenHive.Wpf.Dto\GreenHive.Wpf.Dto.csproj" />
+		<Resource Include="Assets\Fonts\FluentSystemIcons-Regular.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Assets\Fonts\FluentSystemIcons-Regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Assets\Fonts\FluentSystemIconsRegular.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>FluentSystemIconsRegular.resx</DependentUpon>
+		</Compile>
+		<Compile Update="Properties\Resources.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Assets\Fonts\FluentSystemIconsRegular.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>FluentSystemIconsRegular.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.de.resx">
+		  <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+		  <Generator>ResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Properties\Resources.resx">
+		  <Generator>ResXFileCodeGenerator</Generator>
+		  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Common\Extensions\FontMapping\License - Fluent System Icons.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>

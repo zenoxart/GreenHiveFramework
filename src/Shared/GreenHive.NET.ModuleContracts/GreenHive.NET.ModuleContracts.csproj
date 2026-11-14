@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>GreenHive.NET.ModuleContracts</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GreenHive.NET.Contracts\GreenHive.NET.Contracts.csproj" />
+    <ProjectReference Include="..\GreenHive.NET.WorkflowContracts\GreenHive.NET.WorkflowContracts.csproj" />
+    <ProjectReference Include="..\GreenHive.NET.CommandContracts\GreenHive.NET.CommandContracts.csproj" />
+    <ProjectReference Include="..\GreenHive.NET.NotificationContracts\GreenHive.NET.NotificationContracts.csproj" />
+  </ItemGroup>
+
+</Project>

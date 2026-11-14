@@ -1,0 +1,174 @@
+{
+  // Green Hive module manifest - UserManagement
+  "moduleId": "user-management",
+  "version": "1.0.0",
+  "displayName": "users:module.name",
+  "description": "Users, departments and role assignment.",
+  "icon": "users.home",
+  "accentColor": "#4CBF73",
+  "minHostVersion": "1.0.0",
+  "contractsVersion": 1,
+  "prefix": "users",
+  "client": {
+    "platform": "wpf",
+    "targetFramework": "net10.0-windows",
+    "desktopRuntime": ">=10.0.0",
+    "package": "user-management-1.0.0.zip",
+    "entryAssembly": "GreenHive.NET.Modules.UserManagement.Client.dll",
+    "entryType": "GreenHive.NET.Modules.UserManagement.Client.UserManagementModule",
+    "viewMode": "codeOnly",
+    "hotSwap": "supported"
+  },
+  "backend": {
+    "service": "http://user-module:8080",
+    "apiVersion": "v1",
+    "route": "/api/users"
+  },
+  "permissions": [
+    "users.view",
+    "users.edit",
+    "roles.edit"
+  ],
+  "dependencies": [],
+  "languages": [
+    "en",
+    "de"
+  ],
+  "defaultLanguage": "en",
+  "contractSurface": {
+    "backendApiVersion": "v1",
+    "commands": [
+      {
+        "id": "users.create",
+        "workflowCapable": true
+      },
+      {
+        "id": "users.edit",
+        "workflowCapable": true
+      }
+    ],
+    "inputSchemas": [
+      {
+        "schemaId": "users.onboarding",
+        "version": 1,
+        "fields": [
+          {
+            "name": "displayName",
+            "type": "text",
+            "label": "users:field.displayName",
+            "required": true,
+            "maxLength": 100
+          },
+          {
+            "name": "userName",
+            "type": "text",
+            "label": "users:field.userName",
+            "required": true,
+            "pattern": "^[a-z][a-z0-9.\\-]{2,40}$",
+            "span": "half"
+          },
+          {
+            "name": "email",
+            "type": "text",
+            "label": "users:field.email",
+            "required": true,
+            "span": "half"
+          },
+          {
+            "name": "departmentId",
+            "type": "entityRef",
+            "label": "users:field.department",
+            "lookup": "/api/users/lookups/departments",
+            "required": true,
+            "span": "half"
+          },
+          {
+            "name": "jobTitle",
+            "type": "text",
+            "label": "users:field.jobTitle",
+            "span": "half"
+          },
+          {
+            "name": "role",
+            "type": "choice",
+            "label": "users:field.role",
+            "required": true,
+            "default": "Viewer",
+            "options": [
+              {
+                "value": "Viewer",
+                "label": "Viewer"
+              },
+              {
+                "value": "Clerk",
+                "label": "Clerk"
+              },
+              {
+                "value": "Analyst",
+                "label": "Analyst"
+              },
+              {
+                "value": "Approver",
+                "label": "Approver"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "stepTypes": [
+      {
+        "id": "users.createUser",
+        "version": 1,
+        "title": "users:step.createUser",
+        "headless": true,
+        "endpoint": "/api/users/workflow-steps/users.createUser",
+        "outputs": [
+          "userId",
+          "userName",
+          "temporaryPassword"
+        ],
+        "input": {
+          "schemaId": "users.createUser",
+          "fields": [
+            {
+              "name": "displayName",
+              "type": "text",
+              "required": true
+            },
+            {
+              "name": "userName",
+              "type": "text",
+              "required": true
+            },
+            {
+              "name": "email",
+              "type": "text",
+              "required": true
+            },
+            {
+              "name": "departmentId",
+              "type": "text"
+            },
+            {
+              "name": "jobTitle",
+              "type": "text"
+            },
+            {
+              "name": "role",
+              "type": "text"
+            }
+          ]
+        }
+      }
+    ],
+    "events": [
+      {
+        "type": "users.created"
+      },
+      {
+        "type": "users.updated"
+      }
+    ]
+  }
+}

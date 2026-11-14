@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>GreenHive.NET.Backend.WorkflowService</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.Contracts\GreenHive.NET.Contracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.ModuleContracts\GreenHive.NET.ModuleContracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.NotificationContracts\GreenHive.NET.NotificationContracts.csproj" />
+    <ProjectReference Include="..\..\Shared\GreenHive.NET.WorkflowContracts\GreenHive.NET.WorkflowContracts.csproj" />
+    <ProjectReference Include="..\GreenHive.NET.Backend.Core\GreenHive.NET.Backend.Core.csproj" />
+  </ItemGroup>
+
+</Project>
